@@ -62,7 +62,7 @@ void PlayerSpaceShip::Update(float delraTime)
 		//if (speed<=maxvelocity)
 		//{
 		//	M_Velocity.NormalizedVector();
-		///	M_Velocity = M_Velocity*maxvelocity;
+		//	M_Velocity = M_Velocity*maxvelocity;
 		//}
 		//SDL_Log("velocty %f, %f", M_Velocity.X, M_Velocity.Y);
 		for (int i = 0; i < m_bullets.size(); ++i)
