@@ -6,10 +6,12 @@
 
 Game::Game()
 {
+	//please follow he guides in class for a more detailed description of this class 
+	//initalizes the window and the renderer
 	SdlWindow = nullptr;
 	SdlRenderer = nullptr;
 	LastUpadateTimer = SDL_GetTicks();
-
+	//checks if sdl is initalized if it isnt  then end the game , else if it has then run the game 
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
 		IsTheGameOver = true;
 
@@ -28,22 +30,28 @@ Game::Game()
 
 }
 bool Game::start() {
+	//create the renderer
 	SdlRenderer = SDL_CreateRenderer(SdlWindow, 0, -1);
+	//if its not null
 	if (SdlRenderer != nullptr) {
+		//make an object of the input  class 
 		UserInput = new Input();
 		std::cout << "render created " << std::endl;
-
+		//make an object of the texture class
 		playerBullets = new Texture();
+		//laods the player bullets texture 
 		playerBullets->LoadImgFromFile("../assets/B1.bmp", SdlRenderer);
 		
 
-
+		//this part creates another obejct of the texture class , it then loads the bullets texture
 		Texture* playerSpacetexture = new Texture();
 		playerSpacetexture->LoadImgFromFile("../assets/SP1.bmp", SdlRenderer);
-
+		//its then sets the postion of the bullet class 
 		M_Position1.X = 380;
 		M_Position1.Y = 400;
+		//it then creates a new obejct of that class 
 		playerSpaceS = new PlayerSpaceShip(playerSpacetexture, M_Position1);
+		//then adds the obeject to the game obejcts list
 		M_GameObjects.push_back(playerSpaceS);
 	
 		
@@ -64,26 +72,32 @@ bool Game::start() {
 }
 void Game::run(char* title, int width, int height, bool fullscreen) {
 	int creationFlag = 0;
-
+	//checks the type of window to be shown
 	if (!fullscreen)
 	{
+		//sets the type of window to be shown
 		creationFlag = SDL_WINDOW_SHOWN;
 	}
 	else
 	{
+		//sets the type of window to be shown
 		creationFlag = SDL_WINDOW_FULLSCREEN;
 	}
+	//creates the window
 	SdlWindow = SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, creationFlag);
 
-
+	//if there is a window and start is being run then
 	if (SdlWindow !=nullptr && start())
 	{
 		std::cout << "created window" << std::endl;
+		//checks if the game is not over 
 		while (!IsTheGameOver)
 		{
+			//process the users input 
 			processinput();
-
+			//update the screen 
 			update();
+			//draw on the screen the obbejcts 
 			draw();
 		}
 
@@ -93,6 +107,7 @@ void Game::run(char* title, int width, int height, bool fullscreen) {
 	else
 	{
 		std::cout << "not created window" << std::endl;
+		//if not then shutdown the game and destory the objects (including window and etc)
 		shutdown();
 		destroy();
 	
@@ -102,16 +117,11 @@ void Game::run(char* title, int width, int height, bool fullscreen) {
 }
 
 void Game::draw() {
-
+	//this part sets the render colour and cleanrs the background
 	SDL_SetRenderDrawColor(SdlRenderer, 47, 155, 228, 255);
 	SDL_RenderClear(SdlRenderer);
 	
-	
-	
-	//ani->draw(sdlRenderer, 0, 0);
-	
-	//m_player->Draw(sdlRenderer);
-
+	//this part goes through each of the enemies and game obejcts and draws them
 	for (int i = 0; i < M_GameObjects.size(); ++i)
 	{
 		M_GameObjects[i]->Draw(SdlRenderer);
@@ -123,25 +133,26 @@ void Game::draw() {
 	SDL_RenderPresent(SdlRenderer);
 }
 void Game::destroy() {
+//this destroys the window,renderer and also quits the game
 	SDL_DestroyWindow(SdlWindow);
 	SDL_DestroyRenderer(SdlRenderer);
 	SDL_Quit();
 }
 void Game::processinput() {
 	//m_player->Input();
-
+	//this calls the update input function
 	UserInput->UpdateInput();
-	
+	//if the user has  presses down the left mouse button
 	if (UserInput->IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {
 		SDL_Log("ifring");
 
 	}
-
+	//if the user has  let go of the left mouse button
 	if (UserInput->IsMouseButtonUp(MOUSE_BUTTON_LEFT)) {
-		SDL_Log("did not press te left buttton");
+		//SDL_Log("did not press te left buttton");
 
 	}
-
+	//if the user has  presses down the right mouse button
 	if (UserInput->IsMouseButtonDown(MOUSE_BUTTON_RIGHT)) {
 		SDL_Log("ALT ifring");
 
@@ -161,13 +172,14 @@ void Game::processinput() {
 		
 
 	}*/
-
+	//this part goes through each game object and  handles the user input 
 	for (int i = 0; i < M_GameObjects.size(); ++i)
 	{
 		M_GameObjects[i]->UserInput1();
 		//M_GameObjects[i]->HandleUserInput(UserInput);
 		M_GameObjects[i]->HandleUserInput1(UserInput, playerBullets);
 	}
+	//this part checks what type of event the user has done if they have done a quit event then end the game
 	SDL_Event e;
 	while (SDL_PollEvent(&e)) {
 		if (e.type==SDL_QUIT)
@@ -192,13 +204,13 @@ void Game::update() {
 	//this displays the delta time 
 	//std::cout << "time" << deltaTime<< std::endl;
 
-
+	//calculates the spawn timer
 	unsigned int spawnTicks = SDL_GetTicks() - lastSpawn;
 	float spawnTimer = spawnTicks / 1000.0f;
 
 	//this displays the spawn timer 
 	//std::cout << "Spawn Timer: " << spawnTimer<< std::endl;
-
+	//this spawns the enemies if there is les than 10 of them
 	if (spawnTimer>0.5 && enemycount<10) {
 		enemycount++;
 		M_EnemyTexture = new Texture();
@@ -213,6 +225,7 @@ void Game::update() {
 //	ani->Update(deltaTime);
 	//m_player->Update(deltaTime);
 	
+	//this goes through all of the enimies and game obejcts and updates them 
 	for (int i = 0; i < M_GameObjects.size(); ++i)
 	{
 		M_GameObjects[i]->Update(deltaTime);
