@@ -22,6 +22,7 @@ public:
 
 	void NormalizeVector();
 	Vector2 NormalizedVector();
+	float magnitude();
 	float LengthOfVector();
 	~Vector2();
 };

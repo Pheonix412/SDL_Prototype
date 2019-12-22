@@ -58,6 +58,11 @@ Vector2 Vector2::NormalizedVector()
 	return result;
 }
 
+float Vector2::magnitude()
+{
+	return sqrt(X + Y);
+}
+
 
 
 float Vector2::LengthOfVector()

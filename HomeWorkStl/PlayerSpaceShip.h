@@ -10,6 +10,7 @@ private:
 	std::vector <Bullet1*> m_bullets;
 	Vector2 M_Position1;
 	Vector2 M_Position2;
+	float maxvelocity;
 	//std::vector<GameObject*>M_GameObjects;
 public:
 	PlayerSpaceShip();

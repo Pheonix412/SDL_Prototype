@@ -3,6 +3,7 @@
 #include <SDL.h>
 #include<iostream>
 
+//by Rhys Thomas Baker 7772 and By Jayme Schmid 6290 2019
 enum MouseInputs
 {
 	MOUSE_BUTTON_LEFT = 0,

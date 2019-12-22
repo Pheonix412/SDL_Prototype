@@ -1,7 +1,7 @@
 #include "GameObject.h"
 #include<iostream>
 
-
+//by Rhys Thomas Baker 7772 and By Jayme Schmid 6290 2019
 GameObject::GameObject()
 {
 	std::cout << "gameobject constructor" << std::endl;

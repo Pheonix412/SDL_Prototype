@@ -1,30 +1,21 @@
-﻿  C:\Users\Bacca\Desktop\AssignmentPrototype\dep\lib\x64\SDL2.dll
+﻿  C:\Users\zbook j\Desktop\basic game prog assignment\SDL_Prototype\dep\lib\x64\SDL2.dll
           1 file(s) copied.
-  Vector2.cpp
-c:\users\bacca\desktop\assignmentprototype\homeworkstl\vector2.cpp(35): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\users\bacca\desktop\assignmentprototype\homeworkstl\vector2.cpp(40): warning C4244: '*=': conversion from 'const float' to 'int', possible loss of data
-c:\users\bacca\desktop\assignmentprototype\homeworkstl\vector2.cpp(41): warning C4244: '*=': conversion from 'const float' to 'int', possible loss of data
-c:\users\bacca\desktop\assignmentprototype\homeworkstl\vector2.cpp(47): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\bacca\desktop\assignmentprototype\homeworkstl\vector2.cpp(48): warning C4244: '/=': conversion from 'float' to 'int', possible loss of data
-c:\users\bacca\desktop\assignmentprototype\homeworkstl\vector2.cpp(49): warning C4244: '/=': conversion from 'float' to 'int', possible loss of data
-c:\users\bacca\desktop\assignmentprototype\homeworkstl\vector2.cpp(55): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\bacca\desktop\assignmentprototype\homeworkstl\vector2.cpp(56): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-c:\users\bacca\desktop\assignmentprototype\homeworkstl\vector2.cpp(57): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-c:\users\bacca\desktop\assignmentprototype\homeworkstl\vector2.cpp(65): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
   Texture.cpp
-  Source.cpp
   PlayerSpaceShip.cpp
   Input.cpp
-c:\users\bacca\desktop\assignmentprototype\homeworkstl\input.cpp(125): warning C4805: '==': unsafe mix of type 'const Uint8' and type 'bool' in operation
+c:\users\zbook j\desktop\basic game prog assignment\sdl_prototype\homeworkstl\input.cpp(125): warning C4805: '==': unsafe mix of type 'const Uint8' and type 'bool' in operation
   GameObject.cpp
   Game.cpp
   EnemyWave1.cpp
-c:\users\bacca\desktop\assignmentprototype\homeworkstl\enemywave1.cpp(27): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
-c:\users\bacca\desktop\assignmentprototype\homeworkstl\enemywave1.cpp(28): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
-c:\users\bacca\desktop\assignmentprototype\homeworkstl\enemywave1.cpp(29): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
-c:\users\bacca\desktop\assignmentprototype\homeworkstl\enemywave1.cpp(36): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-c:\users\bacca\desktop\assignmentprototype\homeworkstl\enemywave1.cpp(37): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+c:\users\zbook j\desktop\basic game prog assignment\sdl_prototype\homeworkstl\enemywave1.cpp(27): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
+c:\users\zbook j\desktop\basic game prog assignment\sdl_prototype\homeworkstl\enemywave1.cpp(28): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
+c:\users\zbook j\desktop\basic game prog assignment\sdl_prototype\homeworkstl\enemywave1.cpp(29): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
+c:\users\zbook j\desktop\basic game prog assignment\sdl_prototype\homeworkstl\enemywave1.cpp(36): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+c:\users\zbook j\desktop\basic game prog assignment\sdl_prototype\homeworkstl\enemywave1.cpp(37): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
   Bullet1.cpp
   Generating Code...
-  HomeWorkStl.vcxproj -> C:\Users\Bacca\Desktop\AssignmentPrototype\x64\Debug\HomeWorkStl.exe
-  HomeWorkStl.vcxproj -> C:\Users\Bacca\Desktop\AssignmentPrototype\x64\Debug\HomeWorkStl.pdb (Full PDB)
+  Compiling...
+  Source.cpp
+  Generating Code...
+  HomeWorkStl.vcxproj -> C:\Users\zbook j\Desktop\basic game prog assignment\SDL_Prototype\x64\Debug\HomeWorkStl.exe
+  HomeWorkStl.vcxproj -> C:\Users\zbook j\Desktop\basic game prog assignment\SDL_Prototype\x64\Debug\HomeWorkStl.pdb (Full PDB)

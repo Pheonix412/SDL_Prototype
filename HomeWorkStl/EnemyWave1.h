@@ -2,6 +2,7 @@
 #include"GameObject.h"
 class EnemyWave1:public GameObject
 {
+	//by Rhys Thomas Baker 7772 and By Jayme Schmid 6290 2019
 private:
 	Vector2 M_Velocity;
 	Vector2 M_Acceleration;

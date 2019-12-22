@@ -1,6 +1,6 @@
 #include "PlayerSpaceShip.h"
 
-
+//by Rhys Thomas Baker 7772 and By Jayme Schmid 6290 2019
 
 PlayerSpaceShip::PlayerSpaceShip()
 {
@@ -16,6 +16,7 @@ PlayerSpaceShip::PlayerSpaceShip(Texture * texture, Vector2 position)
 	M_Texture = texture;
 	M_Velocity = Vector2(0, 0);
 	M_Acceleration = Vector2(0, 0);
+	maxvelocity = 10.00f;
 }
 
 void PlayerSpaceShip::AddPlayerForce(Vector2 force)
@@ -52,24 +53,23 @@ void PlayerSpaceShip::Draw(SDL_Renderer * renderer)
 void PlayerSpaceShip::Update(float delraTime)
 {
 	//this part updates the players posution and also their velocity
+	
+	//M_Acceleration = M_Acceleration + Vector2(M_Velocity *-0.5f);
 	M_Velocity += M_Acceleration *delraTime;
-	/*if (M_Position.X>=200 &&M_Velocity.X>0)
-	{
-		
-	}
-	else if(M_Position.X <= 0 && M_Velocity.X<0)
-	{
-		
-	}
-	else  { */
 		M_Position += M_Velocity*delraTime;
+		//float speed = M_Velocity.magnitude();
 	//}
-
+		//if (speed<=maxvelocity)
+		//{
+		//	M_Velocity.NormalizedVector();
+		///	M_Velocity = M_Velocity*maxvelocity;
+		//}
+		//SDL_Log("velocty %f, %f", M_Velocity.X, M_Velocity.Y);
 		for (int i = 0; i < m_bullets.size(); ++i)
 		{
 			m_bullets[i]->Update(delraTime);
 		}
-
+		//M_Acceleration = Vector2(0, 0);
 	
 }
 
@@ -95,7 +95,7 @@ void PlayerSpaceShip::HandleUserInput(Input * input)
 	if (input->IsKeyDown(SDL_SCANCODE_A))
 	{
 		
-		AddPlayerForce(Vector2(-1, 0));
+		AddPlayerForce(Vector2(-10, 0));
 	}
 
 
@@ -103,9 +103,17 @@ void PlayerSpaceShip::HandleUserInput(Input * input)
 	{
 		//if (M_Position.X <= 200 && M_Velocity.X>=0)
 		//{
-			AddPlayerForce(Vector2(1, 0));
+			AddPlayerForce(Vector2(10, 0));
 		//}
 		
+	}
+	if (input->IsKeyUp(SDL_SCANCODE_D))
+	{
+		//if (M_Position.X <= 200 && M_Velocity.X>=0)
+		//{
+	//	AddPlayerForce(Vector2(10, 0));
+		//}
+		M_Acceleration = Vector2(0, 0);
 	}
 	if (input->IsKeyDown(SDL_SCANCODE_SPACE))
 	{
@@ -159,8 +167,8 @@ void PlayerSpaceShip::HandleUserInput1(Input * input, Texture * playerBullets)
 		SDL_Log("SpacePressed");
 
 		
- 		int X1 = M_Position.X;
-		int Y1 = M_Position.Y;
+ 		int X1 = (M_Position.X+10);
+		int Y1 = (M_Position.Y-40);
 		
 		M_Position2.X = X1 ;
 		M_Position2.Y = Y1;

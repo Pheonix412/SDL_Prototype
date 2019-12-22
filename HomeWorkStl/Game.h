@@ -8,6 +8,7 @@
 #include"Input.h"
 class Game
 {
+	//by Rhys Thomas Baker 7772 and By Jayme Schmid 6290 2019
 private:
 	SDL_Window* SdlWindow;
 	SDL_Renderer *SdlRenderer;
