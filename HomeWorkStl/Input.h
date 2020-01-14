@@ -2,7 +2,10 @@
 #include"Vector2.h"
 #include <SDL.h>
 #include<iostream>
+#include<SDL_syswm.h>
 
+
+class Game;
 //by Rhys Thomas Baker 7772 and By Jayme Schmid 6290 2019
 //this is a enum that holds all of the types of the mouse inputs
 enum MouseInputs
@@ -28,11 +31,12 @@ private:
 	void OnMouseButtonDown(SDL_Event &e);
 	void OnMouseButtonUp(SDL_Event &e);
 	void OnMouseButtonMove(SDL_Event &e);
+	void OnSystemEvents(SDL_Event& e, Game * g);
 public:
 	//this holds te input constructor
 	Input();
 	//this holds teh update input function 
-	void UpdateInput();
+	void UpdateInput(Game* game);
 	//these are function that return an bollean value todo with mouses or keyboard 
 	bool IsMouseButtonDown(MouseInputs button);
 	bool IsMouseButtonUp(MouseInputs button);

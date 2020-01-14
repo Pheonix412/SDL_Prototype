@@ -1,5 +1,8 @@
 #include "Game.h"
 #include<iostream>
+#include<string>
+#include"resource1.h"
+#include<windows.h>
 
 
 //by Rhys Thomas Baker 7772 and By Jayme Schmid 6290 2019
@@ -89,6 +92,27 @@ void Game::run(char* title, int width, int height, bool fullscreen) {
 	//if there is a window and start is being run then
 	if (SdlWindow !=nullptr && start())
 	{
+
+		//this part finds the name of the current window and converts to to lpcwstr 
+		std::string test;
+		test = title;
+		int len;
+		int slength = (int)test.length() + 1;
+		len = MultiByteToWideChar(CP_ACP, 0, test.c_str(), slength, 0, 0);
+		wchar_t* buf = new wchar_t[len];
+		MultiByteToWideChar(CP_ACP, 0, test.c_str(), slength, buf, len);
+		std::wstring r(buf);
+		// TEST SDL is the name of the window that the program will try to find. 
+		std::wstring test1;
+		test1 = r;
+		LPCWSTR t1;
+		t1 = test1.c_str();
+		//this part finds the current window and loads and sets the menu 
+		HWND happ = FindWindow(NULL, t1);
+		HMENU hmenu = LoadMenu(GetModuleHandle(0), MAKEINTRESOURCE(IDR_MENU2));
+		//this sets the menu to the window.
+		SetMenu(happ, hmenu);
+
 		std::cout << "created window" << std::endl;
 		//checks if the game is not over 
 		while (!IsTheGameOver)
@@ -141,7 +165,7 @@ void Game::destroy() {
 void Game::processinput() {
 	//m_player->Input();
 	//this calls the update input function
-	UserInput->UpdateInput();
+	UserInput->UpdateInput(this);
 	//if the user has  presses down the left mouse button
 	if (UserInput->IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {
 		SDL_Log("ifring");
@@ -243,4 +267,9 @@ void Game::shutdown() {
 
 Game::~Game()
 {
+}
+
+void Game::SetGameState(bool status)
+{
+	IsTheGameOver = status;
 }

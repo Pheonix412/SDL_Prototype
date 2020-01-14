@@ -6,6 +6,9 @@
 #include<vector>
 #include"Vector2.h"
 #include"Input.h"
+#include<Windows.h>
+#include<SDL_syswm.h>
+#include"resource1.h"
 class Game
 {
 	//by Rhys Thomas Baker 7772 and By Jayme Schmid 6290 2019
@@ -58,5 +61,7 @@ public:
 	void destroy();
 	//this is the destructor for the game
 	~Game();
+
+	void SetGameState(bool status);
 };
 

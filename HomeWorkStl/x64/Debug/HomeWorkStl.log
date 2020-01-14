@@ -1,5 +1,6 @@
 ﻿  C:\Users\zbook j\Desktop\basic game prog assignment\SDL_Prototype\dep\lib\x64\SDL2.dll
           1 file(s) copied.
-  PlayerSpaceShip.cpp
+  Input.cpp
+c:\users\zbook j\desktop\basic game prog assignment\sdl_prototype\homeworkstl\input.cpp(243): warning C4805: '==': unsafe mix of type 'const Uint8' and type 'bool' in operation
   HomeWorkStl.vcxproj -> C:\Users\zbook j\Desktop\basic game prog assignment\SDL_Prototype\x64\Debug\HomeWorkStl.exe
   HomeWorkStl.vcxproj -> C:\Users\zbook j\Desktop\basic game prog assignment\SDL_Prototype\x64\Debug\HomeWorkStl.pdb (Full PDB)

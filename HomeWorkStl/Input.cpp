@@ -1,4 +1,9 @@
 #include "Input.h"
+#include"resource.h"
+#include<SDL_syswm.h>
+#include<string>
+#include<codecvt>
+#include"Game.h"
 
 //by Rhys Thomas Baker 7772 and By Jayme Schmid 6290 2019
 
@@ -76,21 +81,120 @@ void Input::OnMouseButtonMove(SDL_Event & e)
 	}
 }
 
+void Input::OnSystemEvents(SDL_Event & e, Game * g)
+{
+	WPARAM wp = e.syswm.msg->msg.win.wParam;
+
+
+
+	//this part gets the current files name via its path 
+	//this part gets the entire path of the application 
+	TCHAR AppFileName[MAX_PATH];
+	GetModuleFileName(NULL, AppFileName, MAX_PATH);
+	TCHAR * t1 = AppFileName;
+	std::wstring strAppName(t1);
+	//this part extracts the files name from the path of the application
+	std::string t2;
+	using convert_type = std::codecvt_utf8<wchar_t>;
+	std::wstring_convert<convert_type, wchar_t> converter;
+	t2 = converter.to_bytes(strAppName);
+	t2 = t2.substr(t2.rfind("\\") + 1);
+	t2 = t2.substr(0, t2.size() - 4);
+	//this part gets the compiled sdl version of the application
+	SDL_version compiled;
+	SDL_GetVersion(&compiled);
+	std::string  sdlver;
+	sdlver = std::to_string(compiled.major);
+	//this part adds the sdl version and also the file name to a string
+	std::string test2;
+	test2 = "program name: " + t2 + " running on sdl version:  " + sdlver;
+	//this part converts the string to a wstring so that it could be converted to lpcwstr so that it can be displayed on the message box ,this is used for the message box content
+	int len;
+	int slength = (int)test2.length() + 1;
+	len = MultiByteToWideChar(CP_ACP, 0, test2.c_str(), slength, 0, 0);
+	wchar_t* buf = new wchar_t[len];
+	MultiByteToWideChar(CP_ACP, 0, test2.c_str(), slength, buf, len);
+	std::wstring r(buf);
+	std::wstring test1;
+	test1 = r;
+
+
+
+
+	std::string test3;
+	test3 = t2;
+	//this part converts the string to a wstring so that it could be converted to lpcwstr so that it can be displayed on the message box, THIS IS USED FOR THE MESSAGE BOX HEADER
+	len;
+	slength = (int)test3.length() + 1;
+	len = MultiByteToWideChar(CP_ACP, 0, test3.c_str(), slength, 0, 0);
+	buf = new wchar_t[len];
+	MultiByteToWideChar(CP_ACP, 0, test3.c_str(), slength, buf, len);
+	std::wstring r1(buf);
+	std::wstring test4;
+	test4 = r1;
+
+
+
+
+
+
+
+
+	//for some reason it is only able to get the resource symbol values not the id
+
+	//SDL_Log(abc.c_str());
+	switch (wp)
+	{
+		//40007- NEW WINDOW
+		//40002- QUIT-DONE
+		//40004- ABOUT SDL 2
+		//40006- CIRCLE
+		//40005- RECTANGLE
+
+		//QUITS
+	case 40002:
+		SDL_Log("test");
+		//gameover=true
+		g->SetGameState(true);
+		break;
+	case 40007:
+		//this parts runs the function that creates a new window
+		
+		break;
+		//ABOUT SDL 2
+	case 40003:
+		//need to get the owner of the window its the first parameter 
+		//second is the text in the text box 
+		//third is the title 
+		//last is the type of the message box 
+
+
+		MessageBox(NULL, test1.c_str(), test4.c_str(), MB_OK);
+		break;
+	default:
+		break;
+	}
+}
+
 Input::Input()
 {//this part sets the mosue positon and also goes through each button state and sets then to false 
 	for (int i = 0; i < 7; ++i) {
 		M_MouseButtonStates[i] = false;
 	}
 	M_MousePosition = Vector2(0, 0);
+	SDL_EventState(SDL_SYSWMEVENT, SDL_ENABLE);
 }
 
-void Input::UpdateInput()
+void Input::UpdateInput(Game* game)
 {
 	SDL_Event e;
 	//this part goes through each type of possible event, if they are true it will then run its coresponding function and pass the events value
 	while (SDL_PollEvent(&e)) {
 		switch (e.type)
 		{
+		case SDL_SYSWMEVENT:
+			OnSystemEvents(e, game);
+			break;
 		case SDL_MOUSEBUTTONDOWN:
 			OnMouseButtonDown(e);
 			break;
