@@ -1,5 +1,5 @@
 #pragma once
-
+#include <SDL_ttf.h>
 #include <SDL.h>
 class Texture
 {
@@ -23,6 +23,8 @@ public:
 	int GetImageHeight() { return M_Height; }
 	//this resets the texture 
 	void ResetTexture();
+	//renders text
+	bool RenderText(const char* text, TTF_Font* font, SDL_Renderer* renderer, SDL_Color colour);
 	//this is a destructor for the texture 
 	~Texture();
 };

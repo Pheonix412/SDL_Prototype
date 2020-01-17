@@ -79,6 +79,44 @@ void Texture::ResetTexture() {
 		M_Height = 0;
 	}
  }
+bool Texture::RenderText(const char * text, TTF_Font * font, SDL_Renderer* renderer, SDL_Color colour)
+{
+	//remmove pre-existing texture
+	ResetTexture();
+
+	//check if texture is nullptr
+
+	if (M_Texture == nullptr) {
+		//render text to surface
+		SDL_Surface*  textSurface = TTF_RenderText_Blended_Wrapped(font,text,colour,500);
+
+		if (textSurface != nullptr) {
+			SDL_Log("Loaded text to surface-success");
+
+			//converts the rendered tet surface to the texture
+			M_Texture = SDL_CreateTextureFromSurface(renderer, textSurface);
+
+			if (M_Texture != nullptr) {
+				SDL_Log("Convert surface to texture- Success");
+				//get width and height of rendered text
+				M_Width = textSurface->w;
+				M_Height = textSurface->h;
+			}
+			else {
+				SDL_Log("Convert surface to texture- Failed %s", SDL_GetError());
+				return false;
+			}
+			//remove the text surface from the memory
+			SDL_FreeSurface(textSurface);
+		}
+		else {
+			SDL_Log("Loaded text to surface- Failed %s", TTF_GetError());
+			return false;
+		}
+	}
+	return M_Texture != nullptr;
+}
+
 //this function destructs the texture
 Texture::~Texture()
 {

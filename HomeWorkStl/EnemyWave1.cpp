@@ -11,12 +11,18 @@ EnemyWave1::EnemyWave1(Texture * texture, Vector2 position){
 	M_Position = position;
 }
 
-void EnemyWave1::AddPlayerForce(Vector2 force)
-{
+void EnemyWave1::AddPlayerForce(Vector2 force){
+	if (M_Acceleration.X<4 || M_Acceleration.Y<4)
+	{
+		M_Acceleration += force;
+	}
 }
 
-void EnemyWave1::ReducePlayerForce(Vector2 force)
-{
+void EnemyWave1::ReducePlayerForce(Vector2 force){
+	if (M_Acceleration.X>-10 || M_Acceleration.Y>-10)
+	{
+		M_Acceleration -= force;
+	}
 }
 
 void EnemyWave1::Draw(SDL_Renderer * renderer){
@@ -28,7 +34,7 @@ void EnemyWave1::Draw(SDL_Renderer * renderer){
 void EnemyWave1::Update(float delraTime){
 	//tjis function increases the postion of the enemy when it updates 
 	M_Position.X += (0 * delraTime);
-	M_Position.Y += (5 * delraTime);
+	M_Position.Y += (60 * delraTime);
 	M_Position.Y += M_Position.Y*delraTime;
 }
 

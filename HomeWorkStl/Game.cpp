@@ -1,10 +1,9 @@
 #include "Game.h"
-#include<iostream>
-#include<string>
-#include"resource1.h"
-#include<windows.h>
-
-
+#include <iostream>
+#include <string>
+#include "resource1.h"
+#include <windows.h>
+#include <SDL_mixer.h>
 //by Rhys Thomas Baker 7772 and By Jayme Schmid 6290 2019
 
 Game::Game()
@@ -19,18 +18,19 @@ Game::Game()
 		IsTheGameOver = true;
 
 		std::cout << "error initalizing " << std::endl;
-
 	}
 	else
 	{
 		IsTheGameOver = false;
-
+		//check if SDL_TTF was initalized
+		if (TTF_Init() == -1) {
+			SDL_Log("Initialized SDL_ttf - Failed");
+		}
+		else {
+			SDL_Log("Initialized SDL_ttf - Success");
+		}
 		std::cout << "inialized " << std::endl;
-
 	}
-
-	
-
 }
 bool Game::start() {
 	//create the renderer
@@ -61,6 +61,12 @@ bool Game::start() {
 		lastSpawn = SDL_GetTicks();
 
 		LastUpadateTimer = SDL_GetTicks();
+
+		//intalizing text texture
+		m_textTexture = new Texture();
+		//initalizing the font
+		m_font = TTF_OpenFont("../assets/RobotoBold.ttf", 24);
+
 
 		return true;
 	}
@@ -145,6 +151,13 @@ void Game::draw() {
 	SDL_SetRenderDrawColor(SdlRenderer, 47, 155, 228, 255);
 	SDL_RenderClear(SdlRenderer);
 	
+	if (m_font != nullptr) {
+		SDL_Color colour = { 255,255,255,255 };
+		if (!m_textTexture->RenderText("Wave 1", m_font, SdlRenderer, colour)) {
+			SDL_Log("Text rendered - Success");
+		}
+		m_textTexture->Draw(SdlRenderer, 10, 10);
+	}
 	//this part goes through each of the enemies and game obejcts and draws them
 	for (int i = 0; i < M_GameObjects.size(); ++i)
 	{
@@ -162,6 +175,7 @@ void Game::destroy() {
 	SDL_DestroyRenderer(SdlRenderer);
 	SDL_Quit();
 }
+
 void Game::processinput() {
 	//m_player->Input();
 	//this calls the update input function

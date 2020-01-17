@@ -41,6 +41,10 @@ private:
 	EnemyWave1* Enemies;
 	//this pointer holds the texture of the enemy 
 	Texture* M_EnemyTexture;
+	//stores text texture
+	Texture* m_textTexture;
+	//stores font
+	TTF_Font* m_font;
 public:
 	Game();
 	//this function starts the game 
@@ -64,4 +68,3 @@ public:
 
 	void SetGameState(bool status);
 };
-
