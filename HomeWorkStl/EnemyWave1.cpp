@@ -35,7 +35,6 @@ void EnemyWave1::Update(float delraTime){
 	//tjis function increases the postion of the enemy when it updates 
 	M_Position.X += (0 * delraTime);
 	M_Position.Y += (60 * delraTime);
-	M_Position.Y += M_Position.Y*delraTime;
 }
 
 void EnemyWave1::MoveToPlayer(float deltaTime, Vector2 position){

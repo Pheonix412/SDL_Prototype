@@ -10,7 +10,7 @@ private:
 public:
 	//this is the first wave of enemies constructor and overloaded constructor
 	EnemyWave1();
-	EnemyWave1(Texture * texture, Vector2 position);
+	EnemyWave1(Texture* texture, Vector2 position);
 	//this function adds force to the enemy 
 	void AddPlayerForce(Vector2 force);
 	//this function removes force from the enemy
