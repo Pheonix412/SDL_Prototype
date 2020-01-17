@@ -16,9 +16,9 @@ public:
 	//this function removes force from the enemy
 	void ReducePlayerForce(Vector2 force);
 	//this funcation draws the enemy
-	void Draw(SDL_Renderer*renderer);
+	void Draw(SDL_Renderer* renderer);
 	//this function updates the enemy
-	void Update(float delraTime);
+	void Update(float deltaTime);
 	//this function moves the player towards the player
 	void MoveToPlayer(float deltaTime, Vector2 position);
 	//this function destructs the enemy 

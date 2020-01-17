@@ -14,12 +14,12 @@ public:
 	//this is a overloadd constructor for the vector 2 class 
 	Vector2(int x,int y);
 	// this overloads operators todo with the vector 2 class 
-	Vector2 Vector2::operator+(const Vector2 &anotherV);
-	Vector2 Vector2::operator+=(const Vector2 &anotherV);
-	 Vector2 operator-(const Vector2 &anotherV);
-	 Vector2 operator-=(const Vector2 &anotherV);
-	Vector2 operator*(const float &scalar);
-	Vector2 operator*=(const float &scalar);
+	Vector2 Vector2::operator+(const Vector2& anotherV);
+	Vector2 Vector2::operator+=(const Vector2& anotherV);
+	 Vector2 operator-(const Vector2& anotherV);
+	 Vector2 operator-=(const Vector2& anotherV);
+	Vector2 operator*(const float& scalar);
+	Vector2 operator*=(const float& scalar);
 	//this functions normalize the object
 	void NormalizeVector();
 	Vector2 NormalizedVector();

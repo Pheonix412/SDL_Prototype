@@ -3,9 +3,9 @@
 #include <string>
 #include "resource1.h"
 #include <windows.h>
-#include <SDL_mixer.h>
-//by Rhys Thomas Baker 7772 and By Jayme Schmid 6290 2019
 
+//by Rhys Thomas Baker 7772 and By Jayme Schmid 6290 2019
+//credit to https://patrickdearteaga.com for the music
 Game::Game()
 {
 	//please follow he guides in class for a more detailed description of this class 
@@ -45,7 +45,6 @@ bool Game::start() {
 		//laods the player bullets texture 
 		playerBullets->LoadImgFromFile("../assets/B1.bmp", SdlRenderer);
 		
-
 		//this part creates another obejct of the texture class , it then loads the bullets texture
 		Texture* playerSpacetexture = new Texture();
 		playerSpacetexture->LoadImgFromFile("../assets/SP1.bmp", SdlRenderer);
@@ -57,7 +56,6 @@ bool Game::start() {
 		//then adds the obeject to the game obejcts list
 		M_GameObjects.push_back(playerSpaceS);
 	
-		
 		lastSpawn = SDL_GetTicks();
 
 		LastUpadateTimer = SDL_GetTicks();
@@ -67,6 +65,8 @@ bool Game::start() {
 		//initalizing the font
 		m_font = TTF_OpenFont("../assets/RobotoBold.ttf", 24);
 
+
+		Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 4096);
 
 		return true;
 	}
@@ -225,12 +225,7 @@ void Game::processinput() {
 			IsTheGameOver = true;
 		}
 
-	
 	}
-
-	
-
-
 
 }
 void Game::update() {
@@ -249,7 +244,7 @@ void Game::update() {
 	//this displays the spawn timer 
 	//std::cout << "Spawn Timer: " << spawnTimer<< std::endl;
 	//this spawns the enemies if there is les than 10 of them
-	if (spawnTimer>0.5 && enemycount<10) {
+	if (spawnTimer>0.5 && enemycount<20) {
 		enemycount++;
 		M_EnemyTexture = new Texture();
 		M_EnemyTexture->LoadImgFromFile("../assets/EnemyShipS.bmp", SdlRenderer);
@@ -276,7 +271,7 @@ void Game::update() {
 	}
 }
 void Game::shutdown() {
-
+	Mix_CloseAudio();
 }
 
 Game::~Game()

@@ -2,7 +2,7 @@
 #include"Game.h"
 #include<iostream>
 //by Rhys Thomas Baker 7772 and By Jayme Schmid 6290 2019
-int main(int argc, char ** argv) {
+int main(int argc, char** argv) {
 	//this creates the object of the game
 	Game* game = new Game();
 	//calls the run funcation in the game obejct 
@@ -12,3 +12,20 @@ int main(int argc, char ** argv) {
 	//returns 0
 	return 0;
 }
+
+
+
+// TODO: Check if sound actually works
+
+// TODO: Add sound effects for a shooting a bullet
+
+// TODO: Make it so a bullet will only fire every x seconds This will allow
+// for no spam in sound and so you cant spam the arena will bullets and win
+
+// TODO: If enemy is shot with bullet, enemy disapears with the bullet and 
+// is replaced with a explosion
+
+// TODO: Fix player movement
+
+// TODO: Add adjustable speed to enemies are faster in higher waves -Optional
+

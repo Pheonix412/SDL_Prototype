@@ -7,9 +7,11 @@ PlayerSpaceShip::PlayerSpaceShip()
 	//on construction of the player it sets their texture to a nullptr
 	M_Texture = nullptr;
 	std::cout << "playerconstructor" << std::endl;
+
+
 }
 
-PlayerSpaceShip::PlayerSpaceShip(Texture * texture, Vector2 position)
+PlayerSpaceShip::PlayerSpaceShip(Texture* texture, Vector2 position)
 {
 	//this part initalizes the players position,texture,velocity and also acceleration.
 	M_Position = position;
@@ -40,23 +42,24 @@ void PlayerSpaceShip::ReducePlayerForce(Vector2 force)
 
 }
 
-void PlayerSpaceShip::Draw(SDL_Renderer * renderer)
+void PlayerSpaceShip::Draw(SDL_Renderer* renderer)
 {
 	//this part points to the draw function in the texture class and draws te player on the screen 
 	M_Texture->Draw(renderer, M_Position.X, M_Position.Y);
 	for (int i = 0; i < m_bullets.size(); ++i)
 	{
+
 		m_bullets[i]->Draw(renderer);
 	}
 }
 
-void PlayerSpaceShip::Update(float delraTime)
+void PlayerSpaceShip::Update(float deltaTime)
 {
 	//this part updates the players posution and also their velocity
 	
 	//M_Acceleration = M_Acceleration + Vector2(M_Velocity *-0.5f);
-	M_Velocity += M_Acceleration *delraTime;
-		M_Position += M_Velocity*delraTime;
+		M_Velocity += M_Acceleration * deltaTime;
+		M_Position += M_Velocity * deltaTime;
 		//float speed = M_Velocity.magnitude();
 	//}
 		//if (speed<=maxvelocity)
@@ -67,7 +70,7 @@ void PlayerSpaceShip::Update(float delraTime)
 		//SDL_Log("velocty %f, %f", M_Velocity.X, M_Velocity.Y);
 		for (int i = 0; i < m_bullets.size(); ++i)
 		{
-			m_bullets[i]->Update(delraTime);
+			m_bullets[i]->Update(deltaTime);
 		}
 		//M_Acceleration = Vector2(0, 0);
 	
@@ -77,7 +80,7 @@ void PlayerSpaceShip::UserInput1()
 {
 }
 
-void PlayerSpaceShip::HandleUserInput(Input * input)
+void PlayerSpaceShip::HandleUserInput(Input* input)
 {
 	//this part handles the users input when they press a key down the keyboard, when they press a button down it will add to the players force in the coresponding direction
 	if (input->IsKeyDown(SDL_SCANCODE_W))
@@ -126,13 +129,11 @@ void PlayerSpaceShip::HandleUserInput(Input * input)
 		//M_Position1.Y = (Y1 - 40);
 		//GameObject*playerC = new Bullet1(m_bullets, M_Position1);
 		//M_GameObjects.push_back(playerC);
-
-
 	}
 	
 }
 
-void PlayerSpaceShip::HandleUserInput1(Input * input, Texture * playerBullets)
+void PlayerSpaceShip::HandleUserInput1(Input* input, Texture* playerBullets)
 {
 	//this part handles the users input when they press a key down the keyboard, when they press a button down it will add to the players force in the coresponding direction
 	if (input->IsKeyDown(SDL_SCANCODE_W))
@@ -170,7 +171,7 @@ void PlayerSpaceShip::HandleUserInput1(Input * input, Texture * playerBullets)
  		int X1 = (M_Position.X+10);
 		int Y1 = (M_Position.Y-40);
 		
-		M_Position2.X = X1 ;
+		M_Position2.X = X1;
 		M_Position2.Y = Y1;
 		Bullet1*playerC = new Bullet1(playerBullets, M_Position2);
 		m_bullets.push_back(playerC);

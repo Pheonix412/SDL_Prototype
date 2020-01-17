@@ -11,14 +11,14 @@ public:
 	GameObject();
 	~GameObject();
 	//this is the draw function for the game object
-	virtual void Draw(SDL_Renderer*renderer);
+	virtual void Draw(SDL_Renderer* renderer);
 	//this is the update function for the game object
-	virtual void Update(float delraTime);
+	virtual void Update(float deltaTime);
 	//this is the user input function for the game object 
 	virtual void UserInput1();
 	//these are functions that handles the user input 
-	virtual void HandleUserInput(Input*input);
-	virtual void HandleUserInput1(Input*input, Texture* playerBullets);
+	virtual void HandleUserInput(Input* input);
+	virtual void HandleUserInput1(Input* input, Texture* playerBullets);
 	//this holds the postion of the game object 
 	Vector2 GetPosition();
 protected:

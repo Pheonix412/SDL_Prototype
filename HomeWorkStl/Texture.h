@@ -6,7 +6,7 @@ class Texture
 	//by Rhys Thomas Baker 7772 and By Jayme Schmid 6290 2019
 private:
 	//this is a pointer for the texture 
-	SDL_Texture *M_Texture;
+	SDL_Texture* M_Texture;
 	//this holds the width and the height for the texture 
 	int M_Width;
 	int M_Height;

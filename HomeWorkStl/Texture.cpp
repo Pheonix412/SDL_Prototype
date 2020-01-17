@@ -62,7 +62,7 @@ void Texture::Draw(SDL_Renderer* renderer, int x, int y, SDL_Rect * sourceRect) 
 		destRect.h = sourceRect -> h;
 	}
 	//put the source rectangle here , the source rectangle is in charge of what is rendered from the sprite sheet
-	SDL_RenderCopyEx(renderer, M_Texture, sourceRect, &destRect,0.0,NULL,SDL_FLIP_HORIZONTAL);
+	SDL_RenderCopyEx(renderer, M_Texture, sourceRect, &destRect,0.0,NULL,SDL_FLIP_NONE);
 
 
 }
@@ -79,7 +79,7 @@ void Texture::ResetTexture() {
 		M_Height = 0;
 	}
  }
-bool Texture::RenderText(const char * text, TTF_Font * font, SDL_Renderer* renderer, SDL_Color colour)
+bool Texture::RenderText(const char* text, TTF_Font* font, SDL_Renderer* renderer, SDL_Color colour)
 {
 	//remmove pre-existing texture
 	ResetTexture();

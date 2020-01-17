@@ -9,6 +9,7 @@
 #include<Windows.h>
 #include<SDL_syswm.h>
 #include"resource1.h"
+#include <SDL_mixer.h>
 class Game
 {
 	//by Rhys Thomas Baker 7772 and By Jayme Schmid 6290 2019
@@ -16,7 +17,7 @@ class Game
 private:
 	//these are pointers for the window and the render
 	SDL_Window* SdlWindow;
-	SDL_Renderer *SdlRenderer;
+	SDL_Renderer* SdlRenderer;
 	//this is a boolean varaible that holds the status of the game 
 	bool IsTheGameOver;
 	unsigned int LastUpadateTimer;
@@ -29,10 +30,10 @@ private:
 	//this is the pointer of the players space ship
 	GameObject* playerSpaceS;
 	//this holds the texture of the players space ship
-	PlayerSpaceShip * M_Player_SpaceShip;
+	PlayerSpaceShip* M_Player_SpaceShip;
 	Texture* playerBullets;
 	//this pointer holds the users input 
-	Input *UserInput;
+	Input* UserInput;
 	
 	Vector2 M_Position1;
 	//this variable holds the numbers of the enemies 
@@ -45,6 +46,11 @@ private:
 	Texture* m_textTexture;
 	//stores font
 	TTF_Font* m_font;
+
+
+	//music for background
+	Mix_Music* M_Music = NULL;
+
 public:
 	Game();
 	//this function starts the game 

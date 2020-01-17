@@ -10,15 +10,15 @@ private:
 public:
 	//bullet constructor and overloaded constructor
 	Bullet1();
-	Bullet1(Texture * texture, Vector2 position);
+	Bullet1(Texture* texture, Vector2 position);
 //this function adds force to the bullet
 	void AddPlayerForce(Vector2 force);
 	//this function reduces force to the bullet
 	void ReducePlayerForce(Vector2 force);
 	//this function draws the bullet
-	void Draw(SDL_Renderer*renderer);
+	void Draw(SDL_Renderer* renderer);
 	//this function updates the bullet
-	void Update(float delraTime);
+	void Update(float deltaTime);
 	//this is the destructor of the bullet
 	~Bullet1();
 };

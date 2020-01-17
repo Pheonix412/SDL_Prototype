@@ -1,11 +1,11 @@
 #include "EnemyWave1.h"
-
+#include <random>
 //by Rhys Thomas Baker 7772 and By Jayme Schmid 6290 2019
 
 EnemyWave1::EnemyWave1(){
 }
 
-EnemyWave1::EnemyWave1(Texture * texture, Vector2 position){
+EnemyWave1::EnemyWave1(Texture* texture, Vector2 position){
 	//this initalizes the enemies texture and position 
 	M_Texture = texture;
 	M_Position = position;
@@ -25,16 +25,16 @@ void EnemyWave1::ReducePlayerForce(Vector2 force){
 	}
 }
 
-void EnemyWave1::Draw(SDL_Renderer * renderer){
+void EnemyWave1::Draw(SDL_Renderer* renderer){
 	//this draws the enemy 
 	M_Texture->Draw(renderer, M_Position.X, M_Position.Y);
 }
 
 
-void EnemyWave1::Update(float delraTime){
-	//tjis function increases the postion of the enemy when it updates 
-	M_Position.X += (0 * delraTime);
-	M_Position.Y += (60 * delraTime);
+void EnemyWave1::Update(float deltaTime){
+	//this function increases the postion of the enemy when it updates 
+	M_Position.X += (0 * deltaTime);
+	M_Position.Y += (120 * deltaTime);
 }
 
 void EnemyWave1::MoveToPlayer(float deltaTime, Vector2 position){

@@ -28,10 +28,10 @@ private:
 	//this holds the keyboard states 
 	const Uint8* M_keyboardState;
 	//these are functons to do with the mouse 
-	void OnMouseButtonDown(SDL_Event &e);
-	void OnMouseButtonUp(SDL_Event &e);
-	void OnMouseButtonMove(SDL_Event &e);
-	void OnSystemEvents(SDL_Event& e, Game * g);
+	void OnMouseButtonDown(SDL_Event& e);
+	void OnMouseButtonUp(SDL_Event& e);
+	void OnMouseButtonMove(SDL_Event& e);
+	void OnSystemEvents(SDL_Event& e, Game* g);
 public:
 	//this holds te input constructor
 	Input();

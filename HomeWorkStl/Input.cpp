@@ -1,9 +1,9 @@
 #include "Input.h"
-#include"resource.h"
-#include<SDL_syswm.h>
-#include<string>
-#include<codecvt>
-#include"Game.h"
+#include "resource.h"
+#include <SDL_syswm.h>
+#include <string>
+#include <codecvt>
+#include "Game.h"
 
 //by Rhys Thomas Baker 7772 and By Jayme Schmid 6290 2019
 
@@ -35,7 +35,7 @@ void Input::OnMouseButtonDown(SDL_Event & e)
 	}
 }
 
-void Input::OnMouseButtonUp(SDL_Event & e)
+void Input::OnMouseButtonUp(SDL_Event& e)
 {
 	//if the event is a a mouse button up 
 	if (e.type == SDL_MOUSEBUTTONUP)
@@ -65,7 +65,7 @@ void Input::OnMouseButtonUp(SDL_Event & e)
 	
 
 
-void Input::OnMouseButtonMove(SDL_Event & e)
+void Input::OnMouseButtonMove(SDL_Event& e)
 {
 	//if the mouse is moving and the left buttton is presses then set the mouse positon (x or y) to the coresponding mouse moiton postion 
 	if (e.type==SDL_MOUSEMOTION&& e.motion.state==SDL_BUTTON_LMASK) {
@@ -81,7 +81,7 @@ void Input::OnMouseButtonMove(SDL_Event & e)
 	}
 }
 
-void Input::OnSystemEvents(SDL_Event & e, Game * g)
+void Input::OnSystemEvents(SDL_Event& e, Game* g)
 {
 	WPARAM wp = e.syswm.msg->msg.win.wParam;
 

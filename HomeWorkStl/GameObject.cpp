@@ -18,11 +18,11 @@ GameObject::~GameObject()
 	
 }
 
-void GameObject::Draw(SDL_Renderer * renderer)
+void GameObject::Draw(SDL_Renderer* renderer)
 {
 }
 
-void GameObject::Update(float delraTime)
+void GameObject::Update(float deltaTime)
 {
 }
 
@@ -30,7 +30,7 @@ void GameObject::UserInput1()
 {
 }
 
-void GameObject::HandleUserInput(Input * input)
+void GameObject::HandleUserInput(Input* input)
 {
 	
 }

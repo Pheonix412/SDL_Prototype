@@ -11,12 +11,12 @@ Vector2::Vector2(int x, int y)
 	this->Y = y;
 }
 //this is the addition operator ,pretty much the other variables 
-Vector2 Vector2::operator+(const Vector2 &anotherV) {
+Vector2 Vector2::operator+(const Vector2& anotherV) {
 	//this  returns vectors 2 once it has added both the current and the objects x and y vairiables together
 	return Vector2(this->X + anotherV.X, this->Y + anotherV.Y);
 }
 //this is the addition and equals operator
-Vector2 Vector2::operator+=(const Vector2 &anotherV) {
+Vector2 Vector2::operator+=(const Vector2& anotherV) {
 	//this adds the current x operator to the current objects x operator
 	this->X += anotherV.X;
 	//this adds the current y operator to the current objects y operator
@@ -25,20 +25,20 @@ Vector2 Vector2::operator+=(const Vector2 &anotherV) {
 	return *this;
 }
 //its pretty much the same thing for the rest of the operators just with their coresponding operators instead of +
-Vector2 Vector2::operator-(const Vector2 &anotherV) {
+Vector2 Vector2::operator-(const Vector2& anotherV) {
 	return Vector2(this->X - anotherV.X, this->Y - anotherV.Y);
 }
-Vector2 Vector2::operator-=(const Vector2 &anotherV) {
+Vector2 Vector2::operator-=(const Vector2& anotherV) {
 	this->X -= anotherV.X;
 	this->Y -= anotherV.Y;
 	return *this;
 }
-Vector2 Vector2::operator*(const float & scalar)
+Vector2 Vector2::operator*(const float& scalar)
 {
 	return Vector2(this->X * scalar, this->Y * scalar);
 }
 
-Vector2 Vector2::operator*=(const float & scalar)
+Vector2 Vector2::operator*=(const float& scalar)
 {
 	this->X *= scalar;
 	this->Y *= scalar;
