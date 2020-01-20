@@ -27,7 +27,7 @@ Game::Game()
 			SDL_Log("Initialized SDL_ttf - Failed");
 		}
 		else {
-			SDL_Log("Initialized SDL_ttf - Success");
+			//SDL_Log("Initialized SDL_ttf - Success");
 		}
 		std::cout << "inialized " << std::endl;
 	}
@@ -39,7 +39,7 @@ bool Game::start() {
 	if (SdlRenderer != nullptr) {
 		//make an object of the input  class 
 		UserInput = new Input();
-		std::cout << "render created " << std::endl;
+	//	std::cout << "render created " << std::endl;
 		//make an object of the texture class
 		playerBullets = new Texture();
 		//laods the player bullets texture 
@@ -66,7 +66,7 @@ bool Game::start() {
 		m_font = TTF_OpenFont("../assets/RobotoBold.ttf", 24);
 
 
-		Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 4096);
+		
 
 		return true;
 	}
@@ -94,6 +94,19 @@ void Game::run(char* title, int width, int height, bool fullscreen) {
 	}
 	//creates the window
 	SdlWindow = SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, creationFlag);
+
+
+	if (Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 2048)) {
+		SDL_Log("Audio Error %s", Mix_GetError());
+	};
+
+	//music for background 
+	Mix_Music* M_Music = Mix_LoadMUS("../assets/IntergalacticOdyssey.ogg");
+
+	if (!Mix_PlayingMusic()) {
+		Mix_PlayMusic(M_Music, -1);
+	}
+
 
 	//if there is a window and start is being run then
 	if (SdlWindow !=nullptr && start())
@@ -130,9 +143,6 @@ void Game::run(char* title, int width, int height, bool fullscreen) {
 			//draw on the screen the obbejcts 
 			draw();
 		}
-
-
-
 	}
 	else
 	{
@@ -140,10 +150,7 @@ void Game::run(char* title, int width, int height, bool fullscreen) {
 		//if not then shutdown the game and destory the objects (including window and etc)
 		shutdown();
 		destroy();
-	
 	}
-
-
 }
 
 void Game::draw() {
@@ -154,7 +161,7 @@ void Game::draw() {
 	if (m_font != nullptr) {
 		SDL_Color colour = { 255,255,255,255 };
 		if (!m_textTexture->RenderText("Wave 1", m_font, SdlRenderer, colour)) {
-			SDL_Log("Text rendered - Success");
+			//SDL_Log("Text rendered - Success");
 		}
 		m_textTexture->Draw(SdlRenderer, 10, 10);
 	}
@@ -271,7 +278,7 @@ void Game::update() {
 	}
 }
 void Game::shutdown() {
-	Mix_CloseAudio();
+	Mix_Quit();
 }
 
 Game::~Game()

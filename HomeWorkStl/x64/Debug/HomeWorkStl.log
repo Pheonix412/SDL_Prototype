@@ -1,13 +1,5 @@
-﻿  E:\SDL_Prototype-master\dep\lib\x64\SDL2.dll
+﻿  C:\Users\Bacca\Desktop\SDL_Prototype\SDL_Prototype\dep\lib\x64\SDL2.dll
           1 file(s) copied.
-  Source.cpp
   Game.cpp
-  EnemyWave1.cpp
-e:\sdl_prototype-master\homeworkstl\enemywave1.cpp(36): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
-e:\sdl_prototype-master\homeworkstl\enemywave1.cpp(37): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
-e:\sdl_prototype-master\homeworkstl\enemywave1.cpp(45): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-e:\sdl_prototype-master\homeworkstl\enemywave1.cpp(46): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-  Bullet1.cpp
-  Generating Code...
-  HomeWorkStl.vcxproj -> E:\SDL_Prototype-master\x64\Debug\HomeWorkStl.exe
-  HomeWorkStl.vcxproj -> E:\SDL_Prototype-master\x64\Debug\HomeWorkStl.pdb (Full PDB)
+  HomeWorkStl.vcxproj -> C:\Users\Bacca\Desktop\SDL_Prototype\SDL_Prototype\x64\Debug\HomeWorkStl.exe
+  HomeWorkStl.vcxproj -> C:\Users\Bacca\Desktop\SDL_Prototype\SDL_Prototype\x64\Debug\HomeWorkStl.pdb (Full PDB)

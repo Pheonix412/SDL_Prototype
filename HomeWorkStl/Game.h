@@ -47,10 +47,6 @@ private:
 	//stores font
 	TTF_Font* m_font;
 
-
-	//music for background
-	Mix_Music* M_Music = NULL;
-
 public:
 	Game();
 	//this function starts the game 

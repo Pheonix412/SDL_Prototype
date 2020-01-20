@@ -22,13 +22,13 @@ bool Texture::LoadImgFromFile(const char* path, SDL_Renderer* renderer) {
 			//this sets the colour key
 			SDL_SetColorKey(loadsurface, SDL_TRUE, SDL_MapRGB(loadsurface->format, 205, 34, 0));
 		//this outputs to the console that the texture loaded 
-			std::cout << "texture loaded" << std::endl;
+	//		std::cout << "texture loaded" << std::endl;
 			//this changes the surface to a texture and saves it 
 			M_Texture = SDL_CreateTextureFromSurface(renderer, loadsurface);
 			//if the texture is not null
 			if (M_Texture != nullptr) {
 
-				std::cout << "created texture from surface" << std::endl;
+			//	std::cout << "created texture from surface" << std::endl;
 				//this sets the width and height of the texture 
 				M_Width = loadsurface->w;
 				M_Height = loadsurface->h;
@@ -91,13 +91,13 @@ bool Texture::RenderText(const char* text, TTF_Font* font, SDL_Renderer* rendere
 		SDL_Surface*  textSurface = TTF_RenderText_Blended_Wrapped(font,text,colour,500);
 
 		if (textSurface != nullptr) {
-			SDL_Log("Loaded text to surface-success");
+		//	SDL_Log("Loaded text to surface-success");
 
 			//converts the rendered tet surface to the texture
 			M_Texture = SDL_CreateTextureFromSurface(renderer, textSurface);
 
 			if (M_Texture != nullptr) {
-				SDL_Log("Convert surface to texture- Success");
+			//	SDL_Log("Convert surface to texture- Success");
 				//get width and height of rendered text
 				M_Width = textSurface->w;
 				M_Height = textSurface->h;
