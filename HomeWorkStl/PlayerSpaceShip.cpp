@@ -11,9 +11,10 @@ PlayerSpaceShip::PlayerSpaceShip()
 	M_Velocity = Vector2(0, 0);
 	M_Acceleration = Vector2(0, 0);
 	maxVelocity = 0.0f;
+	m_Collider = nullptr;
 }
 
-PlayerSpaceShip::PlayerSpaceShip(Texture* texture, Vector2 position)
+PlayerSpaceShip::PlayerSpaceShip(Texture* texture, Vector2 position, int colWidth, int colHeight)
 {
 	//this part initalizes the players position,texture,velocity and also acceleration.
 	M_Position = position;
@@ -21,6 +22,10 @@ PlayerSpaceShip::PlayerSpaceShip(Texture* texture, Vector2 position)
 	M_Velocity = Vector2(0, 0);
 	M_Acceleration = Vector2(0, 0);
 	maxVelocity = 500.0f;
+	m_colWidth = colWidth;
+	m_colHeight = colHeight;
+	//setup collider
+	m_Collider = new AABB(M_Position, m_colWidth, m_colHeight);
 }
 
 void PlayerSpaceShip::AddPlayerForce(Vector2 force)
@@ -34,10 +39,33 @@ void PlayerSpaceShip::ReducePlayerForce(Vector2 force)
 		M_Acceleration -= force;
 }
 
+AABB * PlayerSpaceShip::GetCollider()
+{
+	return m_Collider;
+}
+
+void PlayerSpaceShip::ToggleGorund(bool toggle){
+	//toggle isTouchingGround
+	m_isTouchingGround = toggle;
+
+}
+
 void PlayerSpaceShip::Draw(SDL_Renderer* renderer)
 {
 	//this part points to the draw function in the texture class and draws te player on the screen 
 	M_Texture->Draw(renderer, M_Position.X, M_Position.Y);
+
+	//draw a box to visualise the collider
+	SDL_Rect rect = {
+		m_Collider->GetPosition().X,
+		m_Collider->GetPosition().Y,
+		m_Collider->GetWidth(),
+		m_Collider->GetHeight()
+	};
+
+	SDL_SetRenderDrawColor(renderer, 0, 255, 255, 0);
+	SDL_RenderDrawRect(renderer, &rect);
+
 	for (int i = 0; i < m_bullets.size(); ++i)
 	{
 
@@ -58,6 +86,8 @@ void PlayerSpaceShip::Update(float deltaTime)
 		}
 
 		M_Position += M_Velocity * deltaTime;
+
+		m_Collider->Update(M_Position);
 
 	
 		//SDL_Log("velocty %f, %f", M_Velocity.X, M_Velocity.Y);

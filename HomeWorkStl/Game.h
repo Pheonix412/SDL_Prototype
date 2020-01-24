@@ -9,7 +9,7 @@
 #include<Windows.h>
 #include<SDL_syswm.h>
 #include"resource1.h"
-#include <SDL_mixer.h>
+#include "Audio.h"
 class Game
 {
 	//by Rhys Thomas Baker 7772 and By Jayme Schmid 6290 2019
@@ -47,6 +47,7 @@ private:
 	//stores font
 	TTF_Font* m_font;
 
+	Audio* audio;
 public:
 	Game();
 	//this function starts the game 
@@ -65,6 +66,9 @@ public:
 	void run(char* title,int width,int height,bool fullscreen);
 	//this is the destroy function for the game 
 	void destroy();
+	//player enemy collision check
+	void PE_CollisionCheck();
+
 	//this is the destructor for the game
 	~Game();
 

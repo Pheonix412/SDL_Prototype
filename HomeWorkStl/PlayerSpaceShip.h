@@ -3,6 +3,7 @@
 #include "GameObject.h"
 #include"Bullet1.h"
 #include <SDL_mixer.h>
+
 class PlayerSpaceShip : public GameObject
 {
 	//by Rhys Thomas Baker 7772 and By Jayme Schmid 6290 2019
@@ -17,21 +18,29 @@ private:
 	//this holds the postion of the bulet 
 	Vector2 M_Position2;
 	float maxVelocity;
-	//std::vector<GameObject*>M_GameObjects;
+
 	//holds how long its been since a bullet has been made
 	unsigned int LastUpadateTimer;
+
+	AABB* m_Collider;
+	int m_colWidth;
+	int m_colHeight;
+	bool m_isTouchingGround;
 public:
 	//this is the space ship constructor 
 	PlayerSpaceShip();
 	//this is a bullet pointer
 	Bullet1* m_bullet;
 	//this is a overloaded constructor of the space ship
-	PlayerSpaceShip(Texture* texture, Vector2 position);
+	PlayerSpaceShip(Texture* texture, Vector2 position, int colWidth, int colHeight);
 //this function adds force to the player 
 	void AddPlayerForce(Vector2 force);
 	//this function reduces force to the player 
 	void ReducePlayerForce(Vector2 force);
 	//this function draws the plater 
+
+	AABB* GetCollider();
+	void ToggleGorund(bool toggle);
 	void Draw(SDL_Renderer* renderer);
 	//this function updates the player 
 	void Update(float deltaTime);

@@ -3,13 +3,16 @@
 //by Rhys Thomas Baker 7772 and By Jayme Schmid 6290 2019
 
 EnemyWave1::EnemyWave1(){
-	
+	M_Texture = nullptr;
+	m_Collider = nullptr;
 }
 
-EnemyWave1::EnemyWave1(Texture* texture, Vector2 position){
+EnemyWave1::EnemyWave1(Texture* texture, Vector2 position, int colWidth, int colHeight){
 	//this initalizes the enemies texture and position 
 	M_Texture = texture;
 	M_Position = position;
+	//initalize collider
+	m_Collider = new AABB(position, colWidth, colHeight);
 }
 
 void EnemyWave1::AddPlayerForce(Vector2 force){
@@ -29,6 +32,16 @@ void EnemyWave1::ReducePlayerForce(Vector2 force){
 void EnemyWave1::Draw(SDL_Renderer* renderer){
 	//this draws the enemy 
 	M_Texture->Draw(renderer, M_Position.X, M_Position.Y);
+
+	SDL_Rect rect = {
+		m_Collider->GetPosition().X,
+		m_Collider->GetPosition().Y,
+		m_Collider->GetWidth(),
+		m_Collider->GetHeight()
+	};
+
+	SDL_SetRenderDrawColor(renderer, 0, 255, 255, 0);
+	SDL_RenderDrawRect(renderer, &rect);
 }
 
 
@@ -36,6 +49,8 @@ void EnemyWave1::Update(float deltaTime){
 	//this function increases the postion of the enemy when it updates 
 	M_Position.X += (0 * deltaTime);
 	M_Position.Y += (120 * deltaTime);
+
+	m_Collider->Update(M_Position);
 }
 
 void EnemyWave1::MoveToPlayer(float deltaTime, Vector2 position){
@@ -49,6 +64,11 @@ void EnemyWave1::MoveToPlayer(float deltaTime, Vector2 position){
 
 	M_Position.X += xVel;
 	M_Position.Y += yVel;
+}
+
+AABB * EnemyWave1::GetCollider()
+{
+	return m_Collider;
 }
 
 EnemyWave1::~EnemyWave1(){

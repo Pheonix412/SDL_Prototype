@@ -7,10 +7,11 @@ private:
 	//this is the varoables for velocity and accleration for the first wave of enemies 
 	Vector2 M_Velocity;
 	Vector2 M_Acceleration;
+	AABB* m_Collider;
 public:
 	//this is the first wave of enemies constructor and overloaded constructor
 	EnemyWave1();
-	EnemyWave1(Texture* texture, Vector2 position);
+	EnemyWave1(Texture* texture, Vector2 position, int colWidth, int colHeight);
 	//this function adds force to the enemy 
 	void AddPlayerForce(Vector2 force);
 	//this function removes force from the enemy
@@ -21,6 +22,11 @@ public:
 	void Update(float deltaTime);
 	//this function moves the player towards the player
 	void MoveToPlayer(float deltaTime, Vector2 position);
+
+	AABB* GetCollider();
+
+
+
 	//this function destructs the enemy 
 	~EnemyWave1();
 };

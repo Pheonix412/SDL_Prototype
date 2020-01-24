@@ -14,7 +14,7 @@ Game::Game()
 	SdlRenderer = nullptr;
 	LastUpadateTimer = SDL_GetTicks();
 	//checks if sdl is initalized if it isnt  then end the game , else if it has then run the game 
-	if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
+	if (SDL_Init(SDL_INIT_EVERYTHING) != 0|| TTF_Init() == -1|| Mix_OpenAudio(192000,MIX_DEFAULT_FORMAT,2,4096)==-1) {
 		IsTheGameOver = true;
 
 		std::cout << "error initalizing " << std::endl;
@@ -22,15 +22,9 @@ Game::Game()
 	else
 	{
 		IsTheGameOver = false;
-		//check if SDL_TTF was initalized
-		if (TTF_Init() == -1) {
-			SDL_Log("Initialized SDL_ttf - Failed");
-		}
-		else {
-			//SDL_Log("Initialized SDL_ttf - Success");
-		}
 		std::cout << "inialized " << std::endl;
 	}
+	audio = new Audio();
 }
 bool Game::start() {
 	//create the renderer
@@ -45,6 +39,10 @@ bool Game::start() {
 		//laods the player bullets texture 
 		playerBullets->LoadImgFromFile("../assets/B1.bmp", SdlRenderer);
 		
+		audio = new Audio();
+
+		audio->PlayBGMusic("../assets/IntergalacticOdyssey.ogg");
+
 		//this part creates another obejct of the texture class , it then loads the bullets texture
 		Texture* playerSpacetexture = new Texture();
 		playerSpacetexture->LoadImgFromFile("../assets/SP1.bmp", SdlRenderer);
@@ -52,7 +50,7 @@ bool Game::start() {
 		M_Position1.X = 380;
 		M_Position1.Y = 400;
 		//it then creates a new obejct of that class 
-		playerSpaceS = new PlayerSpaceShip(playerSpacetexture, M_Position1);
+		playerSpaceS = new PlayerSpaceShip(playerSpacetexture, M_Position1,80,80);
 		//then adds the obeject to the game obejcts list
 		M_GameObjects.push_back(playerSpaceS);
 	
@@ -94,19 +92,6 @@ void Game::run(char* title, int width, int height, bool fullscreen) {
 	}
 	//creates the window
 	SdlWindow = SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, creationFlag);
-
-
-	if (Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 2048)) {
-		SDL_Log("Audio Error %s", Mix_GetError());
-	};
-
-	//music for background 
-	Mix_Music* M_Music = Mix_LoadMUS("../assets/IntergalacticOdyssey.ogg");
-
-	if (!Mix_PlayingMusic()) {
-		Mix_PlayMusic(M_Music, -1);
-	}
-
 
 	//if there is a window and start is being run then
 	if (SdlWindow !=nullptr && start())
@@ -183,6 +168,31 @@ void Game::destroy() {
 	SDL_Quit();
 }
 
+void Game::PE_CollisionCheck(){
+	if (M_Player_SpaceShip->GetPosition().Y >= (600-80)) {
+		M_Player_SpaceShip->ToggleGorund(true);
+	}
+	else {
+		M_Player_SpaceShip->ToggleGorund(false);
+	}
+
+	if (M_Player_SpaceShip->GetCollider()) {
+		//check that we have collided with the individual enemy collisions
+		for (auto itr = M_EnemyObjects.end(); itr != M_EnemyObjects.begin();) {
+			--itr;
+			//if the enemes collision is within the players collsion bounds then delete the enemy
+			if ((*itr) != nullptr && M_Player_SpaceShip->GetCollider()->RectCollision(*(*itr)->GetCollider())) {
+				delete* itr;
+				*itr = nullptr;
+				itr = M_EnemyObjects.erase(itr);
+
+				SDL_Log("Enemy Deleted");
+			}
+		}
+	}
+
+}
+
 void Game::processinput() {
 	//m_player->Input();
 	//this calls the update input function
@@ -257,7 +267,7 @@ void Game::update() {
 		M_EnemyTexture->LoadImgFromFile("../assets/EnemyShipS.bmp", SdlRenderer);
 		int rand_x = rand() % 700 + 10;
 		int rand_y = rand() % 1 + 10;
-		Enemies = new EnemyWave1(M_EnemyTexture, Vector2(rand_x, rand_y));
+		Enemies = new EnemyWave1(M_EnemyTexture, Vector2(rand_x, rand_y),40,35);
 		M_EnemyObjects.push_back(Enemies);
 		lastSpawn = SDL_GetTicks();
 	}
@@ -270,12 +280,14 @@ void Game::update() {
 	{
 		M_GameObjects[i]->Update(deltaTime);
 	}
+	
 	for (int i = 0; i < M_EnemyObjects.size(); ++i)
 	{
 		M_EnemyObjects[i]->Update(deltaTime);
 		//M_EnemyObjects[i]->MoveToPlayer(deltaTime, playerSpaceS->GetPosition());
 
 	}
+	PE_CollisionCheck();
 }
 void Game::shutdown() {
 	Mix_Quit();
