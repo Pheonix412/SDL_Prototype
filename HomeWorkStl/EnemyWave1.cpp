@@ -3,6 +3,7 @@
 //by Rhys Thomas Baker 7772 and By Jayme Schmid 6290 2019
 
 EnemyWave1::EnemyWave1(){
+	
 }
 
 EnemyWave1::EnemyWave1(Texture* texture, Vector2 position){
@@ -50,6 +51,9 @@ void EnemyWave1::MoveToPlayer(float deltaTime, Vector2 position){
 	M_Position.Y += yVel;
 }
 
-EnemyWave1::~EnemyWave1()
-{
+EnemyWave1::~EnemyWave1(){
+	if (M_Texture != nullptr) {
+		delete  M_Texture;
+		M_Texture = nullptr;
+	}
 }

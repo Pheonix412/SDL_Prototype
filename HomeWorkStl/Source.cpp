@@ -14,13 +14,7 @@ int main(int argc, char** argv) {
 }
 
 
-
-// TODO: Check if sound actually works
-
 // TODO: Add sound effects for a shooting a bullet
-
-// TODO: Make it so a bullet will only fire every x seconds This will allow
-// for no spam in sound and so you cant spam the arena will bullets and win
 
 // TODO: If enemy is shot with bullet, enemy disapears with the bullet and 
 // is replaced with a explosion

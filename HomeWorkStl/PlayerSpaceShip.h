@@ -16,8 +16,10 @@ private:
 	Vector2 M_Position1;
 	//this holds the postion of the bulet 
 	Vector2 M_Position2;
-	float maxvelocity;
+	float maxVelocity;
 	//std::vector<GameObject*>M_GameObjects;
+	//holds how long its been since a bullet has been made
+	unsigned int LastUpadateTimer;
 public:
 	//this is the space ship constructor 
 	PlayerSpaceShip();
@@ -36,7 +38,6 @@ public:
 	//this function updates the users input
 	void UserInput1();
 	//these functions handle the users input 
-	void HandleUserInput(Input* input);
 	void HandleUserInput1(Input* input, Texture* playerBullets);
 	//this is the space ship destructor
 	~PlayerSpaceShip();

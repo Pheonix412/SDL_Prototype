@@ -221,7 +221,7 @@ void Game::processinput() {
 	for (int i = 0; i < M_GameObjects.size(); ++i)
 	{
 		M_GameObjects[i]->UserInput1();
-		//M_GameObjects[i]->HandleUserInput(UserInput);
+		
 		M_GameObjects[i]->HandleUserInput1(UserInput, playerBullets);
 	}
 	//this part checks what type of event the user has done if they have done a quit event then end the game
@@ -250,7 +250,7 @@ void Game::update() {
 
 	//this displays the spawn timer 
 	//std::cout << "Spawn Timer: " << spawnTimer<< std::endl;
-	//this spawns the enemies if there is les than 10 of them
+	//this spawns the enemies if there is less than 20 of them
 	if (spawnTimer>0.5 && enemycount<20) {
 		enemycount++;
 		M_EnemyTexture = new Texture();
