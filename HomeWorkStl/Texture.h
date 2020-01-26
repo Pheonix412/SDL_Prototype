@@ -1,6 +1,9 @@
 #pragma once
 #include <SDL_ttf.h>
 #include <SDL.h>
+#include<SDL_image.h>
+#include "Vector2.h"
+#include<string>
 class Texture
 {
 	//by Rhys Thomas Baker 7772 and By Jayme Schmid 6290 2019
@@ -16,7 +19,7 @@ public:
 	//this ia function that loads a image from the file 
 	bool LoadImgFromFile(const char* path, SDL_Renderer* renderer);
 	//this is the draw function for the texture 
-	void Draw(SDL_Renderer* renderer, int x, int y, SDL_Rect* sourceRect = NULL);
+	void Draw(SDL_Renderer* renderer, int x, int y, SDL_Rect* sourceRect = NULL,bool Flip=false);
 	//this gets the iamge width
 	int GetImageWidth() { return M_Width; }
 	//this gets the image height 

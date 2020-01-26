@@ -21,7 +21,7 @@ public:
 	virtual void HandleUserInput(Input* input);
 	virtual void HandleUserInput1(Input* input, Texture* playerBullets);
 	//this holds the postion of the game object 
-	Vector2 GetPosition();
+	//Vector2 GetPosition();
 protected:
 	//this holds the position and the texture for the game object 
 	Vector2 M_Position;

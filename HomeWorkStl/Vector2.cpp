@@ -2,6 +2,8 @@
 //by Rhys Thomas Baker 7772 and By Jayme Schmid 6290 2019
 Vector2::Vector2()
 {
+	X = 0;
+	Y = 0;
 }
 
 Vector2::Vector2(int x, int y)
@@ -48,7 +50,7 @@ Vector2 Vector2::operator*=(const float& scalar)
 void Vector2::NormalizeVector()
 {
 	//works out the magnitude of both the x and y values 
-	float mag = sqrtf(X*X + Y*Y);
+	float mag = magnitude();
 	//this sets the normalized vectors for both the x and y values
 	this->X /= mag;
 	this->Y /= mag;
@@ -57,12 +59,12 @@ void Vector2::NormalizeVector()
 Vector2 Vector2::NormalizedVector()
 {
 	//sets the result to null
-	Vector2 result = Vector2(NULL,NULL);
+	Vector2 result = Zero();
 	//this works out the magnitude 
-	float mag = sqrtf(X*X + Y*Y);
+	float mag = magnitude();
 	//this works out the normalized x and y values
-	result.X = this->X / mag;
-	result.Y = this->Y / mag;
+	this->X /= mag;
+	this->Y /= mag;
 	return result;
 }
 //this function works out the magnitude however it is incorrect. 
@@ -75,6 +77,10 @@ float Vector2::LengthOfVector()
 {
 	//this returns  the legnth of the vector it does this my multiplying both x and y values and then it adds them to themselves and square roots it.
 	return sqrt(X*X + Y*Y);
+}
+Vector2 Vector2::Zero()
+{
+	return Vector2(0,0);
 }
 //this  destruct the current vector 
 Vector2::~Vector2()

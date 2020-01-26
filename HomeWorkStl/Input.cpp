@@ -178,6 +178,7 @@ void Input::OnSystemEvents(SDL_Event& e, Game* g)
 
 Input::Input()
 {//this part sets the mosue positon and also goes through each button state and sets then to false 
+	isGameOver = false;
 	for (int i = 0; i < 7; ++i) {
 		M_MouseButtonStates[i] = false;
 	}
@@ -205,10 +206,22 @@ void Input::UpdateInput(Game* game)
 			OnMouseButtonMove(e);
 			break;		
 		case SDL_KEYDOWN:
+			if (e.button.button == SDL_SCANCODE_ESCAPE)
+			{
+				isGameOver = true;
+			}
 			M_keyboardState = SDL_GetKeyboardState(NULL);
+			if (e.key.repeat == 0)
+			{
+				m_keyboardPressState[e.key.keysym.sym] = 1;
+			}
 			break;
 		case SDL_KEYUP:
 			M_keyboardState = SDL_GetKeyboardState(NULL);
+			m_keyboardPressState[e.key.keysym.sym] = 2;
+			break;
+		case SDL_QUIT:
+			isGameOver = true;
 			break;
 
 		}
@@ -240,7 +253,7 @@ bool Input::IsKeyDown(SDL_Scancode key)
 {
 	// if a key is down then set the keys value to true
 	if (M_keyboardState != nullptr) {
-		if (M_keyboardState[key]==true)
+		if (M_keyboardState[key])
 		{
 			return true;
 		}
@@ -251,7 +264,7 @@ bool Input::IsKeyDown(SDL_Scancode key)
 bool Input::IsKeyUp(SDL_Scancode key)
 {// if a key is up then set the keys value to false 
 	if (M_keyboardState != nullptr) {
-		if (M_keyboardState[key] == false)
+		if (M_keyboardState[key] )
 		{
 			return false;
 		}
@@ -267,4 +280,52 @@ Vector2 Input::GetMousePos()
 
 Input::~Input()
 {
+}
+
+bool Input::wasMouseButtonPressed(MouseInputs button)
+{
+	if (m_MouseClickStates[button] == 1) {
+		return true;
+	}
+
+	return false;
+}
+
+bool Input::wasMouseButtonReleased(MouseInputs button)
+{
+	if (m_MouseClickStates[button] == 2) {
+		return true;
+	}
+	return false;
+}
+
+void Input::SetClickStateFalse(MouseInputs button)
+{
+	m_MouseClickStates[button] = 0;
+}
+
+bool Input::wasKeyPressed(SDL_Keycode key)
+{
+	if (m_keyboardPressState[key] == 1) {
+		return true;
+	}
+	return false;
+}
+
+bool Input::wasKeyReleased(SDL_Keycode key)
+{
+	if (m_keyboardPressState[key] == 2) {
+		return true;
+	}
+	return false;
+}
+
+void Input::SetKeyboardStateFalse(SDL_Keycode key)
+{
+	m_keyboardPressState[key] = 0;
+}
+
+bool Input::GetGameOver()
+{
+	return isGameOver;
 }

@@ -32,6 +32,13 @@ private:
 	void OnMouseButtonUp(SDL_Event& e);
 	void OnMouseButtonMove(SDL_Event& e);
 	void OnSystemEvents(SDL_Event& e, Game* g);
+
+	int m_MouseClickStates[7];
+
+	bool isGameOver;
+	int m_keyboardPressState[322];
+
+
 public:
 	//this holds te input constructor
 	Input();
@@ -44,6 +51,28 @@ public:
 	bool IsKeyUp(SDL_Scancode key);
 	//is is a vector 2 that holds the mouse position
 	Vector2 GetMousePos();
+
+	bool wasMouseButtonPressed(MouseInputs button);
+	bool wasMouseButtonReleased(MouseInputs button);
+	//set was to fasle 
+	void SetClickStateFalse(MouseInputs  button);
+
+
+	bool wasKeyPressed(SDL_Keycode key);
+	bool wasKeyReleased(SDL_Keycode key);
+
+	void SetKeyboardStateFalse(SDL_Keycode key);
+
+	bool GetGameOver();
+
+
+
+
+
+
+
+
+
 	//this is the destructor for the input class 
 	~Input();
 };

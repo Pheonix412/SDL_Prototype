@@ -1,5 +1,9 @@
-﻿  d:\Users\7772\Documents\SDL_Prototype\dep\lib\x64\SDL2.dll
-          1 file(s) copied.
-  Game.cpp
-  HomeWorkStl.vcxproj -> d:\Users\7772\Documents\SDL_Prototype\x64\Debug\HomeWorkStl.exe
-  HomeWorkStl.vcxproj -> d:\Users\7772\Documents\SDL_Prototype\x64\Debug\HomeWorkStl.pdb (Full PDB)
+﻿  C:\Users\zbook j\Desktop\basic game prog assignment\SDL_Prototype\dep\lib\x64\libfreetype-6.dll
+  C:\Users\zbook j\Desktop\basic game prog assignment\SDL_Prototype\dep\lib\x64\SDL2.dll
+  C:\Users\zbook j\Desktop\basic game prog assignment\SDL_Prototype\dep\lib\x64\SDL2_ttf.dll
+  C:\Users\zbook j\Desktop\basic game prog assignment\SDL_Prototype\dep\lib\x64\zlib1.dll
+          4 file(s) copied.
+  PlayerSpaceShip.cpp
+c:\users\zbook j\desktop\basic game prog assignment\sdl_prototype\homeworkstl\playerspaceship.cpp(106): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
+  HomeWorkStl.vcxproj -> C:\Users\zbook j\Desktop\basic game prog assignment\SDL_Prototype\x64\Debug\HomeWorkStl.exe
+  HomeWorkStl.vcxproj -> C:\Users\zbook j\Desktop\basic game prog assignment\SDL_Prototype\x64\Debug\HomeWorkStl.pdb (Full PDB)

@@ -27,6 +27,8 @@ public:
 	float magnitude();
 	//this function gets the length of a vector 
 	float LengthOfVector();
+
+	Vector2 Zero();
 	//this is a destructor for the vector 2 class 
 	~Vector2();
 };

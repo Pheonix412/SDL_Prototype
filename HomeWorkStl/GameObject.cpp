@@ -39,7 +39,7 @@ void GameObject::HandleUserInput1(Input*input, Texture* playerBullets)
 {
 }
 
-Vector2 GameObject::GetPosition()
+/*Vector2 GameObject::GetPosition()
 {
 	return Vector2(M_Position.X, M_Position.Y);
-}
+}*/

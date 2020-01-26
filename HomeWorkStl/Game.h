@@ -28,7 +28,7 @@ private:
 	std::vector<GameObject*>M_GameObjects;
 	std::vector<EnemyWave1*>M_EnemyObjects;
 	//this is the pointer of the players space ship
-	GameObject* playerSpaceS;
+	PlayerSpaceShip* playerSpaceS;
 	//this holds the texture of the players space ship
 	PlayerSpaceShip* M_Player_SpaceShip;
 	Texture* playerBullets;
@@ -48,6 +48,9 @@ private:
 	TTF_Font* m_font;
 
 	Audio* audio;
+
+	Texture* playerSpacetexture;
+
 public:
 	Game();
 	//this function starts the game 

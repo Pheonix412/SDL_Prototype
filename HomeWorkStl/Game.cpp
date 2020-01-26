@@ -44,7 +44,7 @@ bool Game::start() {
 		audio->PlayBGMusic("../assets/IntergalacticOdyssey.ogg");
 
 		//this part creates another obejct of the texture class , it then loads the bullets texture
-		Texture* playerSpacetexture = new Texture();
+		playerSpacetexture = new Texture();
 		playerSpacetexture->LoadImgFromFile("../assets/SP1.bmp", SdlRenderer);
 		//its then sets the postion of the bullet class 
 		M_Position1.X = 380;
@@ -52,7 +52,9 @@ bool Game::start() {
 		//it then creates a new obejct of that class 
 		playerSpaceS = new PlayerSpaceShip(playerSpacetexture, M_Position1,80,80);
 		//then adds the obeject to the game obejcts list
-		M_GameObjects.push_back(playerSpaceS);
+		
+		// problem with this so dont add it to the space ship class 
+		//M_GameObjects.push_back(playerSpaceS);
 	
 		lastSpawn = SDL_GetTicks();
 
@@ -142,6 +144,8 @@ void Game::draw() {
 	//this part sets the render colour and cleanrs the background
 	SDL_SetRenderDrawColor(SdlRenderer, 47, 155, 228, 255);
 	SDL_RenderClear(SdlRenderer);
+
+	playerSpaceS->Draw(SdlRenderer);
 	
 	if (m_font != nullptr) {
 		SDL_Color colour = { 255,255,255,255 };
@@ -169,19 +173,23 @@ void Game::destroy() {
 }
 
 void Game::PE_CollisionCheck(){
-	if (M_Player_SpaceShip->GetPosition().Y >= (600-80)) {
-		M_Player_SpaceShip->ToggleGorund(true);
+	//these should be both in the player space ship class
+
+	// i have a feeling this is not needed as the player should be able to move freely within the space
+
+	if (playerSpaceS->GetPlayerPos().Y >= (400-80)) {
+		playerSpaceS->ToggleGorund(true);
 	}
 	else {
-		M_Player_SpaceShip->ToggleGorund(false);
+		playerSpaceS->ToggleGorund(false);
 	}
 
-	if (M_Player_SpaceShip->GetCollider()) {
+	if (playerSpaceS->GetCollider()) {
 		//check that we have collided with the individual enemy collisions
 		for (auto itr = M_EnemyObjects.end(); itr != M_EnemyObjects.begin();) {
 			--itr;
 			//if the enemes collision is within the players collsion bounds then delete the enemy
-			if ((*itr) != nullptr && M_Player_SpaceShip->GetCollider()->RectCollision(*(*itr)->GetCollider())) {
+			if ((*itr) != nullptr && playerSpaceS->GetCollider()->RectCollision(*(*itr)->GetCollider())) {
 				delete* itr;
 				*itr = nullptr;
 				itr = M_EnemyObjects.erase(itr);
@@ -197,6 +205,8 @@ void Game::processinput() {
 	//m_player->Input();
 	//this calls the update input function
 	UserInput->UpdateInput(this);
+	PE_CollisionCheck();
+	playerSpaceS->HandleUserInput1(UserInput, playerBullets);
 	//if the user has  presses down the left mouse button
 	if (UserInput->IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {
 		SDL_Log("ifring");
@@ -250,7 +260,7 @@ void Game::update() {
 	unsigned int ticks = SDL_GetTicks() - LastUpadateTimer;
 	float deltaTime = ticks / 1000.0f;
 	LastUpadateTimer = SDL_GetTicks();
-	
+	playerSpaceS->Update(deltaTime);
 	//this displays the delta time 
 	//std::cout << "time" << deltaTime<< std::endl;
 
@@ -287,7 +297,7 @@ void Game::update() {
 		//M_EnemyObjects[i]->MoveToPlayer(deltaTime, playerSpaceS->GetPosition());
 
 	}
-	PE_CollisionCheck();
+
 }
 void Game::shutdown() {
 	Mix_Quit();

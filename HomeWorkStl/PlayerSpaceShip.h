@@ -26,6 +26,8 @@ private:
 	int m_colWidth;
 	int m_colHeight;
 	bool m_isTouchingGround;
+	float m_MaxVelocity;
+	float playerdecleration;
 public:
 	//this is the space ship constructor 
 	PlayerSpaceShip();
@@ -39,7 +41,12 @@ public:
 	void ReducePlayerForce(Vector2 force);
 	//this function draws the plater 
 
+
+	//fix this....
 	AABB* GetCollider();
+
+	Vector2 GetPlayerPos();
+
 	void ToggleGorund(bool toggle);
 	void Draw(SDL_Renderer* renderer);
 	//this function updates the player 

@@ -10,8 +10,16 @@ PlayerSpaceShip::PlayerSpaceShip()
 	LastUpadateTimer = SDL_GetTicks();
 	M_Velocity = Vector2(0, 0);
 	M_Acceleration = Vector2(0, 0);
+	m_MaxVelocity = 0.0f;
+	playerdecleration = 0.0f;
+
+
+
+
 	maxVelocity = 0.0f;
-	m_Collider = nullptr;
+	m_Collider = new AABB();
+	
+	m_isTouchingGround = false;
 }
 
 PlayerSpaceShip::PlayerSpaceShip(Texture* texture, Vector2 position, int colWidth, int colHeight)
@@ -21,10 +29,13 @@ PlayerSpaceShip::PlayerSpaceShip(Texture* texture, Vector2 position, int colWidt
 	M_Texture = texture;
 	M_Velocity = Vector2(0, 0);
 	M_Acceleration = Vector2(0, 0);
-	maxVelocity = 500.0f;
+	maxVelocity = 1000.0f;
+	playerdecleration = 2000.0f;
+	//maxVelocity = 500.0f;
 	m_colWidth = colWidth;
 	m_colHeight = colHeight;
 	//setup collider
+	m_isTouchingGround = false;
 	m_Collider = new AABB(M_Position, m_colWidth, m_colHeight);
 }
 
@@ -42,6 +53,11 @@ void PlayerSpaceShip::ReducePlayerForce(Vector2 force)
 AABB * PlayerSpaceShip::GetCollider()
 {
 	return m_Collider;
+}
+
+Vector2 PlayerSpaceShip::GetPlayerPos()
+{
+	return M_Position;
 }
 
 void PlayerSpaceShip::ToggleGorund(bool toggle){
@@ -86,9 +102,12 @@ void PlayerSpaceShip::Update(float deltaTime)
 		}
 
 		M_Position += M_Velocity * deltaTime;
+		if (!m_isTouchingGround) {
+			M_Position.Y += 500.0f*deltaTime;
+		}
 
 		m_Collider->Update(M_Position);
-
+		M_Acceleration = Vector2(0, 0);
 	
 		//SDL_Log("velocty %f, %f", M_Velocity.X, M_Velocity.Y);
 		for (int i = 0; i < m_bullets.size(); ++i)
@@ -133,24 +152,24 @@ void PlayerSpaceShip::HandleUserInput1(Input* input, Texture* playerBullets)
 
 	if (input->IsKeyDown(SDL_SCANCODE_A))
 	{
-		AddPlayerForce(Vector2(-1, 0) * 1000);
+		AddPlayerForce(Vector2(-25,0) * 20000.0f);
 	}
 
 	if (input->IsKeyUp(SDL_SCANCODE_A))
 	{
 		if (M_Velocity.X < 0) {
-			ReducePlayerForce(Vector2(-1, 0) * 1000);
+			ReducePlayerForce(Vector2(-2, 0) *playerdecleration);
 		}
 	}
 
 	if (input->IsKeyDown(SDL_SCANCODE_D))
 	{
-		AddPlayerForce(Vector2(1, 0) * 1000);
+		AddPlayerForce(Vector2(1, 0) * 1000.0f);
 	}
 	if (input->IsKeyUp(SDL_SCANCODE_D))
 	{
 		if (M_Velocity.X > 0) {
-			ReducePlayerForce(Vector2(1, 0) * 1000);
+			ReducePlayerForce(Vector2(1, 0) * playerdecleration);
 		}
 	}
 	if (input->IsKeyDown(SDL_SCANCODE_SPACE))
@@ -175,6 +194,10 @@ void PlayerSpaceShip::HandleUserInput1(Input* input, Texture* playerBullets)
 
 PlayerSpaceShip::~PlayerSpaceShip()
 {
+	if (M_Texture != nullptr) {
+		delete M_Texture;
+		M_Texture = nullptr;
+	}
 	std::cout << "player destructor" << std::endl;
 
 }
