@@ -3,6 +3,7 @@
 #include "GameObject.h"
 #include"Bullet1.h"
 #include <SDL_mixer.h>
+#include "Audio.h"
 
 class PlayerSpaceShip : public GameObject
 {
@@ -28,6 +29,8 @@ private:
 	bool m_isTouchingGround;
 	float m_MaxVelocity;
 	float playerdecleration;
+
+	Audio* audio;
 public:
 	//this is the space ship constructor 
 	PlayerSpaceShip();

@@ -24,7 +24,7 @@ Game::Game()
 		IsTheGameOver = false;
 		std::cout << "inialized " << std::endl;
 	}
-	audio = new Audio();
+	audio = nullptr;
 }
 bool Game::start() {
 	//create the renderer

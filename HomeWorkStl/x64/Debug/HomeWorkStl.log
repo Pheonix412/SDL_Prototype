@@ -1,9 +1,15 @@
-﻿  C:\Users\zbook j\Desktop\basic game prog assignment\SDL_Prototype\dep\lib\x64\libfreetype-6.dll
-  C:\Users\zbook j\Desktop\basic game prog assignment\SDL_Prototype\dep\lib\x64\SDL2.dll
-  C:\Users\zbook j\Desktop\basic game prog assignment\SDL_Prototype\dep\lib\x64\SDL2_ttf.dll
-  C:\Users\zbook j\Desktop\basic game prog assignment\SDL_Prototype\dep\lib\x64\zlib1.dll
+﻿  C:\Users\Bacca\Desktop\SDL_Prototype\SDL_Prototype\dep\lib\x64\libfreetype-6.dll
+  C:\Users\Bacca\Desktop\SDL_Prototype\SDL_Prototype\dep\lib\x64\SDL2.dll
+  C:\Users\Bacca\Desktop\SDL_Prototype\SDL_Prototype\dep\lib\x64\SDL2_ttf.dll
+  C:\Users\Bacca\Desktop\SDL_Prototype\SDL_Prototype\dep\lib\x64\zlib1.dll
           4 file(s) copied.
   PlayerSpaceShip.cpp
-c:\users\zbook j\desktop\basic game prog assignment\sdl_prototype\homeworkstl\playerspaceship.cpp(106): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
-  HomeWorkStl.vcxproj -> C:\Users\zbook j\Desktop\basic game prog assignment\SDL_Prototype\x64\Debug\HomeWorkStl.exe
-  HomeWorkStl.vcxproj -> C:\Users\zbook j\Desktop\basic game prog assignment\SDL_Prototype\x64\Debug\HomeWorkStl.pdb (Full PDB)
+c:\users\bacca\desktop\sdl_prototype\sdl_prototype\homeworkstl\playerspaceship.cpp(106): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
+  Game.cpp
+  Generating Code...
+  Compiling...
+  Source.cpp
+  Input.cpp
+  Generating Code...
+  HomeWorkStl.vcxproj -> C:\Users\Bacca\Desktop\SDL_Prototype\SDL_Prototype\x64\Debug\HomeWorkStl.exe
+  HomeWorkStl.vcxproj -> C:\Users\Bacca\Desktop\SDL_Prototype\SDL_Prototype\x64\Debug\HomeWorkStl.pdb (Full PDB)

@@ -152,7 +152,7 @@ void PlayerSpaceShip::HandleUserInput1(Input* input, Texture* playerBullets)
 
 	if (input->IsKeyDown(SDL_SCANCODE_A))
 	{
-		AddPlayerForce(Vector2(-25,0) * 20000.0f);
+		AddPlayerForce(Vector2(-1,0) * 2000.0f);
 	}
 
 	if (input->IsKeyUp(SDL_SCANCODE_A))
@@ -164,7 +164,7 @@ void PlayerSpaceShip::HandleUserInput1(Input* input, Texture* playerBullets)
 
 	if (input->IsKeyDown(SDL_SCANCODE_D))
 	{
-		AddPlayerForce(Vector2(1, 0) * 1000.0f);
+		AddPlayerForce(Vector2(1, 0) * 2000.0f);
 	}
 	if (input->IsKeyUp(SDL_SCANCODE_D))
 	{
@@ -186,7 +186,8 @@ void PlayerSpaceShip::HandleUserInput1(Input* input, Texture* playerBullets)
 			M_Position2.Y = Y1;
 			Bullet1*playerC = new Bullet1(playerBullets, M_Position2);
 			m_bullets.push_back(playerC);
-
+			audio = new Audio();
+			audio->PlaySFX("../assets/Shoot.wav");
 		}
 	}
 }
