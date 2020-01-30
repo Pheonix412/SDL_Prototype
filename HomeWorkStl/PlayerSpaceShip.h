@@ -13,7 +13,7 @@ private:
 	Vector2 M_Velocity;
 	Vector2 M_Acceleration;
 	//this creats and object of the bullet
-	std::vector <Bullet1*> m_bullets;
+	
 	//this holda the position of player space shi[
 	Vector2 M_Position1;
 	//this holds the postion of the bulet 
@@ -43,8 +43,8 @@ public:
 	//this function reduces force to the player 
 	void ReducePlayerForce(Vector2 force);
 	//this function draws the plater 
-
-
+	float GetPlayerY();
+	float GetPlayerX();
 	//fix this....
 	AABB* GetCollider();
 

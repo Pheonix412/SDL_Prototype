@@ -50,6 +50,16 @@ void PlayerSpaceShip::ReducePlayerForce(Vector2 force)
 		M_Acceleration -= force;
 }
 
+float PlayerSpaceShip::GetPlayerY()
+{
+	return M_Position.Y;
+}
+
+float PlayerSpaceShip::GetPlayerX()
+{
+	return M_Position.X;
+}
+
 AABB * PlayerSpaceShip::GetCollider()
 {
 	return m_Collider;
@@ -82,11 +92,7 @@ void PlayerSpaceShip::Draw(SDL_Renderer* renderer)
 	SDL_SetRenderDrawColor(renderer, 0, 255, 255, 0);
 	SDL_RenderDrawRect(renderer, &rect);
 
-	for (int i = 0; i < m_bullets.size(); ++i)
-	{
-
-		m_bullets[i]->Draw(renderer);
-	}
+	
 }
 
 void PlayerSpaceShip::Update(float deltaTime)
@@ -110,10 +116,7 @@ void PlayerSpaceShip::Update(float deltaTime)
 		M_Acceleration = Vector2(0, 0);
 	
 		//SDL_Log("velocty %f, %f", M_Velocity.X, M_Velocity.Y);
-		for (int i = 0; i < m_bullets.size(); ++i)
-		{
-			m_bullets[i]->Update(deltaTime);
-		}
+		
 		//M_Acceleration = Vector2(0, 0);
 	
 }
@@ -126,29 +129,6 @@ void PlayerSpaceShip::UserInput1()
 void PlayerSpaceShip::HandleUserInput1(Input* input, Texture* playerBullets)
 {
 	//this part handles the users input when they press a key down the keyboard, when they press a button down it will add to the players force in the coresponding direction
-	/*if (input->IsKeyDown(SDL_SCANCODE_W))
-	{
-		AddPlayerForce(Vector2(0, -1) * 2000);
-	}
-
-	if (input->IsKeyUp(SDL_SCANCODE_W))
-	{
-		if (M_Velocity.Y > 0) {
-			ReducePlayerForce(Vector2(0, -1) * 1000);
-		}
-	}
-
-	if (input->IsKeyDown(SDL_SCANCODE_S))
-	{
-		AddPlayerForce(Vector2(0, 1) * 2000);
-	}
-
-	if (input->IsKeyUp(SDL_SCANCODE_S))
-	{
-		if (M_Velocity.Y < 0) {
-			ReducePlayerForce(Vector2(0, 1) * 1000);
-		}
-	}*/
 
 	if (input->IsKeyDown(SDL_SCANCODE_A))
 	{
@@ -172,7 +152,7 @@ void PlayerSpaceShip::HandleUserInput1(Input* input, Texture* playerBullets)
 			ReducePlayerForce(Vector2(1, 0) * playerdecleration);
 		}
 	}
-	if (input->IsKeyDown(SDL_SCANCODE_SPACE))
+/*	if (input->IsKeyDown(SDL_SCANCODE_SPACE))
 	{
 		SDL_Log("SpacePressed");
 		unsigned int ticks = SDL_GetTicks() - LastUpadateTimer;
@@ -190,6 +170,7 @@ void PlayerSpaceShip::HandleUserInput1(Input* input, Texture* playerBullets)
 			audio->PlaySFX("../assets/Shoot.wav");
 		}
 	}
+*/
 }
 
 

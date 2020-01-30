@@ -15,13 +15,19 @@ class Game
 	//by Rhys Thomas Baker 7772 and By Jayme Schmid 6290 2019
 	//please refer back to the tutorials done in class for more information about this.
 private:
+	//timers
+	unsigned int GameRunTimer;
+	unsigned int LastUpadateTimer;
+	unsigned int lastSpawnL;
+	unsigned int lastSpawnM;
+	unsigned int lastSpawnS;
+	unsigned int LastBullet;
 	//these are pointers for the window and the render
 	SDL_Window* SdlWindow;
 	SDL_Renderer* SdlRenderer;
 	//this is a boolean varaible that holds the status of the game 
 	bool IsTheGameOver;
-	unsigned int LastUpadateTimer;
-	unsigned int lastSpawn;
+	
 	//this is a pointer to the texture 
 	Texture* M_Texture;
 	//this creates object for the game obejcts and the enemies 
@@ -48,9 +54,9 @@ private:
 	TTF_Font* m_font;
 
 	Audio* audio;
-
+	Vector2 M_Position2;
 	Texture* playerSpacetexture;
-
+	std::vector <Bullet1*> m_bullets;
 public:
 	Game();
 	//this function starts the game 
@@ -60,7 +66,7 @@ public:
 	//this holds the type of event that the user has  done 
 	SDL_Event e;
 	//this is the update function for the game 
-	void update();
+	void update(float deltaTime);
 	//this is the draw function for the game 
 	void draw();
 	//this is the shutdown function for the game

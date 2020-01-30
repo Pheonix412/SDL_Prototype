@@ -47,8 +47,8 @@ bool Game::start() {
 		playerSpacetexture = new Texture();
 		playerSpacetexture->LoadImgFromFile("../assets/SP1.bmp", SdlRenderer);
 		//its then sets the postion of the bullet class 
-		M_Position1.X = 380;
-		M_Position1.Y = 400;
+		M_Position1.X = 710;
+		M_Position1.Y = 700;
 		//it then creates a new obejct of that class 
 		playerSpaceS = new PlayerSpaceShip(playerSpacetexture, M_Position1,80,80);
 		//then adds the obeject to the game obejcts list
@@ -56,17 +56,11 @@ bool Game::start() {
 		// problem with this so dont add it to the space ship class 
 		//M_GameObjects.push_back(playerSpaceS);
 	
-		lastSpawn = SDL_GetTicks();
-
-		LastUpadateTimer = SDL_GetTicks();
 
 		//intalizing text texture
-		m_textTexture = new Texture();
+		//m_textTexture = new Texture();
 		//initalizing the font
-		m_font = TTF_OpenFont("../assets/RobotoBold.ttf", 24);
-
-
-		
+		//m_font = TTF_OpenFont("../assets/RobotoBold.ttf", 24);
 
 		return true;
 	}
@@ -123,10 +117,15 @@ void Game::run(char* title, int width, int height, bool fullscreen) {
 		//checks if the game is not over 
 		while (!IsTheGameOver)
 		{
+			//calculate delta time. 
+			unsigned int ticks = SDL_GetTicks() - LastUpadateTimer;
+			float deltaTime = ticks / 1000.0f;
+			LastUpadateTimer = SDL_GetTicks();
+
 			//process the users input 
 			processinput();
 			//update the screen 
-			update();
+			update(deltaTime);
 			//draw on the screen the obbejcts 
 			draw();
 		}
@@ -139,25 +138,21 @@ void Game::run(char* title, int width, int height, bool fullscreen) {
 		destroy();
 	}
 }
-
 void Game::draw() {
 	//this part sets the render colour and cleanrs the background
 	SDL_SetRenderDrawColor(SdlRenderer, 47, 155, 228, 255);
 	SDL_RenderClear(SdlRenderer);
 
 	playerSpaceS->Draw(SdlRenderer);
-	
-	if (m_font != nullptr) {
-		SDL_Color colour = { 255,255,255,255 };
-		if (!m_textTexture->RenderText("Wave 1", m_font, SdlRenderer, colour)) {
-			//SDL_Log("Text rendered - Success");
-		}
-		m_textTexture->Draw(SdlRenderer, 10, 10);
-	}
-	//this part goes through each of the enemies and game obejcts and draws them
+
 	for (int i = 0; i < M_GameObjects.size(); ++i)
 	{
 		M_GameObjects[i]->Draw(SdlRenderer);
+	}
+	for (int i = 0; i < m_bullets.size(); ++i)
+	{
+
+		m_bullets[i]->Draw(SdlRenderer);
 	}
 	for (int i = 0; i < M_EnemyObjects.size(); ++i)
 	{
@@ -171,7 +166,6 @@ void Game::destroy() {
 	SDL_DestroyRenderer(SdlRenderer);
 	SDL_Quit();
 }
-
 void Game::PE_CollisionCheck(){
 	//these should be both in the player space ship class
 
@@ -200,7 +194,6 @@ void Game::PE_CollisionCheck(){
 	}
 
 }
-
 void Game::processinput() {
 	//m_player->Input();
 	//this calls the update input function
@@ -222,26 +215,29 @@ void Game::processinput() {
 		SDL_Log("ALT ifring");
 
 	}
-	//move this to the player class and when you press space in the player class it should spawn a bullet and be able to retrive the current position of the player as it is apart of the game object class
-	/*if (UserInput->IsKeyDown(SDL_SCANCODE_SPACE))
+
+	if (UserInput->IsKeyDown(SDL_SCANCODE_SPACE))
 	{
 		SDL_Log("SpacePressed");
+		unsigned int BulletTicks = SDL_GetTicks() - LastBullet;
+		float bulletTime = BulletTicks / 1000.0f;
+		//only allows a bullet to spawn after 0.2 seconds
+		if (bulletTime >= 0.2f) {
 
-	//M_GameObjects[0].
-		int X1 = (*M_GameObjects[0]).M_Position.X;
-		int Y1 = (*M_GameObjects[0]).M_Position.Y;
-		M_Position1.X = (X1+10);
-		M_Position1.Y = (Y1-40);
-		GameObject*playerC = new Bullet1(playerBullets, M_Position1);
-		M_GameObjects.push_back(playerC);
-		
-
-	}*/
+			int X1 = (playerSpaceS->GetPlayerX() + 10);
+			int Y1 = (playerSpaceS->GetPlayerY() - 40);
+			LastBullet = SDL_GetTicks();
+			M_Position2.X = X1;
+			M_Position2.Y = Y1;
+			Bullet1*playerC = new Bullet1(playerBullets, M_Position2);
+			m_bullets.push_back(playerC);
+			audio = new Audio();
+			audio->PlaySFX("../assets/Shoot.wav");
+		}
+	}
 	//this part goes through each game object and  handles the user input 
 	for (int i = 0; i < M_GameObjects.size(); ++i)
 	{
-		M_GameObjects[i]->UserInput1();
-		
 		M_GameObjects[i]->HandleUserInput1(UserInput, playerBullets);
 	}
 	//this part checks what type of event the user has done if they have done a quit event then end the game
@@ -255,35 +251,56 @@ void Game::processinput() {
 	}
 
 }
-void Game::update() {
-	//calculate delta time. 
-	unsigned int ticks = SDL_GetTicks() - LastUpadateTimer;
-	float deltaTime = ticks / 1000.0f;
-	LastUpadateTimer = SDL_GetTicks();
+void Game::update(float deltaTime) {
+	
 	playerSpaceS->Update(deltaTime);
 	//this displays the delta time 
 	//std::cout << "time" << deltaTime<< std::endl;
 
-	//calculates the spawn timer
-	unsigned int spawnTicks = SDL_GetTicks() - lastSpawn;
-	float spawnTimer = spawnTicks / 1000.0f;
+	//calculate game timer
+	unsigned int gameTicks = SDL_GetTicks();
+	float GameTime = gameTicks / 1000.0f;
 
-	//this displays the spawn timer 
-	//std::cout << "Spawn Timer: " << spawnTimer<< std::endl;
-	//this spawns the enemies if there is less than 20 of them
-	if (spawnTimer>0.5 && enemycount<20) {
+	//calculates the spawn timer
+	unsigned int spawnTicksL = SDL_GetTicks() - lastSpawnL;
+	float spawnTimerL = spawnTicksL / 1000.0f;
+	 
+	unsigned int spawnTicksM = SDL_GetTicks() - lastSpawnM;
+	float spawnTimerM = spawnTicksM / 1000.0f;
+
+	unsigned int spawnTicksS = SDL_GetTicks() - lastSpawnS;
+	float spawnTimerS = spawnTicksS / 1000.0f;
+
+	if (spawnTimerL>0.8) {
+		enemycount++;
+		M_EnemyTexture = new Texture();
+		M_EnemyTexture->LoadImgFromFile("../assets/EnemyShipL.bmp", SdlRenderer);
+		int rand_x = rand() % 1400 + 10;
+		int rand_y = rand() % 1 + 10;
+		Enemies = new EnemyWave1(M_EnemyTexture, Vector2(rand_x, rand_y),60,41,80);
+		M_EnemyObjects.push_back(Enemies);
+		lastSpawnL = SDL_GetTicks();
+	}
+	if (spawnTimerM>2&&GameTime>60) {
+		enemycount++;
+		M_EnemyTexture = new Texture();
+		M_EnemyTexture->LoadImgFromFile("../assets/EnemyShipM.bmp", SdlRenderer);
+		int rand_x = rand() % 1400 + 10;
+		int rand_y = rand() % 1 + 10;
+		Enemies = new EnemyWave1(M_EnemyTexture, Vector2(rand_x, rand_y), 41, 41,120);
+		M_EnemyObjects.push_back(Enemies);
+		lastSpawnM = SDL_GetTicks();
+	}
+	if (spawnTimerS>1&&GameTime>120) {
 		enemycount++;
 		M_EnemyTexture = new Texture();
 		M_EnemyTexture->LoadImgFromFile("../assets/EnemyShipS.bmp", SdlRenderer);
-		int rand_x = rand() % 700 + 10;
+		int rand_x = rand() % 1400 + 10;
 		int rand_y = rand() % 1 + 10;
-		Enemies = new EnemyWave1(M_EnemyTexture, Vector2(rand_x, rand_y),40,35);
+		Enemies = new EnemyWave1(M_EnemyTexture, Vector2(rand_x, rand_y), 40, 35,200);
 		M_EnemyObjects.push_back(Enemies);
-		lastSpawn = SDL_GetTicks();
+		lastSpawnS = SDL_GetTicks();
 	}
-
-//	ani->Update(deltaTime);
-	//m_player->Update(deltaTime);
 	
 	//this goes through all of the enimies and game obejcts and updates them 
 	for (int i = 0; i < M_GameObjects.size(); ++i)
@@ -294,19 +311,18 @@ void Game::update() {
 	for (int i = 0; i < M_EnemyObjects.size(); ++i)
 	{
 		M_EnemyObjects[i]->Update(deltaTime);
-		//M_EnemyObjects[i]->MoveToPlayer(deltaTime, playerSpaceS->GetPosition());
-
 	}
-
+	for (int i = 0; i < m_bullets.size(); ++i)
+	{
+		m_bullets[i]->Update(deltaTime);
+	}
 }
 void Game::shutdown() {
 	Mix_Quit();
 }
-
 Game::~Game()
 {
 }
-
 void Game::SetGameState(bool status)
 {
 	IsTheGameOver = status;

@@ -8,10 +8,11 @@ private:
 	Vector2 M_Velocity;
 	Vector2 M_Acceleration;
 	AABB* m_Collider;
+	int M_Speed;
 public:
 	//this is the first wave of enemies constructor and overloaded constructor
 	EnemyWave1();
-	EnemyWave1(Texture* texture, Vector2 position, int colWidth, int colHeight);
+	EnemyWave1(Texture* texture, Vector2 position, int colWidth, int colHeight, int speed);
 	//this function adds force to the enemy 
 	void AddPlayerForce(Vector2 force);
 	//this function removes force from the enemy
@@ -20,8 +21,6 @@ public:
 	void Draw(SDL_Renderer* renderer);
 	//this function updates the enemy
 	void Update(float deltaTime);
-	//this function moves the player towards the player
-	void MoveToPlayer(float deltaTime, Vector2 position);
 
 	AABB* GetCollider();
 
