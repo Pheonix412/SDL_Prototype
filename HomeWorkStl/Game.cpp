@@ -12,6 +12,9 @@ Game::Game()
 	//initalizes the window and the renderer
 	SdlWindow = nullptr;
 	SdlRenderer = nullptr;
+	isPlayerAlive = nullptr;
+	Lives = 0;
+	WaveNum = 0;
 	LastUpadateTimer = SDL_GetTicks();
 	//checks if sdl is initalized if it isnt  then end the game , else if it has then run the game 
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0|| TTF_Init() == -1|| Mix_OpenAudio(192000,MIX_DEFAULT_FORMAT,2,4096)==-1) {
@@ -27,6 +30,9 @@ Game::Game()
 	audio = nullptr;
 }
 bool Game::start() {
+	Lives = 3;
+	WaveNum = 1;
+	isPlayerAlive = true;
 	//create the renderer
 	SdlRenderer = SDL_CreateRenderer(SdlWindow, 0, -1);
 	//if its not null
@@ -42,7 +48,8 @@ bool Game::start() {
 		audio = new Audio();
 
 		audio->PlayBGMusic("../assets/IntergalacticOdyssey.ogg");
-
+		m_textTexture = new Texture();
+		m_font = TTF_OpenFont("../assets/RobotoBold.ttf", 24);
 		//this part creates another obejct of the texture class , it then loads the bullets texture
 		playerSpacetexture = new Texture();
 		playerSpacetexture->LoadImgFromFile("../assets/SP1.bmp", SdlRenderer);
@@ -158,6 +165,29 @@ void Game::draw() {
 	{
 		M_EnemyObjects[i]->Draw(SdlRenderer);
 	}
+
+	if (m_font != nullptr) {
+		SDL_Color colour = { 255,255,255,255 };
+		std::string wavenum1;
+		wavenum1 = std::to_string((int)WaveNum);
+		std::string livenum1;
+		livenum1 = std::to_string((int)Lives);
+		if (!m_textTexture->RenderText(( " Lives: " + livenum1).c_str(), m_font, SdlRenderer, colour)) {
+			//SDL_Log("Text rendered - Success");
+		}
+
+
+		if (isPlayerAlive == false)
+		{
+			if (!m_textTexture->RenderText("Game over", m_font, SdlRenderer, colour)) {
+				//SDL_Log("Text rendered - Success");
+			}
+
+		}
+		m_textTexture->Draw(SdlRenderer, 10, 10);
+
+	}
+
 	SDL_RenderPresent(SdlRenderer);
 }
 void Game::destroy() {
@@ -184,9 +214,41 @@ void Game::PE_CollisionCheck(){
 			--itr;
 			//if the enemes collision is within the players collsion bounds then delete the enemy
 			if ((*itr) != nullptr && playerSpaceS->GetCollider()->RectCollision(*(*itr)->GetCollider())) {
-				delete* itr;
-				*itr = nullptr;
-				itr = M_EnemyObjects.erase(itr);
+				//delete* itr;
+				//*itr = nullptr;
+				//itr = M_EnemyObjects.erase(itr);
+
+			if (Lives > 0) {
+
+
+				playerSpaceS->~PlayerSpaceShip();
+				playerSpacetexture = new Texture();
+				playerSpacetexture->LoadImgFromFile("../assets/SP1.bmp", SdlRenderer);
+				playerSpaceS = new PlayerSpaceShip(playerSpacetexture, M_Position1, 80, 80);
+					Lives--;
+				}
+				else if (Lives == 0)
+				{
+					playerSpaceS->~PlayerSpaceShip();
+					SDL_Log("game over");
+
+					isPlayerAlive = false;
+
+
+
+
+				}
+
+
+
+
+
+
+
+
+
+
+
 
 				SDL_Log("Enemy Deleted");
 			}

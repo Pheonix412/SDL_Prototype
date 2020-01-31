@@ -54,9 +54,16 @@ private:
 	TTF_Font* m_font;
 
 	Audio* audio;
+
+	int WaveNum;
+	int Lives;
+	bool isPlayerAlive;
+
+
 	Vector2 M_Position2;
 	Texture* playerSpacetexture;
 	std::vector <Bullet1*> m_bullets;
+
 public:
 	Game();
 	//this function starts the game 

@@ -1,14 +1,10 @@
-﻿  C:\Users\7772\Documents\GitHub\SDL_Prototype\dep\lib\x64\libfreetype-6.dll
-  C:\Users\7772\Documents\GitHub\SDL_Prototype\dep\lib\x64\SDL2.dll
-  C:\Users\7772\Documents\GitHub\SDL_Prototype\dep\lib\x64\SDL2_ttf.dll
-  C:\Users\7772\Documents\GitHub\SDL_Prototype\dep\lib\x64\zlib1.dll
+﻿  C:\Users\zbook j\Desktop\basic game prog assignment\SDL_Prototype\dep\lib\x64\libfreetype-6.dll
+  C:\Users\zbook j\Desktop\basic game prog assignment\SDL_Prototype\dep\lib\x64\SDL2.dll
+  C:\Users\zbook j\Desktop\basic game prog assignment\SDL_Prototype\dep\lib\x64\SDL2_ttf.dll
+  C:\Users\zbook j\Desktop\basic game prog assignment\SDL_Prototype\dep\lib\x64\zlib1.dll
           4 file(s) copied.
-  PlayerSpaceShip.cpp
-c:\users\7772\documents\github\sdl_prototype\homeworkstl\playerspaceship.cpp(55): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
-c:\users\7772\documents\github\sdl_prototype\homeworkstl\playerspaceship.cpp(60): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
-c:\users\7772\documents\github\sdl_prototype\homeworkstl\playerspaceship.cpp(112): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
   Game.cpp
-c:\users\7772\documents\github\sdl_prototype\homeworkstl\game.cpp(227): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-c:\users\7772\documents\github\sdl_prototype\homeworkstl\game.cpp(228): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-  Generating Code...
-  HomeWorkStl.vcxproj -> C:\Users\7772\Documents\GitHub\SDL_Prototype\x64\Debug\HomeWorkStl.exe
+c:\users\zbook j\desktop\basic game prog assignment\sdl_prototype\homeworkstl\game.cpp(289): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+c:\users\zbook j\desktop\basic game prog assignment\sdl_prototype\homeworkstl\game.cpp(290): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+  HomeWorkStl.vcxproj -> C:\Users\zbook j\Desktop\basic game prog assignment\SDL_Prototype\x64\Debug\HomeWorkStl.exe
+  HomeWorkStl.vcxproj -> C:\Users\zbook j\Desktop\basic game prog assignment\SDL_Prototype\x64\Debug\HomeWorkStl.pdb (Full PDB)
