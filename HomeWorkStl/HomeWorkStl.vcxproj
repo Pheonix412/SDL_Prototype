@@ -153,6 +153,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AABB.cpp" />
+    <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Audio.cpp" />
     <ClCompile Include="Bullet1.cpp" />
     <ClCompile Include="EnemyWave1.cpp" />
@@ -166,6 +167,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AABB.h" />
+    <ClInclude Include="Animation.h" />
     <ClInclude Include="Audio.h" />
     <ClInclude Include="Bullet1.h" />
     <ClInclude Include="EnemyWave1.h" />

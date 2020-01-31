@@ -63,20 +63,17 @@ void Texture::Draw(SDL_Renderer* renderer, int x, int y, SDL_Rect * sourceRect,b
 	SDL_Point center;
 	if (sourceRect != nullptr) {
 		destRect.w = sourceRect->w;
-		destRect.h = sourceRect -> h;
+		destRect.h = sourceRect->h;
 	}
 	//put the source rectangle here , the source rectangle is in charge of what is rendered from the sprite sheet
-	if (!flip)
-	{
-		SDL_RenderCopyEx(renderer, M_Texture, sourceRect, &destRect, 0.0, NULL, SDL_FLIP_NONE);
 
+	if (!flip) {
+		SDL_RenderCopy(renderer, M_Texture, sourceRect, &destRect);
 	}
-	else
-	{
+	else {
 		center.x = destRect.w / 2;
 		center.y = destRect.h / 2;
-		SDL_RenderCopyEx(renderer, M_Texture, sourceRect, &destRect, 0.0, &center, SDL_FLIP_HORIZONTAL);
-
+		SDL_RenderCopyEx(renderer, M_Texture, sourceRect, &destRect, 0, &center, SDL_FLIP_HORIZONTAL);
 	}
 
 }

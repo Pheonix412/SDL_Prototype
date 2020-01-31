@@ -4,6 +4,7 @@
 #include"Vector2.h"
 #include"Input.h"
 #include "AABB.h"
+#include "Animation.h"
 class GameObject
 {
 	//by Rhys Thomas Baker 7772 and By Jayme Schmid 6290 2019

@@ -15,10 +15,8 @@ int main(int argc, char** argv) {
 
 
 
-// TODO: Add sound effects for a shooting a bullet
 
-// TODO: If enemy is shot with bullet, enemy disapears with the bullet and 
-// is replaced with a explosion
 
-// TODO: Add adjustable speed to enemies are faster in higher waves -Optional
+// TODO: If enemy is shot with bullet, enemy disapears with the bullet
+
 

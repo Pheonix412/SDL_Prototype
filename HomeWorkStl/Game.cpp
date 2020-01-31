@@ -14,7 +14,6 @@ Game::Game()
 	SdlRenderer = nullptr;
 	isPlayerAlive = nullptr;
 	Lives = 0;
-	WaveNum = 0;
 	LastUpadateTimer = SDL_GetTicks();
 	//checks if sdl is initalized if it isnt  then end the game , else if it has then run the game 
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0|| TTF_Init() == -1|| Mix_OpenAudio(192000,MIX_DEFAULT_FORMAT,2,4096)==-1) {
@@ -31,7 +30,6 @@ Game::Game()
 }
 bool Game::start() {
 	Lives = 3;
-	WaveNum = 1;
 	isPlayerAlive = true;
 	//create the renderer
 	SdlRenderer = SDL_CreateRenderer(SdlWindow, 0, -1);
@@ -48,27 +46,18 @@ bool Game::start() {
 		audio = new Audio();
 
 		audio->PlayBGMusic("../assets/IntergalacticOdyssey.ogg");
+		//intalizing text texture
 		m_textTexture = new Texture();
+		//initalizing the font
 		m_font = TTF_OpenFont("../assets/RobotoBold.ttf", 24);
-		//this part creates another obejct of the texture class , it then loads the bullets texture
-		playerSpacetexture = new Texture();
-		playerSpacetexture->LoadImgFromFile("../assets/SP1.bmp", SdlRenderer);
+
 		//its then sets the postion of the bullet class 
 		M_Position1.X = 710;
 		M_Position1.Y = 700;
 		//it then creates a new obejct of that class 
-		playerSpaceS = new PlayerSpaceShip(playerSpacetexture, M_Position1,80,80);
-		//then adds the obeject to the game obejcts list
+		playerSpaceS = new PlayerSpaceShip(SdlRenderer, M_Position1,75, 80);
+		//then adds the objeect to the game objects list
 		
-		// problem with this so dont add it to the space ship class 
-		//M_GameObjects.push_back(playerSpaceS);
-	
-
-		//intalizing text texture
-		//m_textTexture = new Texture();
-		//initalizing the font
-		//m_font = TTF_OpenFont("../assets/RobotoBold.ttf", 24);
-
 		return true;
 	}
 	else
@@ -151,11 +140,6 @@ void Game::draw() {
 	SDL_RenderClear(SdlRenderer);
 
 	playerSpaceS->Draw(SdlRenderer);
-
-	for (int i = 0; i < M_GameObjects.size(); ++i)
-	{
-		M_GameObjects[i]->Draw(SdlRenderer);
-	}
 	for (int i = 0; i < m_bullets.size(); ++i)
 	{
 
@@ -168,8 +152,7 @@ void Game::draw() {
 
 	if (m_font != nullptr) {
 		SDL_Color colour = { 255,255,255,255 };
-		std::string wavenum1;
-		wavenum1 = std::to_string((int)WaveNum);
+
 		std::string livenum1;
 		livenum1 = std::to_string((int)Lives);
 		if (!m_textTexture->RenderText(( " Lives: " + livenum1).c_str(), m_font, SdlRenderer, colour)) {
@@ -214,18 +197,17 @@ void Game::PE_CollisionCheck(){
 			--itr;
 			//if the enemes collision is within the players collsion bounds then delete the enemy
 			if ((*itr) != nullptr && playerSpaceS->GetCollider()->RectCollision(*(*itr)->GetCollider())) {
-				//delete* itr;
-				//*itr = nullptr;
-				//itr = M_EnemyObjects.erase(itr);
+				delete* itr;
+				*itr = nullptr;
+				itr = M_EnemyObjects.erase(itr);
 
 			if (Lives > 0) {
-
 
 				playerSpaceS->~PlayerSpaceShip();
 				playerSpacetexture = new Texture();
 				playerSpacetexture->LoadImgFromFile("../assets/SP1.bmp", SdlRenderer);
-				playerSpaceS = new PlayerSpaceShip(playerSpacetexture, M_Position1, 80, 80);
-					Lives--;
+				playerSpaceS = new PlayerSpaceShip(SdlRenderer, M_Position1,75, 80);
+				Lives--;
 				}
 				else if (Lives == 0)
 				{
@@ -234,21 +216,7 @@ void Game::PE_CollisionCheck(){
 
 					isPlayerAlive = false;
 
-
-
-
 				}
-
-
-
-
-
-
-
-
-
-
-
 
 				SDL_Log("Enemy Deleted");
 			}
@@ -261,7 +229,7 @@ void Game::processinput() {
 	//this calls the update input function
 	UserInput->UpdateInput(this);
 	PE_CollisionCheck();
-	playerSpaceS->HandleUserInput1(UserInput, playerBullets);
+	playerSpaceS->HandleUserInput1(UserInput);
 	//if the user has  presses down the left mouse button
 	if (UserInput->IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {
 		SDL_Log("ifring");
@@ -297,11 +265,7 @@ void Game::processinput() {
 			audio->PlaySFX("../assets/Shoot.wav");
 		}
 	}
-	//this part goes through each game object and  handles the user input 
-	for (int i = 0; i < M_GameObjects.size(); ++i)
-	{
-		M_GameObjects[i]->HandleUserInput1(UserInput, playerBullets);
-	}
+
 	//this part checks what type of event the user has done if they have done a quit event then end the game
 	SDL_Event e;
 	while (SDL_PollEvent(&e)) {
@@ -339,7 +303,7 @@ void Game::update(float deltaTime) {
 		M_EnemyTexture->LoadImgFromFile("../assets/EnemyShipL.bmp", SdlRenderer);
 		int rand_x = rand() % 1400 + 10;
 		int rand_y = rand() % 1 + 10;
-		Enemies = new EnemyWave1(M_EnemyTexture, Vector2(rand_x, rand_y),60,41,80);
+		Enemies = new EnemyWave1(M_EnemyTexture, Vector2(rand_x, rand_y),60,41,200);
 		M_EnemyObjects.push_back(Enemies);
 		lastSpawnL = SDL_GetTicks();
 	}
@@ -365,10 +329,6 @@ void Game::update(float deltaTime) {
 	}
 	
 	//this goes through all of the enimies and game obejcts and updates them 
-	for (int i = 0; i < M_GameObjects.size(); ++i)
-	{
-		M_GameObjects[i]->Update(deltaTime);
-	}
 	
 	for (int i = 0; i < M_EnemyObjects.size(); ++i)
 	{

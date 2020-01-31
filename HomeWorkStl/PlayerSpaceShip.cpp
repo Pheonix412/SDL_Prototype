@@ -13,7 +13,7 @@ PlayerSpaceShip::PlayerSpaceShip()
 	m_MaxVelocity = 0.0f;
 	playerdecleration = 0.0f;
 
-
+	m_playerDir = 0;
 
 
 	maxVelocity = 0.0f;
@@ -22,11 +22,10 @@ PlayerSpaceShip::PlayerSpaceShip()
 	m_isTouchingGround = false;
 }
 
-PlayerSpaceShip::PlayerSpaceShip(Texture* texture, Vector2 position, int colWidth, int colHeight)
+PlayerSpaceShip::PlayerSpaceShip(SDL_Renderer* renderer, Vector2 position, int colWidth, int colHeight)
 {
 	//this part initalizes the players position,texture,velocity and also acceleration.
 	M_Position = position;
-	M_Texture = texture;
 	M_Velocity = Vector2(0, 0);
 	M_Acceleration = Vector2(0, 0);
 	maxVelocity = 1000.0f;
@@ -34,9 +33,72 @@ PlayerSpaceShip::PlayerSpaceShip(Texture* texture, Vector2 position, int colWidt
 	//maxVelocity = 500.0f;
 	m_colWidth = colWidth;
 	m_colHeight = colHeight;
+	// setting the inital player texture
+	M_Texture = new Texture();
+	M_Texture->LoadImgFromFile("../assets/SP1Idle.png", renderer);
+	m_animation = new Animation(M_Texture, 6, 0.25f);
 	//setup collider
 	m_isTouchingGround = false;
 	m_Collider = new AABB(M_Position, m_colWidth, m_colHeight);
+	m_playerDir = 0;
+	m_sdlRenderer = renderer;
+}
+
+void PlayerSpaceShip::AnimationLogic(Input * input){
+	// Pressed d key
+	if (input->wasKeyPressed(SDLK_d)) {
+		RunAnimation(true);
+		// clear the d key state
+		input->SetKeyboardStateFalse(SDLK_d);
+	}
+
+	if (input->wasKeyPressed(SDLK_a)) {
+		RunAnimation();
+		// clear the a key state
+		input->SetKeyboardStateFalse(SDLK_a);
+	}
+
+	if (input->wasKeyReleased(SDLK_d) && m_playerDir == 2) {
+		IdleAnimation();
+		// clear the d key state
+		input->SetKeyboardStateFalse(SDLK_d);
+	}
+
+	if (input->wasKeyReleased(SDLK_a) && m_playerDir == 1) {
+		IdleAnimation();
+		// clear the a key state
+		input->SetKeyboardStateFalse(SDLK_a);
+	}
+
+	if (input->wasKeyReleased(SDLK_d) && m_playerDir == 0) {
+		IdleAnimation();
+		input->SetKeyboardStateFalse(SDLK_a);
+		input->SetKeyboardStateFalse(SDLK_d);
+	}
+
+	if (input->wasKeyReleased(SDLK_a) && m_playerDir == 0) {
+		IdleAnimation();
+		input->SetKeyboardStateFalse(SDLK_d);
+		input->SetKeyboardStateFalse(SDLK_a);
+	}
+}
+
+void PlayerSpaceShip::IdleAnimation(){
+	// Reset the texture
+	M_Texture->ResetTexture();
+	// Load the animation
+	M_Texture->LoadImgFromFile("../assets/SP1Idle.png", m_sdlRenderer);
+	// play the animation
+	m_animation = new Animation(M_Texture, 6, 0.25f);
+}
+
+void PlayerSpaceShip::RunAnimation(bool flip){
+	// Reset the texture
+	M_Texture->ResetTexture();
+	// Load the animation
+	M_Texture->LoadImgFromFile("../assets/SP1Move.png", m_sdlRenderer);
+	// play the animation
+	m_animation = new Animation(M_Texture, 6, 0.125f, flip);
 }
 
 void PlayerSpaceShip::AddPlayerForce(Vector2 force)
@@ -79,7 +141,7 @@ void PlayerSpaceShip::ToggleGorund(bool toggle){
 void PlayerSpaceShip::Draw(SDL_Renderer* renderer)
 {
 	//this part points to the draw function in the texture class and draws te player on the screen 
-	M_Texture->Draw(renderer, M_Position.X, M_Position.Y);
+	m_animation->Draw(renderer, M_Position.X, M_Position.Y);
 
 	//draw a box to visualise the collider
 	SDL_Rect rect = {
@@ -111,10 +173,10 @@ void PlayerSpaceShip::Update(float deltaTime)
 		if (!m_isTouchingGround) {
 			M_Position.Y += 500.0f*deltaTime;
 		}
-
-		m_Collider->Update(M_Position);
 		M_Acceleration = Vector2(0, 0);
-	
+		m_Collider->Update(M_Position);
+		
+		m_animation->Update(deltaTime);
 		//SDL_Log("velocty %f, %f", M_Velocity.X, M_Velocity.Y);
 		
 		//M_Acceleration = Vector2(0, 0);
@@ -126,12 +188,13 @@ void PlayerSpaceShip::UserInput1()
 }
 
 
-void PlayerSpaceShip::HandleUserInput1(Input* input, Texture* playerBullets)
+void PlayerSpaceShip::HandleUserInput1(Input* input)
 {
 	//this part handles the users input when they press a key down the keyboard, when they press a button down it will add to the players force in the coresponding direction
 
 	if (input->IsKeyDown(SDL_SCANCODE_A))
 	{
+		m_playerDir = 2;
 		AddPlayerForce(Vector2(-1,0) * 2000.0f);
 	}
 
@@ -144,6 +207,7 @@ void PlayerSpaceShip::HandleUserInput1(Input* input, Texture* playerBullets)
 
 	if (input->IsKeyDown(SDL_SCANCODE_D))
 	{
+		m_playerDir = 1;
 		AddPlayerForce(Vector2(1, 0) * 2000.0f);
 	}
 	if (input->IsKeyUp(SDL_SCANCODE_D))
@@ -152,34 +216,20 @@ void PlayerSpaceShip::HandleUserInput1(Input* input, Texture* playerBullets)
 			ReducePlayerForce(Vector2(1, 0) * playerdecleration);
 		}
 	}
-/*	if (input->IsKeyDown(SDL_SCANCODE_SPACE))
-	{
-		SDL_Log("SpacePressed");
-		unsigned int ticks = SDL_GetTicks() - LastUpadateTimer;
-		float deltaTime = ticks / 1000.0f;
-		//only allows a bullet to spawn after 0.2 seconds
-		if(deltaTime >=0.2f){	
-			int X1 = (M_Position.X + 10);
-			int Y1 = (M_Position.Y - 40);
-			LastUpadateTimer = SDL_GetTicks();
-			M_Position2.X = X1;
-			M_Position2.Y = Y1;
-			Bullet1*playerC = new Bullet1(playerBullets, M_Position2);
-			m_bullets.push_back(playerC);
-			audio = new Audio();
-			audio->PlaySFX("../assets/Shoot.wav");
-		}
+	// if we are not moving the player in a direction
+	if (input->IsKeyUp(SDL_SCANCODE_A) && input->IsKeyUp(SDL_SCANCODE_D)) {
+		// set player direction to idle
+		m_playerDir = 0;
 	}
-*/
+	AnimationLogic(input);
+
 }
 
 
 PlayerSpaceShip::~PlayerSpaceShip()
 {
-	if (M_Texture != nullptr) {
-		delete M_Texture;
-		M_Texture = nullptr;
-	}
+	M_Texture->ResetTexture();
+
 	std::cout << "player destructor" << std::endl;
 
 }

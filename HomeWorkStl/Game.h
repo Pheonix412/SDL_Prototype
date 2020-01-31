@@ -54,8 +54,6 @@ private:
 	TTF_Font* m_font;
 
 	Audio* audio;
-
-	int WaveNum;
 	int Lives;
 	bool isPlayerAlive;
 

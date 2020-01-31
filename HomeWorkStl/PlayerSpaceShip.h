@@ -29,15 +29,23 @@ private:
 	bool m_isTouchingGround;
 	float m_MaxVelocity;
 	float playerdecleration;
-
+	SDL_Renderer* m_sdlRenderer;
+	Animation* m_animation;
 	Audio* audio;
+	int m_playerDir;
+
 public:
 	//this is the space ship constructor 
 	PlayerSpaceShip();
+	PlayerSpaceShip(SDL_Renderer* renderer, Vector2 position, int colWidth, int colHeight);
+
+	void AnimationLogic(Input* input);
+	// Animtion Functions
+	void IdleAnimation();
+	void RunAnimation(bool flip = false);
 	//this is a bullet pointer
 	Bullet1* m_bullet;
 	//this is a overloaded constructor of the space ship
-	PlayerSpaceShip(Texture* texture, Vector2 position, int colWidth, int colHeight);
 //this function adds force to the player 
 	void AddPlayerForce(Vector2 force);
 	//this function reduces force to the player 
@@ -57,7 +65,7 @@ public:
 	//this function updates the users input
 	void UserInput1();
 	//these functions handle the users input 
-	void HandleUserInput1(Input* input, Texture* playerBullets);
+	void HandleUserInput1(Input* input);
 	//this is the space ship destructor
 	~PlayerSpaceShip();
 };
