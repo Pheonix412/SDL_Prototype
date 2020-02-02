@@ -55,7 +55,7 @@ bool Game::start() {
 		M_Position1.X = 710;
 		M_Position1.Y = 700;
 		//it then creates a new obejct of that class 
-		playerSpaceS = new PlayerSpaceShip(SdlRenderer, M_Position1,75, 80);
+		playerSpaceS = new PlayerSpaceShip(SdlRenderer, M_Position1,55, 80);
 		//then adds the objeect to the game objects list
 		
 		return true;
@@ -222,6 +222,44 @@ void Game::PE_CollisionCheck(){
 			}
 		}
 	}
+	
+
+
+		for (auto itr = M_EnemyObjects.end(); itr != M_EnemyObjects.begin();) {
+			itr--;
+			if ((*itr)->GetCollider())
+		{
+			for (auto itr1 = m_bullets.end(); itr1 != m_bullets.begin();) {
+				itr1--;
+				//I NEED TO FIX THIS
+				if ((*itr) != nullptr && (*itr1) != nullptr&& (*itr1)->GetCollider()->RectCollision(*(*itr)->GetCollider())) {
+
+					SDL_Log("BULLET COILDED");
+					
+					delete* itr;
+					*itr = nullptr;
+					itr = M_EnemyObjects.erase(itr);
+
+					delete* itr1;
+					*itr1 = nullptr;
+					itr1 = m_bullets.erase(itr1);
+
+
+
+
+
+				}
+			}
+
+
+
+
+
+
+
+		}
+	}
+
 
 }
 void Game::processinput() {
@@ -259,7 +297,7 @@ void Game::processinput() {
 			LastBullet = SDL_GetTicks();
 			M_Position2.X = X1;
 			M_Position2.Y = Y1;
-			Bullet1*playerC = new Bullet1(playerBullets, M_Position2);
+			Bullet1*playerC = new Bullet1(SdlRenderer, M_Position2, 40, 35, 200);
 			m_bullets.push_back(playerC);
 			audio = new Audio();
 			audio->PlaySFX("../assets/Shoot.wav");

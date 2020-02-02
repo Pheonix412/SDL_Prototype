@@ -26,6 +26,8 @@ PlayerSpaceShip::PlayerSpaceShip(SDL_Renderer* renderer, Vector2 position, int c
 {
 	//this part initalizes the players position,texture,velocity and also acceleration.
 	M_Position = position;
+	//m_colPOS = M_Position;
+	//m_colPOS.X = m_colPOS.X + 20;
 	M_Velocity = Vector2(0, 0);
 	M_Acceleration = Vector2(0, 0);
 	maxVelocity = 1000.0f;

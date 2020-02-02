@@ -18,11 +18,12 @@ private:
 	Vector2 M_Position1;
 	//this holds the postion of the bulet 
 	Vector2 M_Position2;
+	Vector2 m_colPOS;
 	float maxVelocity;
 
 	//holds how long its been since a bullet has been made
 	unsigned int LastUpadateTimer;
-
+	
 	AABB* m_Collider;
 	int m_colWidth;
 	int m_colHeight;
