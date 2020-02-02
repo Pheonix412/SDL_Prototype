@@ -155,7 +155,12 @@ void Game::draw() {
 
 		std::string livenum1;
 		livenum1 = std::to_string((int)Lives);
-		if (!m_textTexture->RenderText(( " Lives: " + livenum1).c_str(), m_font, SdlRenderer, colour)) {
+		std::string Time;
+		unsigned int gameTicks = SDL_GetTicks();
+		float GameTime = gameTicks / 1000.0f;
+		Time = std::to_string((float)GameTime);
+		//GameTime
+		if (!m_textTexture->RenderText(( " Lives: " + livenum1+" Time:"+Time).c_str(), m_font, SdlRenderer, colour)) {
 			//SDL_Log("Text rendered - Success");
 		}
 
