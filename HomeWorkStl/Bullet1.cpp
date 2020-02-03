@@ -8,6 +8,7 @@ Bullet1::Bullet1()
 	M_Texture = nullptr;
 	std::cout << "bullet constructor" << std::endl;
 	m_Collider = nullptr;
+	M_Position = Vector2(0,0);
 }
 
 Bullet1::Bullet1(SDL_Renderer *renderer, Vector2 position , int colWidth, int colHeight, int speed)

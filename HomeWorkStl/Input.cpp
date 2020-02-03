@@ -213,12 +213,28 @@ void Input::UpdateInput(Game* game)
 			M_keyboardState = SDL_GetKeyboardState(NULL);
 			if (e.key.repeat == 0)
 			{
-				m_keyboardPressState[e.key.keysym.sym] = 1;
+				try
+				{
+					if (e.key.keysym.sym<321)
+					{
+						m_keyboardPressState[e.key.keysym.sym] = 1;
+					}
+					
+				}
+				catch (const std::exception&)
+				{
+					SDL_Log("not valid key pressed");
+				}
+				
 			}
 			break;
 		case SDL_KEYUP:
 			M_keyboardState = SDL_GetKeyboardState(NULL);
-			m_keyboardPressState[e.key.keysym.sym] = 2;
+			if (e.key.keysym.sym<321)
+			{
+				m_keyboardPressState[e.key.keysym.sym] = 2;
+			}
+			
 			break;
 		case SDL_QUIT:
 			isGameOver = true;

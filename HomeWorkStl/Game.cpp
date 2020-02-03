@@ -228,42 +228,59 @@ void Game::PE_CollisionCheck(){
 		}
 	}
 	
+	try {
+		//the issue is to do with the .end and .begin statements..
+		for (auto itr2 = M_EnemyObjects.end(); itr2 != M_EnemyObjects.begin();) {
+			
+			itr2--;
+			if ((*itr2)->GetCollider())
+			{
+				for (auto itr1 = m_bullets.end(); itr1 != m_bullets.begin();) {
+					itr1--;
+					if ((*itr1)->GetCollider()) {
+
+						//I NEED TO FIX THIS
+						if ((*itr2) != nullptr && (*itr1) != nullptr && (*itr1)->GetCollider()->RectCollision(*(*itr2)->GetCollider())) {
+
+							SDL_Log("BULLET COILDED");
+							//for some reason this causes issues 
+							//delete* itr;
+							//*itr = nullptr;
+							//itr = M_EnemyObjects.erase(itr);
+
+							delete* itr1;
+							*itr1 = nullptr;
+							itr1 = m_bullets.erase(itr1);
+							
+							
+							delete* itr2;
+							*itr2 = nullptr;
+							itr2 = M_EnemyObjects.erase(itr2);
+								
 
 
-		for (auto itr = M_EnemyObjects.end(); itr != M_EnemyObjects.begin();) {
-			itr--;
-			if ((*itr)->GetCollider())
-		{
-			for (auto itr1 = m_bullets.end(); itr1 != m_bullets.begin();) {
-				itr1--;
-				//I NEED TO FIX THIS
-				if ((*itr) != nullptr && (*itr1) != nullptr&& (*itr1)->GetCollider()->RectCollision(*(*itr)->GetCollider())) {
 
-					SDL_Log("BULLET COILDED");
+
+						}
+					}
 					
-					delete* itr;
-					*itr = nullptr;
-					itr = M_EnemyObjects.erase(itr);
-
-					delete* itr1;
-					*itr1 = nullptr;
-					itr1 = m_bullets.erase(itr1);
-
-
-
-
 
 				}
+
+
+				
+
+
+
 			}
-
-
-
-
-
-
-
 		}
 	}
+	catch(std::string e) {
+		std::string e1 = "error" + e;
+		//SDL_Log(e1);
+		//SDL_Log(("error " + e + "sdlerror " + SDL_Error).c_str());
+	}
+
 
 
 }
