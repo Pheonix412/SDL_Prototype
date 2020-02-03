@@ -238,14 +238,15 @@ void Game::PE_CollisionCheck(){
 	
 	try {
 		//the issue is to do with the .end and .begin statements..
+
 		for (auto itr2 = M_EnemyObjects.end(); itr2 != M_EnemyObjects.begin();) {
 			
 			itr2--;
-			if ((*itr2)->GetCollider())
-			{
+		//	if ((*itr2)->GetCollider())
+		//	{
 				for (auto itr1 = m_bullets.end(); itr1 != m_bullets.begin();) {
 					itr1--;
-					if ((*itr1)->GetCollider()) {
+					//if ((*itr1)->GetCollider()) {
 
 						//I NEED TO FIX THIS
 						if ((*itr2) != nullptr && (*itr1) != nullptr && (*itr1)->GetCollider()->RectCollision(*(*itr2)->GetCollider())) {
@@ -265,12 +266,12 @@ void Game::PE_CollisionCheck(){
 							*itr2 = nullptr;
 							itr2 = M_EnemyObjects.erase(itr2);
 								
+//this fixes the differencible bug however i dont think it is correct
 
-
-
+							break;
 
 						}
-					}
+				//	}
 					
 
 				}
@@ -280,8 +281,11 @@ void Game::PE_CollisionCheck(){
 
 
 
-			}
+		//	}
 		}
+
+
+
 	}
 	catch(std::string e) {
 		std::string e1 = "error" + e;
@@ -393,7 +397,7 @@ void Game::processinput() {
 		unsigned int BulletTicks = SDL_GetTicks() - LastBullet;
 		float bulletTime = BulletTicks / 1000.0f;
 		//only allows a bullet to spawn after 0.2 seconds
-		if (bulletTime >= 0.2f) {
+		if (bulletTime >= 0.3f) {
 
 			int X1 = (playerSpaceS->GetPlayerX() + 37);
 			int Y1 = (playerSpaceS->GetPlayerY() - 20);
