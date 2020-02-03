@@ -55,7 +55,7 @@ bool Game::start() {
 		M_Position1.X = 710;
 		M_Position1.Y = 700;
 		//it then creates a new obejct of that class 
-		playerSpaceS = new PlayerSpaceShip(SdlRenderer, M_Position1,55, 80);
+		playerSpaceS = new PlayerSpaceShip(SdlRenderer, M_Position1,75, 80);
 		//then adds the objeect to the game objects list
 		
 		return true;
@@ -211,6 +211,8 @@ void Game::PE_CollisionCheck(){
 				playerSpaceS->~PlayerSpaceShip();
 				playerSpacetexture = new Texture();
 				playerSpacetexture->LoadImgFromFile("../assets/SP1.bmp", SdlRenderer);
+				M_Position1.X = 710;
+				M_Position1.Y = 690;
 				playerSpaceS = new PlayerSpaceShip(SdlRenderer, M_Position1,75, 80);
 				Lives--;
 				}
