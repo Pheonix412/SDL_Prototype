@@ -17,7 +17,7 @@ Bullet1::Bullet1(SDL_Renderer *renderer, Vector2 position , int colWidth, int co
 	
 	M_Position = position;
 	M_Texture = new Texture();
-	M_Texture->LoadImgFromFile("../assets/B1.bmp", renderer);
+	M_Texture->LoadImgFromFile("../assets/B2.bmp", renderer);
 	//only velocity no
 	//this sets the bullets velocty and also acceleration 
 	m_Collider = new AABB(position, colWidth, colHeight);

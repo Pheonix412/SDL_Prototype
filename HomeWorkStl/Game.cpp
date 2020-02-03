@@ -13,6 +13,7 @@ Game::Game()
 	SdlWindow = nullptr;
 	SdlRenderer = nullptr;
 	isPlayerAlive = nullptr;
+	Difiiculty = 0;
 	Lives = 0;
 	LastUpadateTimer = SDL_GetTicks();
 	//checks if sdl is initalized if it isnt  then end the game , else if it has then run the game 
@@ -29,9 +30,12 @@ Game::Game()
 	audio = nullptr;
 }
 bool Game::start() {
-	Lives = 3;
+	Difiiculty = 1;
+	Lives = SetIntLives(Difiiculty);
+	//Lives = 3;
 	isPlayerAlive = true;
 	//create the renderer
+
 	SdlRenderer = SDL_CreateRenderer(SdlWindow, 0, -1);
 	//if its not null
 	if (SdlRenderer != nullptr) {
@@ -40,7 +44,8 @@ bool Game::start() {
 	//	std::cout << "render created " << std::endl;
 		//make an object of the texture class
 		playerBullets = new Texture();
-		//laods the player bullets texture 
+		//laods the player bullets texture
+		
 		playerBullets->LoadImgFromFile("../assets/B1.bmp", SdlRenderer);
 		
 		audio = new Audio();
@@ -63,6 +68,7 @@ bool Game::start() {
 	else
 	{
 		std::cout << "render failed " << std::endl;
+
 		return false;
 	}
 	
@@ -157,8 +163,8 @@ void Game::draw() {
 		livenum1 = std::to_string((int)Lives);
 		std::string Time;
 		unsigned int gameTicks = SDL_GetTicks();
-		float GameTime = gameTicks / 1000.0f;
-		Time = std::to_string((float)GameTime);
+		int GameTime = gameTicks / 1000.0f;
+		Time = std::to_string((int)GameTime);
 		//GameTime
 		if (!m_textTexture->RenderText(( " Lives: " + livenum1+" Time:"+Time).c_str(), m_font, SdlRenderer, colour)) {
 			//SDL_Log("Text rendered - Success");
@@ -286,6 +292,79 @@ void Game::PE_CollisionCheck(){
 
 
 }
+void Game::ResetGame()
+{
+	//resets the player 
+	playerSpaceS->~PlayerSpaceShip();
+	playerSpacetexture = new Texture();
+	playerSpacetexture->LoadImgFromFile("../assets/SP1.bmp", SdlRenderer);
+	M_Position1.X = 710;
+	M_Position1.Y = 690;
+	playerSpaceS = new PlayerSpaceShip(SdlRenderer, M_Position1, 75, 80);
+	//resets the player
+	SetLives(Difiiculty);
+	lastSpawnL = 0;
+	lastSpawnM = 0;
+	lastSpawnS = 0;
+	isPlayerAlive = true;
+	//reset the game timer and also the enemies so that the game starts fresh..
+	
+
+
+}
+void Game::ChangeDifficulty(int diff)
+{
+	//set the difficulty and also the game itself 
+	Difiiculty = diff;
+	ResetGame();
+
+
+}
+void Game::SetLives(int diff)
+{
+	SDL_Log("lives set");
+	//sets the lives to the player 
+	//easy 
+	if (diff==1)
+	{
+		Lives = 3;
+	}
+	//medium
+	else if( diff==2)
+	{
+		Lives = 2;
+	}
+	//hard
+	else if (diff == 3)
+	{
+		Lives = 1;
+	}
+	else {
+		SDL_Log("no lives set");
+	}
+}
+int Game::SetIntLives(int diff)
+{
+	int liv = 0;
+	if (diff == 1)
+	{
+		liv = 3;
+	}
+	//medium
+	else if (diff == 2)
+	{
+		liv = 2;
+	}
+	//hard
+	else if (diff == 3)
+	{
+		liv = 1;
+	}
+	else {
+		SDL_Log("no lives set");
+	}
+	return liv;
+}
 void Game::processinput() {
 	//m_player->Input();
 	//this calls the update input function
@@ -316,12 +395,12 @@ void Game::processinput() {
 		//only allows a bullet to spawn after 0.2 seconds
 		if (bulletTime >= 0.2f) {
 
-			int X1 = (playerSpaceS->GetPlayerX() + 10);
-			int Y1 = (playerSpaceS->GetPlayerY() - 40);
+			int X1 = (playerSpaceS->GetPlayerX() + 37);
+			int Y1 = (playerSpaceS->GetPlayerY() - 20);
 			LastBullet = SDL_GetTicks();
 			M_Position2.X = X1;
 			M_Position2.Y = Y1;
-			Bullet1*playerC = new Bullet1(SdlRenderer, M_Position2, 40, 35, 200);
+			Bullet1*playerC = new Bullet1(SdlRenderer, M_Position2, 12, 15, 200);
 			m_bullets.push_back(playerC);
 			audio = new Audio();
 			audio->PlaySFX("../assets/Shoot.wav");

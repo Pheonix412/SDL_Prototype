@@ -157,10 +157,7 @@ void Input::OnSystemEvents(SDL_Event& e, Game* g)
 		//gameover=true
 		g->SetGameState(true);
 		break;
-	case 40007:
-		//this parts runs the function that creates a new window
-		
-		break;
+	
 		//ABOUT SDL 2
 	case 40003:
 		//need to get the owner of the window its the first parameter 
@@ -171,6 +168,23 @@ void Input::OnSystemEvents(SDL_Event& e, Game* g)
 
 		MessageBox(NULL, test1.c_str(), test4.c_str(), MB_OK);
 		break;
+		//restart game 
+	case 40009:
+		g->ResetGame();
+		break;
+		//easy
+	case 40004:
+		g->ChangeDifficulty(1);
+		break;
+		//hard
+	case 40006:
+		g->ChangeDifficulty(2);
+		break;
+		//medium
+	case 40005:
+		g->ChangeDifficulty(3);
+		break;
+
 	default:
 		break;
 	}

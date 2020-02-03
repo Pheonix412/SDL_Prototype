@@ -61,6 +61,7 @@ private:
 	Vector2 M_Position2;
 	Texture* playerSpacetexture;
 	std::vector <Bullet1*> m_bullets;
+	int Difiiculty;
 
 public:
 	Game();
@@ -82,7 +83,10 @@ public:
 	void destroy();
 	//player enemy collision check
 	void PE_CollisionCheck();
-
+	void ResetGame();
+	void ChangeDifficulty(int diff);
+	void SetLives(int diff);
+	int SetIntLives(int diff);
 	//this is the destructor for the game
 	~Game();
 
