@@ -22,6 +22,9 @@ private:
 	unsigned int lastSpawnM;
 	unsigned int lastSpawnS;
 	unsigned int LastBullet;
+	float GameTime;
+	float lastClear;
+	//clears the game timer if true
 	//these are pointers for the window and the render
 	SDL_Window* SdlWindow;
 	SDL_Renderer* SdlRenderer;
@@ -56,7 +59,7 @@ private:
 	Audio* audio;
 	int Lives;
 	bool isPlayerAlive;
-
+	
 
 	Vector2 M_Position2;
 	Texture* playerSpacetexture;

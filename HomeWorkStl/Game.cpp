@@ -15,6 +15,7 @@ Game::Game()
 	isPlayerAlive = nullptr;
 	Difiiculty = 0;
 	Lives = 0;
+	lastClear = 0;
 	LastUpadateTimer = SDL_GetTicks();
 	//checks if sdl is initalized if it isnt  then end the game , else if it has then run the game 
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0|| TTF_Init() == -1|| Mix_OpenAudio(192000,MIX_DEFAULT_FORMAT,2,4096)==-1) {
@@ -162,8 +163,8 @@ void Game::draw() {
 		std::string livenum1;
 		livenum1 = std::to_string((int)Lives);
 		std::string Time;
-		unsigned int gameTicks = SDL_GetTicks();
-		int GameTime = gameTicks / 1000.0f;
+	//	unsigned int gameTicks = SDL_GetTicks();
+	//	GameTime = gameTicks / 1000.0f;
 		Time = std::to_string((int)GameTime);
 		//GameTime
 		if (!m_textTexture->RenderText(( " Lives: " + livenum1+" Time:"+Time).c_str(), m_font, SdlRenderer, colour)) {
@@ -311,9 +312,10 @@ void Game::ResetGame()
 	lastSpawnM = 0;
 	lastSpawnS = 0;
 	isPlayerAlive = true;
-	//reset the game timer and also the enemies so that the game starts fresh..
-	
-
+	//erases all enemies
+	M_EnemyObjects.clear();
+	//reset the game timer so that the spawns starts fresh
+	lastClear = GameTime+lastClear;
 
 }
 void Game::ChangeDifficulty(int diff)
@@ -369,6 +371,7 @@ int Game::SetIntLives(int diff)
 	}
 	return liv;
 }
+
 void Game::processinput() {
 	//m_player->Input();
 	//this calls the update input function
@@ -427,11 +430,11 @@ void Game::update(float deltaTime) {
 	playerSpaceS->Update(deltaTime);
 	//this displays the delta time 
 	//std::cout << "time" << deltaTime<< std::endl;
-
 	//calculate game timer
 	unsigned int gameTicks = SDL_GetTicks();
-	float GameTime = gameTicks / 1000.0f;
-
+	
+	GameTime = gameTicks / 1000.0f;
+	GameTime = GameTime - lastClear;
 	//calculates the spawn timer
 	unsigned int spawnTicksL = SDL_GetTicks() - lastSpawnL;
 	float spawnTimerL = spawnTicksL / 1000.0f;
@@ -452,7 +455,7 @@ void Game::update(float deltaTime) {
 		M_EnemyObjects.push_back(Enemies);
 		lastSpawnL = SDL_GetTicks();
 	}
-	if (spawnTimerM>2&&GameTime>60) {
+	if (spawnTimerM>2&&GameTime>5) {
 		enemycount++;
 		M_EnemyTexture = new Texture();
 		M_EnemyTexture->LoadImgFromFile("../assets/EnemyShipM.bmp", SdlRenderer);

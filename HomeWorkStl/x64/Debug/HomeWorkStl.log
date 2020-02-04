@@ -1,22 +1,28 @@
-﻿  C:\Users\zbook j\Desktop\basic game prog assignment\SDL_Prototype\dep\lib\x64\libFLAC-8.dll
-  C:\Users\zbook j\Desktop\basic game prog assignment\SDL_Prototype\dep\lib\x64\libfreetype-6.dll
-  C:\Users\zbook j\Desktop\basic game prog assignment\SDL_Prototype\dep\lib\x64\libjpeg-9.dll
-  C:\Users\zbook j\Desktop\basic game prog assignment\SDL_Prototype\dep\lib\x64\libmodplug-1.dll
-  C:\Users\zbook j\Desktop\basic game prog assignment\SDL_Prototype\dep\lib\x64\libmpg123-0.dll
-  C:\Users\zbook j\Desktop\basic game prog assignment\SDL_Prototype\dep\lib\x64\libogg-0.dll
-  C:\Users\zbook j\Desktop\basic game prog assignment\SDL_Prototype\dep\lib\x64\libopus-0.dll
-  C:\Users\zbook j\Desktop\basic game prog assignment\SDL_Prototype\dep\lib\x64\libopusfile-0.dll
-  C:\Users\zbook j\Desktop\basic game prog assignment\SDL_Prototype\dep\lib\x64\libpng16-16.dll
-  C:\Users\zbook j\Desktop\basic game prog assignment\SDL_Prototype\dep\lib\x64\libtiff-5.dll
-  C:\Users\zbook j\Desktop\basic game prog assignment\SDL_Prototype\dep\lib\x64\libvorbis-0.dll
-  C:\Users\zbook j\Desktop\basic game prog assignment\SDL_Prototype\dep\lib\x64\libvorbisfile-3.dll
-  C:\Users\zbook j\Desktop\basic game prog assignment\SDL_Prototype\dep\lib\x64\libwebp-7.dll
-  C:\Users\zbook j\Desktop\basic game prog assignment\SDL_Prototype\dep\lib\x64\SDL2.dll
-  C:\Users\zbook j\Desktop\basic game prog assignment\SDL_Prototype\dep\lib\x64\SDL2_image.dll
-  C:\Users\zbook j\Desktop\basic game prog assignment\SDL_Prototype\dep\lib\x64\SDL2_mixer.dll
-  C:\Users\zbook j\Desktop\basic game prog assignment\SDL_Prototype\dep\lib\x64\SDL2_ttf.dll
-  C:\Users\zbook j\Desktop\basic game prog assignment\SDL_Prototype\dep\lib\x64\zlib1.dll
+﻿  C:\Users\Bacca\Desktop\SDL_Prototype\dep\lib\x64\libFLAC-8.dll
+  C:\Users\Bacca\Desktop\SDL_Prototype\dep\lib\x64\libfreetype-6.dll
+  C:\Users\Bacca\Desktop\SDL_Prototype\dep\lib\x64\libjpeg-9.dll
+  C:\Users\Bacca\Desktop\SDL_Prototype\dep\lib\x64\libmodplug-1.dll
+  C:\Users\Bacca\Desktop\SDL_Prototype\dep\lib\x64\libmpg123-0.dll
+  C:\Users\Bacca\Desktop\SDL_Prototype\dep\lib\x64\libogg-0.dll
+  C:\Users\Bacca\Desktop\SDL_Prototype\dep\lib\x64\libopus-0.dll
+  C:\Users\Bacca\Desktop\SDL_Prototype\dep\lib\x64\libopusfile-0.dll
+  C:\Users\Bacca\Desktop\SDL_Prototype\dep\lib\x64\libpng16-16.dll
+  C:\Users\Bacca\Desktop\SDL_Prototype\dep\lib\x64\libtiff-5.dll
+  C:\Users\Bacca\Desktop\SDL_Prototype\dep\lib\x64\libvorbis-0.dll
+  C:\Users\Bacca\Desktop\SDL_Prototype\dep\lib\x64\libvorbisfile-3.dll
+  C:\Users\Bacca\Desktop\SDL_Prototype\dep\lib\x64\libwebp-7.dll
+  C:\Users\Bacca\Desktop\SDL_Prototype\dep\lib\x64\SDL2.dll
+  C:\Users\Bacca\Desktop\SDL_Prototype\dep\lib\x64\SDL2_image.dll
+  C:\Users\Bacca\Desktop\SDL_Prototype\dep\lib\x64\SDL2_mixer.dll
+  C:\Users\Bacca\Desktop\SDL_Prototype\dep\lib\x64\SDL2_ttf.dll
+  C:\Users\Bacca\Desktop\SDL_Prototype\dep\lib\x64\zlib1.dll
          18 file(s) copied.
-  Source.cpp
-  HomeWorkStl.vcxproj -> C:\Users\zbook j\Desktop\basic game prog assignment\SDL_Prototype\x64\Debug\HomeWorkStl.exe
-  HomeWorkStl.vcxproj -> C:\Users\zbook j\Desktop\basic game prog assignment\SDL_Prototype\x64\Debug\HomeWorkStl.pdb (Full PDB)
+  Game.cpp
+c:\users\bacca\desktop\sdl_prototype\homeworkstl\game.cpp(405): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+c:\users\bacca\desktop\sdl_prototype\homeworkstl\game.cpp(406): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+  Generating Code...
+  Skipping... (no relevant changes detected)
+  Audio.cpp
+  AABB.cpp
+  HomeWorkStl.vcxproj -> C:\Users\Bacca\Desktop\SDL_Prototype\x64\Debug\HomeWorkStl.exe
+  HomeWorkStl.vcxproj -> C:\Users\Bacca\Desktop\SDL_Prototype\x64\Debug\HomeWorkStl.pdb (Full PDB)
