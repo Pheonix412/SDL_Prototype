@@ -16,6 +16,7 @@ Game::Game()
 	Difiiculty = 0;
 	Lives = 0;
 	lastClear = 0;
+	finalTime = 0;
 	LastUpadateTimer = SDL_GetTicks();
 	//checks if sdl is initalized if it isnt  then end the game , else if it has then run the game 
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0|| TTF_Init() == -1|| Mix_OpenAudio(192000,MIX_DEFAULT_FORMAT,2,4096)==-1) {
@@ -159,13 +160,12 @@ void Game::draw() {
 
 	if (m_font != nullptr) {
 		SDL_Color colour = { 255,255,255,255 };
-
+		
 		std::string livenum1;
 		livenum1 = std::to_string((int)Lives);
 		std::string Time;
-	//	unsigned int gameTicks = SDL_GetTicks();
-	//	GameTime = gameTicks / 1000.0f;
 		Time = std::to_string((int)GameTime);
+
 		//GameTime
 		if (!m_textTexture->RenderText(( " Lives: " + livenum1+" Time:"+Time).c_str(), m_font, SdlRenderer, colour)) {
 			//SDL_Log("Text rendered - Success");
@@ -174,7 +174,10 @@ void Game::draw() {
 
 		if (isPlayerAlive == false)
 		{
-			if (!m_textTexture->RenderText("Game over", m_font, SdlRenderer, colour)) {
+			finalTime = GameTime;
+			std::string endTime;
+			endTime = std::to_string((int)finalTime);
+			if (!m_textTexture->RenderText(("Game over! You lasted: "+endTime+" Seconds").c_str(), m_font, SdlRenderer, colour)) {
 				//SDL_Log("Text rendered - Success");
 			}
 
@@ -371,7 +374,6 @@ int Game::SetIntLives(int diff)
 	}
 	return liv;
 }
-
 void Game::processinput() {
 	//m_player->Input();
 	//this calls the update input function
@@ -430,6 +432,7 @@ void Game::update(float deltaTime) {
 	playerSpaceS->Update(deltaTime);
 	//this displays the delta time 
 	//std::cout << "time" << deltaTime<< std::endl;
+	if (isPlayerAlive) { 
 	//calculate game timer
 	unsigned int gameTicks = SDL_GetTicks();
 	
@@ -444,38 +447,38 @@ void Game::update(float deltaTime) {
 
 	unsigned int spawnTicksS = SDL_GetTicks() - lastSpawnS;
 	float spawnTimerS = spawnTicksS / 1000.0f;
-
-	if (spawnTimerL>0.8) {
-		enemycount++;
-		M_EnemyTexture = new Texture();
-		M_EnemyTexture->LoadImgFromFile("../assets/EnemyShipL.bmp", SdlRenderer);
-		int rand_x = rand() % 1400 + 10;
-		int rand_y = rand() % 1 + 10;
-		Enemies = new EnemyWave1(M_EnemyTexture, Vector2(rand_x, rand_y),60,41,200);
-		M_EnemyObjects.push_back(Enemies);
-		lastSpawnL = SDL_GetTicks();
-	}
-	if (spawnTimerM>2&&GameTime>5) {
-		enemycount++;
-		M_EnemyTexture = new Texture();
-		M_EnemyTexture->LoadImgFromFile("../assets/EnemyShipM.bmp", SdlRenderer);
-		int rand_x = rand() % 1400 + 10;
-		int rand_y = rand() % 1 + 10;
-		Enemies = new EnemyWave1(M_EnemyTexture, Vector2(rand_x, rand_y), 41, 41,120);
-		M_EnemyObjects.push_back(Enemies);
-		lastSpawnM = SDL_GetTicks();
-	}
-	if (spawnTimerS>1&&GameTime>120) {
-		enemycount++;
-		M_EnemyTexture = new Texture();
-		M_EnemyTexture->LoadImgFromFile("../assets/EnemyShipS.bmp", SdlRenderer);
-		int rand_x = rand() % 1400 + 10;
-		int rand_y = rand() % 1 + 10;
-		Enemies = new EnemyWave1(M_EnemyTexture, Vector2(rand_x, rand_y), 40, 35,200);
-		M_EnemyObjects.push_back(Enemies);
-		lastSpawnS = SDL_GetTicks();
-	}
 	
+		if (spawnTimerL > 0.8) {
+			enemycount++;
+			M_EnemyTexture = new Texture();
+			M_EnemyTexture->LoadImgFromFile("../assets/EnemyShipL.bmp", SdlRenderer);
+			int rand_x = rand() % 1400 + 10;
+			int rand_y = rand() % 1 + 10;
+			Enemies = new EnemyWave1(M_EnemyTexture, Vector2(rand_x, rand_y), 60, 41, 200);
+			M_EnemyObjects.push_back(Enemies);
+			lastSpawnL = SDL_GetTicks();
+		}
+		if (spawnTimerM > 2 && GameTime > 60) {
+			enemycount++;
+			M_EnemyTexture = new Texture();
+			M_EnemyTexture->LoadImgFromFile("../assets/EnemyShipM.bmp", SdlRenderer);
+			int rand_x = rand() % 1400 + 10;
+			int rand_y = rand() % 1 + 10;
+			Enemies = new EnemyWave1(M_EnemyTexture, Vector2(rand_x, rand_y), 41, 41, 120);
+			M_EnemyObjects.push_back(Enemies);
+			lastSpawnM = SDL_GetTicks();
+		}
+		if (spawnTimerS > 1 && GameTime > 120) {
+			enemycount++;
+			M_EnemyTexture = new Texture();
+			M_EnemyTexture->LoadImgFromFile("../assets/EnemyShipS.bmp", SdlRenderer);
+			int rand_x = rand() % 1400 + 10;
+			int rand_y = rand() % 1 + 10;
+			Enemies = new EnemyWave1(M_EnemyTexture, Vector2(rand_x, rand_y), 40, 35, 200);
+			M_EnemyObjects.push_back(Enemies);
+			lastSpawnS = SDL_GetTicks();
+		}
+	}
 	//this goes through all of the enimies and game obejcts and updates them 
 	
 	for (int i = 0; i < M_EnemyObjects.size(); ++i)

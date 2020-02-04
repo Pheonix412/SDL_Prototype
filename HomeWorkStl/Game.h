@@ -24,6 +24,7 @@ private:
 	unsigned int LastBullet;
 	float GameTime;
 	float lastClear;
+	int finalTime;
 	//clears the game timer if true
 	//these are pointers for the window and the render
 	SDL_Window* SdlWindow;
