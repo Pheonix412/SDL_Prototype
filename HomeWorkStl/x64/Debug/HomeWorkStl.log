@@ -18,8 +18,8 @@
   C:\Users\Bacca\Desktop\SDL_Prototype\dep\lib\x64\zlib1.dll
          18 file(s) copied.
   Game.cpp
-c:\users\bacca\desktop\sdl_prototype\homeworkstl\game.cpp(177): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-c:\users\bacca\desktop\sdl_prototype\homeworkstl\game.cpp(407): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-c:\users\bacca\desktop\sdl_prototype\homeworkstl\game.cpp(408): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+c:\users\bacca\desktop\sdl_prototype\homeworkstl\game.cpp(176): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\bacca\desktop\sdl_prototype\homeworkstl\game.cpp(405): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+c:\users\bacca\desktop\sdl_prototype\homeworkstl\game.cpp(406): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
   HomeWorkStl.vcxproj -> C:\Users\Bacca\Desktop\SDL_Prototype\x64\Debug\HomeWorkStl.exe
   HomeWorkStl.vcxproj -> C:\Users\Bacca\Desktop\SDL_Prototype\x64\Debug\HomeWorkStl.pdb (Full PDB)

@@ -12,11 +12,3 @@ int main(int argc, char** argv) {
 	//returns 0
 	return 0;
 }
-
-
-
-
-
-// TODO: If enemy is shot with bullet, enemy disapears with the bullet
-
-

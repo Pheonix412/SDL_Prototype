@@ -1,5 +1,4 @@
 #include "PlayerSpaceShip.h"
-
 //by Rhys Thomas Baker 7772 and By Jayme Schmid 6290 2019
 
 PlayerSpaceShip::PlayerSpaceShip()
@@ -104,7 +103,7 @@ void PlayerSpaceShip::RunAnimation(bool flip){
 void PlayerSpaceShip::AddPlayerForce(Vector2 force)
 {
 	//this part increases the players acceleration in a direction by adding the players force to their acceleration 
-		M_Acceleration += force;
+		M_Acceleration += force;	
 }
 
 void PlayerSpaceShip::ReducePlayerForce(Vector2 force)
@@ -195,7 +194,7 @@ void PlayerSpaceShip::HandleUserInput1(Input* input)
 	if (input->IsKeyDown(SDL_SCANCODE_A))
 	{
 		m_playerDir = 2;
-		AddPlayerForce(Vector2(-1,0) * 2000.0f);
+		AddPlayerForce(Vector2(-1, 0) * 2000.0f);
 	}
 
 	if (input->IsKeyUp(SDL_SCANCODE_A))

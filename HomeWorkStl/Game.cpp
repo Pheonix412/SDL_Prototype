@@ -43,10 +43,10 @@ bool Game::start() {
 	if (SdlRenderer != nullptr) {
 		//make an object of the input  class 
 		UserInput = new Input();
-	//	std::cout << "render created " << std::endl;
+		//std::cout << "render created " << std::endl;
 		//make an object of the texture class
 		playerBullets = new Texture();
-		//laods the player bullets texture
+		//loads the player bullets texture
 		
 		playerBullets->LoadImgFromFile("../assets/B1.bmp", SdlRenderer);
 		
@@ -74,8 +74,6 @@ bool Game::start() {
 		return false;
 	}
 	
-
-
 }
 void Game::run(char* title, int width, int height, bool fullscreen) {
 	int creationFlag = 0;
@@ -174,6 +172,7 @@ void Game::draw() {
 
 		if (isPlayerAlive == false)
 		{
+			M_EnemyObjects.clear();
 			finalTime = GameTime;
 			std::string endTime;
 			endTime = std::to_string((int)finalTime);
@@ -225,6 +224,7 @@ void Game::PE_CollisionCheck(){
 				M_Position1.Y = 690;
 				playerSpaceS = new PlayerSpaceShip(SdlRenderer, M_Position1,75, 80);
 				Lives--;
+				audio->PlaySFX("../assets/PlayerDeath.wav");
 				}
 				else if (Lives == 0)
 				{
@@ -232,7 +232,7 @@ void Game::PE_CollisionCheck(){
 					SDL_Log("game over");
 
 					isPlayerAlive = false;
-
+					
 				}
 
 				SDL_Log("Enemy Deleted");
@@ -269,8 +269,9 @@ void Game::PE_CollisionCheck(){
 							delete* itr2;
 							*itr2 = nullptr;
 							itr2 = M_EnemyObjects.erase(itr2);
-								
-//this fixes the differencible bug however i dont think it is correct
+							audio->PlaySFX("../assets/EnemyDeath.wav");
+
+							//this fixes the differencible bug however i dont think it is correct
 
 							break;
 
@@ -279,10 +280,6 @@ void Game::PE_CollisionCheck(){
 					
 
 				}
-
-
-				
-
 
 
 		//	}
@@ -432,6 +429,7 @@ void Game::update(float deltaTime) {
 	playerSpaceS->Update(deltaTime);
 	//this displays the delta time 
 	//std::cout << "time" << deltaTime<< std::endl;
+	
 	if (isPlayerAlive) { 
 	//calculate game timer
 	unsigned int gameTicks = SDL_GetTicks();
@@ -478,6 +476,7 @@ void Game::update(float deltaTime) {
 			M_EnemyObjects.push_back(Enemies);
 			lastSpawnS = SDL_GetTicks();
 		}
+	
 	}
 	//this goes through all of the enimies and game obejcts and updates them 
 	
