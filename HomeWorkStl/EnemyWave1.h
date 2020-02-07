@@ -21,10 +21,8 @@ public:
 	void Draw(SDL_Renderer* renderer);
 	//this function updates the enemy
 	void Update(float deltaTime);
-
+	//get enemy collider for collision detection
 	AABB* GetCollider();
-
-
 
 	//this function destructs the enemy 
 	~EnemyWave1();

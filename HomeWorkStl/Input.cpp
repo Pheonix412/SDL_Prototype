@@ -85,8 +85,6 @@ void Input::OnSystemEvents(SDL_Event& e, Game* g)
 {
 	WPARAM wp = e.syswm.msg->msg.win.wParam;
 
-
-
 	//this part gets the current files name via its path 
 	//this part gets the entire path of the application 
 	TCHAR AppFileName[MAX_PATH];
@@ -118,9 +116,6 @@ void Input::OnSystemEvents(SDL_Event& e, Game* g)
 	std::wstring test1;
 	test1 = r;
 
-
-
-
 	std::string test3;
 	test3 = t2;
 	//this part converts the string to a wstring so that it could be converted to lpcwstr so that it can be displayed on the message box, THIS IS USED FOR THE MESSAGE BOX HEADER
@@ -132,13 +127,6 @@ void Input::OnSystemEvents(SDL_Event& e, Game* g)
 	std::wstring r1(buf);
 	std::wstring test4;
 	test4 = r1;
-
-
-
-
-
-
-
 
 	//for some reason it is only able to get the resource symbol values not the id
 

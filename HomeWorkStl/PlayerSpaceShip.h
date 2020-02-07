@@ -12,9 +12,7 @@ private:
 	//this holds the velocity and acceleration x and y variables 
 	Vector2 M_Velocity;
 	Vector2 M_Acceleration;
-	//this creats and object of the bullet
-	
-	//this holda the position of player space shi[
+	//this holds the position of player space ship
 	Vector2 M_Position1;
 	//this holds the postion of the bulet 
 	Vector2 M_Position2;
@@ -27,9 +25,7 @@ private:
 	AABB* m_Collider;
 	int m_colWidth;
 	int m_colHeight;
-	bool m_isTouchingGround;
 	float m_MaxVelocity;
-	float playerdecleration;
 	SDL_Renderer* m_sdlRenderer;
 	Animation* m_animation;
 	Audio* audio;
@@ -38,35 +34,38 @@ private:
 public:
 	//this is the space ship constructor 
 	PlayerSpaceShip();
+	//this is a overloaded constructor of the space ship
 	PlayerSpaceShip(SDL_Renderer* renderer, Vector2 position, int colWidth, int colHeight);
-
+	//Animtion Functions
 	void AnimationLogic(Input* input);
-	// Animtion Functions
 	void IdleAnimation();
 	void RunAnimation(bool flip = false);
-	//this is a bullet pointer
-	Bullet1* m_bullet;
-	//this is a overloaded constructor of the space ship
-//this function adds force to the player 
+
+	//this function adds force to the player 
 	void AddPlayerForce(Vector2 force);
+
 	//this function reduces force to the player 
 	void ReducePlayerForce(Vector2 force);
-	//this function draws the plater 
+
+	//get the player's X and Y position
 	float GetPlayerY();
 	float GetPlayerX();
-	//fix this....
+
+	//get collider for player collisions
 	AABB* GetCollider();
-
+	
+	//get player position
 	Vector2 GetPlayerPos();
-
-	void ToggleGorund(bool toggle);
+	
+	//this function draws the player 
 	void Draw(SDL_Renderer* renderer);
+
 	//this function updates the player 
 	void Update(float deltaTime);
-	//this function updates the users input
-	void UserInput1();
+	
 	//these functions handle the users input 
-	void HandleUserInput1(Input* input);
+	void HandleUserInput(Input* input);
+	
 	//this is the space ship destructor
 	~PlayerSpaceShip();
 };

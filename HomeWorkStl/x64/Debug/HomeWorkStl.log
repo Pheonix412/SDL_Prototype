@@ -1,25 +1,24 @@
-﻿  C:\Users\Bacca\Desktop\SDL_Prototype\dep\lib\x64\libFLAC-8.dll
-  C:\Users\Bacca\Desktop\SDL_Prototype\dep\lib\x64\libfreetype-6.dll
-  C:\Users\Bacca\Desktop\SDL_Prototype\dep\lib\x64\libjpeg-9.dll
-  C:\Users\Bacca\Desktop\SDL_Prototype\dep\lib\x64\libmodplug-1.dll
-  C:\Users\Bacca\Desktop\SDL_Prototype\dep\lib\x64\libmpg123-0.dll
-  C:\Users\Bacca\Desktop\SDL_Prototype\dep\lib\x64\libogg-0.dll
-  C:\Users\Bacca\Desktop\SDL_Prototype\dep\lib\x64\libopus-0.dll
-  C:\Users\Bacca\Desktop\SDL_Prototype\dep\lib\x64\libopusfile-0.dll
-  C:\Users\Bacca\Desktop\SDL_Prototype\dep\lib\x64\libpng16-16.dll
-  C:\Users\Bacca\Desktop\SDL_Prototype\dep\lib\x64\libtiff-5.dll
-  C:\Users\Bacca\Desktop\SDL_Prototype\dep\lib\x64\libvorbis-0.dll
-  C:\Users\Bacca\Desktop\SDL_Prototype\dep\lib\x64\libvorbisfile-3.dll
-  C:\Users\Bacca\Desktop\SDL_Prototype\dep\lib\x64\libwebp-7.dll
-  C:\Users\Bacca\Desktop\SDL_Prototype\dep\lib\x64\SDL2.dll
-  C:\Users\Bacca\Desktop\SDL_Prototype\dep\lib\x64\SDL2_image.dll
-  C:\Users\Bacca\Desktop\SDL_Prototype\dep\lib\x64\SDL2_mixer.dll
-  C:\Users\Bacca\Desktop\SDL_Prototype\dep\lib\x64\SDL2_ttf.dll
-  C:\Users\Bacca\Desktop\SDL_Prototype\dep\lib\x64\zlib1.dll
+﻿  d:\Users\7772\Documents\SDL_Prototype\dep\lib\x64\libFLAC-8.dll
+  d:\Users\7772\Documents\SDL_Prototype\dep\lib\x64\libfreetype-6.dll
+  d:\Users\7772\Documents\SDL_Prototype\dep\lib\x64\libjpeg-9.dll
+  d:\Users\7772\Documents\SDL_Prototype\dep\lib\x64\libmodplug-1.dll
+  d:\Users\7772\Documents\SDL_Prototype\dep\lib\x64\libmpg123-0.dll
+  d:\Users\7772\Documents\SDL_Prototype\dep\lib\x64\libogg-0.dll
+  d:\Users\7772\Documents\SDL_Prototype\dep\lib\x64\libopus-0.dll
+  d:\Users\7772\Documents\SDL_Prototype\dep\lib\x64\libopusfile-0.dll
+  d:\Users\7772\Documents\SDL_Prototype\dep\lib\x64\libpng16-16.dll
+  d:\Users\7772\Documents\SDL_Prototype\dep\lib\x64\libtiff-5.dll
+  d:\Users\7772\Documents\SDL_Prototype\dep\lib\x64\libvorbis-0.dll
+  d:\Users\7772\Documents\SDL_Prototype\dep\lib\x64\libvorbisfile-3.dll
+  d:\Users\7772\Documents\SDL_Prototype\dep\lib\x64\libwebp-7.dll
+  d:\Users\7772\Documents\SDL_Prototype\dep\lib\x64\SDL2.dll
+  d:\Users\7772\Documents\SDL_Prototype\dep\lib\x64\SDL2_image.dll
+  d:\Users\7772\Documents\SDL_Prototype\dep\lib\x64\SDL2_mixer.dll
+  d:\Users\7772\Documents\SDL_Prototype\dep\lib\x64\SDL2_ttf.dll
+  d:\Users\7772\Documents\SDL_Prototype\dep\lib\x64\zlib1.dll
          18 file(s) copied.
-  Game.cpp
-c:\users\bacca\desktop\sdl_prototype\homeworkstl\game.cpp(176): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-c:\users\bacca\desktop\sdl_prototype\homeworkstl\game.cpp(405): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-c:\users\bacca\desktop\sdl_prototype\homeworkstl\game.cpp(406): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-  HomeWorkStl.vcxproj -> C:\Users\Bacca\Desktop\SDL_Prototype\x64\Debug\HomeWorkStl.exe
-  HomeWorkStl.vcxproj -> C:\Users\Bacca\Desktop\SDL_Prototype\x64\Debug\HomeWorkStl.pdb (Full PDB)
+  PlayerSpaceShip.cpp
+d:\users\7772\documents\sdl_prototype\homeworkstl\playerspaceship.cpp(110): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+d:\users\7772\documents\sdl_prototype\homeworkstl\playerspaceship.cpp(115): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+  HomeWorkStl.vcxproj -> d:\Users\7772\Documents\SDL_Prototype\x64\Debug\HomeWorkStl.exe
+  HomeWorkStl.vcxproj -> d:\Users\7772\Documents\SDL_Prototype\x64\Debug\HomeWorkStl.pdb (Full PDB)

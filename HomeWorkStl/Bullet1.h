@@ -12,14 +12,11 @@ public:
 	//bullet constructor and overloaded constructor
 	Bullet1();
 	Bullet1(SDL_Renderer * renderer, Vector2 position, int colWidth, int colHeight, int speed);
-//this function adds force to the bullet
-	void AddPlayerForce(Vector2 force);
-	//this function reduces force to the bullet
-	void ReducePlayerForce(Vector2 force);
 	//this function draws the bullet
 	void Draw(SDL_Renderer* renderer);
 	//this function updates the bullet
 	void Update(float deltaTime);
+	//get bullet collider for collision detection
 	AABB* GetCollider();
 
 	//this is the destructor of the bullet

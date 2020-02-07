@@ -6,7 +6,9 @@ class Audio
 {
 public:
 	Audio();
+	//plays background music
 	void PlayBGMusic(const char* path);
+	//plays a sound effects
 	void PlaySFX(const char* path);
 
 	~Audio();

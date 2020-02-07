@@ -10,15 +10,11 @@ PlayerSpaceShip::PlayerSpaceShip()
 	M_Velocity = Vector2(0, 0);
 	M_Acceleration = Vector2(0, 0);
 	m_MaxVelocity = 0.0f;
-	playerdecleration = 0.0f;
 
 	m_playerDir = 0;
 
-
 	maxVelocity = 0.0f;
 	m_Collider = new AABB();
-	
-	m_isTouchingGround = false;
 }
 
 PlayerSpaceShip::PlayerSpaceShip(SDL_Renderer* renderer, Vector2 position, int colWidth, int colHeight)
@@ -28,8 +24,7 @@ PlayerSpaceShip::PlayerSpaceShip(SDL_Renderer* renderer, Vector2 position, int c
 	M_Velocity = Vector2(0, 0);
 	M_Acceleration = Vector2(0, 0);
 	maxVelocity = 1000.0f;
-	playerdecleration = 2000.0f;
-	//maxVelocity = 500.0f;
+
 	m_colWidth = colWidth;
 	m_colHeight = colHeight;
 	// setting the inital player texture
@@ -37,7 +32,6 @@ PlayerSpaceShip::PlayerSpaceShip(SDL_Renderer* renderer, Vector2 position, int c
 	M_Texture->LoadImgFromFile("../assets/SP1Idle.png", renderer);
 	m_animation = new Animation(M_Texture, 6, 0.25f);
 	//setup collider
-	m_isTouchingGround = false;
 	m_Collider = new AABB(M_Position, m_colWidth, m_colHeight);
 	m_playerDir = 0;
 	m_sdlRenderer = renderer;
@@ -108,7 +102,7 @@ void PlayerSpaceShip::AddPlayerForce(Vector2 force)
 
 void PlayerSpaceShip::ReducePlayerForce(Vector2 force)
 {
-		M_Acceleration -= force;
+	M_Acceleration -= force;
 }
 
 float PlayerSpaceShip::GetPlayerY()
@@ -129,12 +123,6 @@ AABB * PlayerSpaceShip::GetCollider()
 Vector2 PlayerSpaceShip::GetPlayerPos()
 {
 	return M_Position;
-}
-
-void PlayerSpaceShip::ToggleGorund(bool toggle){
-	//toggle isTouchingGround
-	m_isTouchingGround = toggle;
-
 }
 
 void PlayerSpaceShip::Draw(SDL_Renderer* renderer)
@@ -158,9 +146,8 @@ void PlayerSpaceShip::Draw(SDL_Renderer* renderer)
 
 void PlayerSpaceShip::Update(float deltaTime)
 {
-	//this part updates the players posution and also their velocity
+	//this part updates the players position and also their velocity
 	
-	//M_Acceleration = M_Acceleration + Vector2(M_Velocity *-0.5f);
 		M_Velocity += M_Acceleration * deltaTime;
 		float length = M_Velocity.magnitude();
 		if (length >= maxVelocity) {
@@ -169,9 +156,6 @@ void PlayerSpaceShip::Update(float deltaTime)
 		}
 
 		M_Position += M_Velocity * deltaTime;
-		if (!m_isTouchingGround) {
-			M_Position.Y += 500.0f*deltaTime;
-		}
 		M_Acceleration = Vector2(0, 0);
 		m_Collider->Update(M_Position);
 		
@@ -182,12 +166,7 @@ void PlayerSpaceShip::Update(float deltaTime)
 	
 }
 
-void PlayerSpaceShip::UserInput1()
-{
-}
-
-
-void PlayerSpaceShip::HandleUserInput1(Input* input)
+void PlayerSpaceShip::HandleUserInput(Input* input)
 {
 	//this part handles the users input when they press a key down the keyboard, when they press a button down it will add to the players force in the coresponding direction
 
@@ -200,7 +179,7 @@ void PlayerSpaceShip::HandleUserInput1(Input* input)
 	if (input->IsKeyUp(SDL_SCANCODE_A))
 	{
 		if (M_Velocity.X < 0) {
-			ReducePlayerForce(Vector2(-2, 0) *playerdecleration);
+			ReducePlayerForce(Vector2(-1, 0) *2000.0f);
 		}
 	}
 
@@ -212,7 +191,7 @@ void PlayerSpaceShip::HandleUserInput1(Input* input)
 	if (input->IsKeyUp(SDL_SCANCODE_D))
 	{
 		if (M_Velocity.X > 0) {
-			ReducePlayerForce(Vector2(1, 0) * playerdecleration);
+			ReducePlayerForce(Vector2(1, 0) * 2000.0f);
 		}
 	}
 	// if we are not moving the player in a direction
@@ -223,7 +202,6 @@ void PlayerSpaceShip::HandleUserInput1(Input* input)
 	AnimationLogic(input);
 
 }
-
 
 PlayerSpaceShip::~PlayerSpaceShip()
 {

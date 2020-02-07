@@ -7,7 +7,7 @@ public:
 	Animation();
 
 	Animation(Texture* spriteSheet, int numberOfFrames, float framesDuration, bool flip = false);
-
+	//updates animation
 	void Update(float deltaTime);
 
 	void Draw(SDL_Renderer* renderer, int x, int y);
@@ -20,6 +20,7 @@ private:
 
 	// width of each frame
 	int m_frameWidth;
+
 	// height of each frame
 	int m_frameHeight;
 

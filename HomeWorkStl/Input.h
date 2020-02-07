@@ -65,15 +65,6 @@ public:
 
 	bool GetGameOver();
 
-
-
-
-
-
-
-
-
 	//this is the destructor for the input class 
 	~Input();
 };
-

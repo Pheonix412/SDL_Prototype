@@ -14,7 +14,6 @@ Bullet1::Bullet1()
 Bullet1::Bullet1(SDL_Renderer *renderer, Vector2 position , int colWidth, int colHeight, int speed)
 {
 	//sets the bullers postion and texture 
-	
 	M_Position = position;
 	M_Texture = new Texture();
 	M_Texture->LoadImgFromFile("../assets/B2.bmp", renderer);
@@ -24,16 +23,6 @@ Bullet1::Bullet1(SDL_Renderer *renderer, Vector2 position , int colWidth, int co
 	M_Velocity = Vector2(0, -70);
 	M_Acceleration = Vector2(0,-70);
 	
-}
-
-void Bullet1::AddPlayerForce(Vector2 force)
-{
-	//dont think we need these 
-}
-
-void Bullet1::ReducePlayerForce(Vector2 force)
-{
-	//dont think we need these 
 }
 
 void Bullet1::Draw(SDL_Renderer* renderer)

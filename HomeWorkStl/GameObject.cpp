@@ -26,20 +26,7 @@ void GameObject::Update(float deltaTime)
 {
 }
 
-void GameObject::UserInput1()
-{
-}
-
 void GameObject::HandleUserInput(Input* input)
 {
 	
 }
-
-void GameObject::HandleUserInput1(Input*input, Texture* playerBullets)
-{
-}
-
-/*Vector2 GameObject::GetPosition()
-{
-	return Vector2(M_Position.X, M_Position.Y);
-}*/

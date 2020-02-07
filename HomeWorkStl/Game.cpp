@@ -34,10 +34,9 @@ Game::Game()
 bool Game::start() {
 	Difiiculty = 1;
 	Lives = SetIntLives(Difiiculty);
-	//Lives = 3;
 	isPlayerAlive = true;
+	
 	//create the renderer
-
 	SdlRenderer = SDL_CreateRenderer(SdlWindow, 0, -1);
 	//if its not null
 	if (SdlRenderer != nullptr) {
@@ -169,7 +168,6 @@ void Game::draw() {
 			//SDL_Log("Text rendered - Success");
 		}
 
-
 		if (isPlayerAlive == false)
 		{
 			M_EnemyObjects.clear();
@@ -182,9 +180,7 @@ void Game::draw() {
 
 		}
 		m_textTexture->Draw(SdlRenderer, 10, 10);
-
 	}
-
 	SDL_RenderPresent(SdlRenderer);
 }
 void Game::destroy() {
@@ -194,16 +190,6 @@ void Game::destroy() {
 	SDL_Quit();
 }
 void Game::PE_CollisionCheck(){
-	//these should be both in the player space ship class
-
-	// i have a feeling this is not needed as the player should be able to move freely within the space
-
-	if (playerSpaceS->GetPlayerPos().Y >= (400-80)) {
-		playerSpaceS->ToggleGorund(true);
-	}
-	else {
-		playerSpaceS->ToggleGorund(false);
-	}
 
 	if (playerSpaceS->GetCollider()) {
 		//check that we have collided with the individual enemy collisions
@@ -306,14 +292,16 @@ void Game::ResetGame()
 	M_Position1.X = 710;
 	M_Position1.Y = 690;
 	playerSpaceS = new PlayerSpaceShip(SdlRenderer, M_Position1, 75, 80);
-	//resets the player
 	SetLives(Difiiculty);
+	//resets the enemy spawns
 	lastSpawnL = 0;
 	lastSpawnM = 0;
 	lastSpawnS = 0;
 	isPlayerAlive = true;
 	//erases all enemies
 	M_EnemyObjects.clear();
+	//erases all bullets
+	m_bullets.clear();
 	//reset the game timer so that the spawns starts fresh
 	lastClear = GameTime+lastClear;
 
@@ -323,8 +311,6 @@ void Game::ChangeDifficulty(int diff)
 	//set the difficulty and also the game itself 
 	Difiiculty = diff;
 	ResetGame();
-
-
 }
 void Game::SetLives(int diff)
 {
@@ -372,11 +358,10 @@ int Game::SetIntLives(int diff)
 	return liv;
 }
 void Game::processinput() {
-	//m_player->Input();
 	//this calls the update input function
 	UserInput->UpdateInput(this);
 	PE_CollisionCheck();
-	playerSpaceS->HandleUserInput1(UserInput);
+	playerSpaceS->HandleUserInput(UserInput);
 	//if the user has  presses down the left mouse button
 	if (UserInput->IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {
 		SDL_Log("ifring");
@@ -390,7 +375,6 @@ void Game::processinput() {
 	//if the user has  presses down the right mouse button
 	if (UserInput->IsMouseButtonDown(MOUSE_BUTTON_RIGHT)) {
 		SDL_Log("ALT ifring");
-
 	}
 
 	if (UserInput->IsKeyDown(SDL_SCANCODE_SPACE))
@@ -427,8 +411,6 @@ void Game::processinput() {
 void Game::update(float deltaTime) {
 	
 	playerSpaceS->Update(deltaTime);
-	//this displays the delta time 
-	//std::cout << "time" << deltaTime<< std::endl;
 	
 	if (isPlayerAlive) { 
 	//calculate game timer
