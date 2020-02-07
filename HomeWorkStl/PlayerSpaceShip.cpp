@@ -96,13 +96,29 @@ void PlayerSpaceShip::RunAnimation(bool flip){
 
 void PlayerSpaceShip::AddPlayerForce(Vector2 force)
 {
-	//this part increases the players acceleration in a direction by adding the players force to their acceleration 
+		//this part increases the players acceleration in a direction by adding the players force to their acceleration 
 		M_Acceleration += force;	
+
+		//checks if player is not in the boundries if they are puts them back in
+		if (M_Position.X < 15) {
+			M_Position.X = 15;
+		}
+		if (M_Position.X > 1415) {
+			M_Position.X = 1415;
+		}
 }
 
 void PlayerSpaceShip::ReducePlayerForce(Vector2 force)
 {
 	M_Acceleration -= force;
+
+	//checks if player is not in the boundries if they are puts them back in
+	if (M_Position.X < 15) {
+		M_Position.X = 15;
+	}
+	if (M_Position.X > 1415) {
+		M_Position.X = 1415;
+	}
 }
 
 float PlayerSpaceShip::GetPlayerY()

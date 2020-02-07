@@ -18,7 +18,7 @@
   d:\Users\7772\Documents\SDL_Prototype\dep\lib\x64\zlib1.dll
          18 file(s) copied.
   PlayerSpaceShip.cpp
-d:\users\7772\documents\sdl_prototype\homeworkstl\playerspaceship.cpp(110): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
-d:\users\7772\documents\sdl_prototype\homeworkstl\playerspaceship.cpp(115): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+d:\users\7772\documents\sdl_prototype\homeworkstl\playerspaceship.cpp(126): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+d:\users\7772\documents\sdl_prototype\homeworkstl\playerspaceship.cpp(131): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
   HomeWorkStl.vcxproj -> d:\Users\7772\Documents\SDL_Prototype\x64\Debug\HomeWorkStl.exe
   HomeWorkStl.vcxproj -> d:\Users\7772\Documents\SDL_Prototype\x64\Debug\HomeWorkStl.pdb (Full PDB)
