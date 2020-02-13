@@ -480,6 +480,7 @@ void Game::ResetGame()
     shootSpeed = -70;
     PowerUpTime = 0;
     isGameFinnished = false;
+    numberofkills = 0;
 
 }
 void Game::ChangeDifficulty(int diff)
@@ -624,7 +625,7 @@ void Game::update(float deltaTime) {
 		}
         //1 minute
         //60
-		if (spawnTimerM > 2 && GameTime > 6) {
+		if (spawnTimerM > 2 && GameTime > 60) {
 			enemycount++;
 			M_EnemyTexture = new Texture();
 			M_EnemyTexture->LoadImgFromFile("../assets/EnemyShipM.bmp", SdlRenderer);
@@ -665,7 +666,7 @@ void Game::update(float deltaTime) {
 		}
         //2 miutes 
         //120
-		if (spawnTimerS > 1 && GameTime > 12) {
+		if (spawnTimerS > 1 && GameTime > 120) {
 			enemycount++;
 			M_EnemyTexture = new Texture();
 			M_EnemyTexture->LoadImgFromFile("../assets/EnemyShipS.bmp", SdlRenderer);
@@ -702,7 +703,7 @@ void Game::update(float deltaTime) {
 		}
         //3 minutes
         //180
-        if (spawnTimerS > 1 && GameTime > 18) {
+        if (spawnTimerS > 1 && GameTime > 180) {
             enemycount++;
             M_EnemyTexture = new Texture();
             M_EnemyTexture->LoadImgFromFile("../assets/EnemyShipXl.png", SdlRenderer);
@@ -739,7 +740,7 @@ void Game::update(float deltaTime) {
         }
         //4minues
         //240
-        if (spawnTimerS > 1 && GameTime > 20) {
+        if (spawnTimerS > 1 && GameTime > 240) {
             enemycount++;
             M_EnemyTexture = new Texture();
             M_EnemyTexture->LoadImgFromFile("../assets/EnemyShipxs.png", SdlRenderer);
@@ -776,7 +777,7 @@ void Game::update(float deltaTime) {
         }
         //5 minues end game..
         //300
-        if (spawnTimerS > 1 && GameTime > 30) {
+        if (spawnTimerS > 1 && GameTime > 300) {
             playerSpaceS->~PlayerSpaceShip();
             isGameFinnished = true;
             audio->PlaySFX("../assets/win.wav");
