@@ -275,6 +275,7 @@ void Game::PE_CollisionCheck(){
                     shootSpeed = -200;
                     SDL_Log("Power Up gained");
                     PowerUpActive = true;
+                    audio->PlaySFX("../assets/P1.wav");
                 
                
             }
@@ -295,6 +296,7 @@ void Game::PE_CollisionCheck(){
                 shootSpeed = -300;
                 SDL_Log("Power Up gained");
                 PowerUpActive = true;
+                audio->PlaySFX("../assets/P2.wav");
 
 
             }
@@ -315,6 +317,7 @@ void Game::PE_CollisionCheck(){
                 shootSpeed = -400;
                 SDL_Log("Power Up gained");
                 PowerUpActive = true;
+                audio->PlaySFX("../assets/P3.wav");
 
 
             }
@@ -335,6 +338,7 @@ void Game::PE_CollisionCheck(){
                 shootSpeed = -500;
                 SDL_Log("Power Up gained");
                 PowerUpActive = true;
+                audio->PlaySFX("../assets/P4.wav");
 
 
             }
@@ -375,7 +379,7 @@ void Game::PE_CollisionCheck(){
 							//this fixes the differencible bug however i dont think it is correct
                             numberofkills = numberofkills + 1;
 							break;
-
+                            
 
 						}
 				//	}
@@ -775,6 +779,7 @@ void Game::update(float deltaTime) {
         if (spawnTimerS > 1 && GameTime > 30) {
             playerSpaceS->~PlayerSpaceShip();
             isGameFinnished = true;
+            audio->PlaySFX("../assets/win.wav");
 
         }
 	
