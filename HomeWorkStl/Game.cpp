@@ -184,7 +184,7 @@ void Game::draw() {
         }
         else if(PowerUpActive==true)
         {
-            PowerUpStatus = " active";
+            PowerUpStatus = " Active";
             if (!m_textTexture->RenderText((" Lives: " + livenum1 + " Time:" + Time+" PowerUp: "+PowerUpStatus).c_str(), m_font, SdlRenderer, colour)) {
                 //SDL_Log("Text rendered - Success");
             }
@@ -475,6 +475,7 @@ void Game::ResetGame()
 	lastClear = GameTime+lastClear;
     shootSpeed = -70;
     PowerUpTime = 0;
+    isGameFinnished = false;
 
 }
 void Game::ChangeDifficulty(int diff)
@@ -583,7 +584,7 @@ void Game::update(float deltaTime) {
 	
 	playerSpaceS->Update(deltaTime);
 	
-	if (isPlayerAlive) { 
+	if (isPlayerAlive && isGameFinnished !=true) { 
 	//calculate game timer
 	unsigned int gameTicks = SDL_GetTicks();
 	
@@ -772,7 +773,7 @@ void Game::update(float deltaTime) {
         //5 minues end game..
         //300
         if (spawnTimerS > 1 && GameTime > 30) {
-          
+            playerSpaceS->~PlayerSpaceShip();
             isGameFinnished = true;
 
         }

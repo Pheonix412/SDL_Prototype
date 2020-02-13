@@ -19,7 +19,7 @@
          18 file(s) copied.
   Game.cpp
 c:\users\zbook j\desktop\basic game prog assignment\sdl_prototype\homeworkstl\game.cpp(196): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-c:\users\zbook j\desktop\basic game prog assignment\sdl_prototype\homeworkstl\game.cpp(559): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
 c:\users\zbook j\desktop\basic game prog assignment\sdl_prototype\homeworkstl\game.cpp(560): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+c:\users\zbook j\desktop\basic game prog assignment\sdl_prototype\homeworkstl\game.cpp(561): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
   HomeWorkStl.vcxproj -> C:\Users\zbook j\Desktop\basic game prog assignment\SDL_Prototype\x64\Debug\HomeWorkStl.exe
   HomeWorkStl.vcxproj -> C:\Users\zbook j\Desktop\basic game prog assignment\SDL_Prototype\x64\Debug\HomeWorkStl.pdb (Full PDB)
