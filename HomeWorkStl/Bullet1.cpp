@@ -21,7 +21,7 @@ Bullet1::Bullet1(SDL_Renderer *renderer, Vector2 position , int colWidth, int co
 	//this sets the bullets velocty and also acceleration 
 	m_Collider = new AABB(position, colWidth, colHeight);
 	M_Velocity = Vector2(0, -70);
-	M_Acceleration = Vector2(0,-70);
+	M_Acceleration = Vector2(0,speed);
 	
 }
 

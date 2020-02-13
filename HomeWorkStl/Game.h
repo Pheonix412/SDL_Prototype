@@ -3,6 +3,8 @@
 #include "Texture.h"
 #include "EnemyWave1.h"
 #include"PlayerSpaceShip.h"
+#include"PowerUp.h"
+
 #include<vector>
 #include"Vector2.h"
 #include"Input.h"
@@ -39,7 +41,10 @@ private:
 	//this creates object for the game obejcts and the enemies 
 	std::vector<GameObject*>M_GameObjects;
 	std::vector<EnemyWave1*>M_EnemyObjects;
-
+    std::vector<PowerUp*>M_PowerUpObjects;
+    std::vector<PowerUp*>M_PowerUpObjects2;
+    std::vector<PowerUp*>M_PowerUpObjects3;
+    std::vector<PowerUp*>M_PowerUpObjects4;
 	//this is the pointer of the players space ship
 	PlayerSpaceShip* playerSpaceS;
 	Texture* playerBullets;
@@ -56,16 +61,28 @@ private:
 	//this is a pointer of the enemy
 	EnemyWave1* Enemies;
 
+    PowerUp* PowerU;
+    PowerUp* PowerU2;
+    PowerUp* PowerU3;
+    PowerUp* PowerU4;
+
 	//this pointer holds the texture of the enemy 
 	Texture* M_EnemyTexture;
 
 	//stores text texture
 	Texture* m_textTexture;
 
+    Texture* M_PowerUpTexture;
+    Texture* M_PowerUpTexture2;
+    Texture* M_PowerUpTexture3;
+    Texture* M_PowerUpTexture4;
 	//stores font
 	TTF_Font* m_font;
 	//stores the audio
 	Audio* audio;
+    int shootSpeed;
+    float PowerUpTime;
+
 
 	int Lives;
 	bool isPlayerAlive;
@@ -75,6 +92,9 @@ private:
 	std::vector <Bullet1*> m_bullets;
 
 	int Difiiculty;
+    bool PowerUpActive;
+    bool isGameFinnished;
+    int numberofkills;
 
 public:
 	Game();

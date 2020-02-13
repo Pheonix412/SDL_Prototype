@@ -3,6 +3,7 @@
 #include <string>
 #include "resource1.h"
 #include <windows.h>
+#include <chrono>
 
 //by Rhys Thomas Baker 7772 and By Jayme Schmid 6290 2019
 //credit to https://patrickdearteaga.com for the music
@@ -17,6 +18,9 @@ Game::Game()
 	Lives = 0;
 	lastClear = 0;
 	finalTime = 0;
+    shootSpeed = -70;
+    PowerUpActive = false;
+    isGameFinnished = false;
 	LastUpadateTimer = SDL_GetTicks();
 	//checks if sdl is initalized if it isnt  then end the game , else if it has then run the game 
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0|| TTF_Init() == -1|| Mix_OpenAudio(192000,MIX_DEFAULT_FORMAT,2,4096)==-1) {
@@ -154,7 +158,14 @@ void Game::draw() {
 	{
 		M_EnemyObjects[i]->Draw(SdlRenderer);
 	}
-
+    for (int i = 0; i < M_PowerUpObjects.size(); ++i)
+    {
+        M_PowerUpObjects[i]->Draw(SdlRenderer);
+    }
+    for (int i = 0; i < M_PowerUpObjects2.size(); ++i)
+    {
+        M_PowerUpObjects2[i]->Draw(SdlRenderer);
+    }
 	if (m_font != nullptr) {
 		SDL_Color colour = { 255,255,255,255 };
 		
@@ -162,11 +173,22 @@ void Game::draw() {
 		livenum1 = std::to_string((int)Lives);
 		std::string Time;
 		Time = std::to_string((int)GameTime);
+        std::string PowerUpStatus;
+        if (PowerUpActive == false) {
 
-		//GameTime
-		if (!m_textTexture->RenderText(( " Lives: " + livenum1+" Time:"+Time).c_str(), m_font, SdlRenderer, colour)) {
-			//SDL_Log("Text rendered - Success");
-		}
+
+            //GameTime
+            if (!m_textTexture->RenderText((" Lives: " + livenum1 + " Time:" + Time).c_str(), m_font, SdlRenderer, colour)) {
+                //SDL_Log("Text rendered - Success");
+            }
+        }
+        else if(PowerUpActive==true)
+        {
+            PowerUpStatus = " active";
+            if (!m_textTexture->RenderText((" Lives: " + livenum1 + " Time:" + Time+" PowerUp: "+PowerUpStatus).c_str(), m_font, SdlRenderer, colour)) {
+                //SDL_Log("Text rendered - Success");
+            }
+        }
 
 		if (isPlayerAlive == false)
 		{
@@ -179,6 +201,19 @@ void Game::draw() {
 			}
 
 		}
+        if (isGameFinnished == TRUE)
+        {
+            M_EnemyObjects.clear();
+            
+            std::string killnumber;
+            int kn = numberofkills;
+            killnumber = std::to_string(kn);
+            
+            if (!m_textTexture->RenderText(("Congradulations you have finnished the game,you have killed "+killnumber+" enemies").c_str(), m_font, SdlRenderer, colour)) {
+                //SDL_Log("Text rendered - Success");
+            }
+
+        }
 		m_textTexture->Draw(SdlRenderer, 10, 10);
 	}
 	SDL_RenderPresent(SdlRenderer);
@@ -224,9 +259,143 @@ void Game::PE_CollisionCheck(){
 				SDL_Log("Enemy Deleted");
 			}
 		}
+        for (auto itr2 = M_PowerUpObjects.end(); itr2 != M_PowerUpObjects.begin();) {
+            --itr2;
+            //if the enemes collision is within the players collsion bounds then delete the enemy
+            if ((*itr2) != nullptr && playerSpaceS->GetCollider()->RectCollision(*(*itr2)->GetCollider())) {
+                delete* itr2;
+                *itr2 = nullptr;
+                itr2 = M_PowerUpObjects.erase(itr2);
+               
+                unsigned int gameTicks = SDL_GetTicks();
+
+                GameTime = gameTicks / 1000.0f;
+                GameTime = GameTime - lastClear;
+                PowerUpTime = GameTime;
+                    shootSpeed = -200;
+                    SDL_Log("Power Up gained");
+                    PowerUpActive = true;
+                
+               
+            }
+        }
+        for (auto itr2 = M_PowerUpObjects2.end(); itr2 != M_PowerUpObjects2.begin();) {
+            --itr2;
+            //if the enemes collision is within the players collsion bounds then delete the enemy
+            if ((*itr2) != nullptr && playerSpaceS->GetCollider()->RectCollision(*(*itr2)->GetCollider())) {
+                delete* itr2;
+                *itr2 = nullptr;
+                itr2 = M_PowerUpObjects2.erase(itr2);
+
+                unsigned int gameTicks = SDL_GetTicks();
+
+                GameTime = gameTicks / 1000.0f;
+                GameTime = GameTime - lastClear;
+                PowerUpTime = GameTime;
+                shootSpeed = -300;
+                SDL_Log("Power Up gained");
+                PowerUpActive = true;
+
+
+            }
+        }
+        for (auto itr3 = M_PowerUpObjects3.end(); itr3 != M_PowerUpObjects3.begin();) {
+            --itr3;
+            //if the enemes collision is within the players collsion bounds then delete the enemy
+            if ((*itr3) != nullptr && playerSpaceS->GetCollider()->RectCollision(*(*itr3)->GetCollider())) {
+                delete* itr3;
+                *itr3 = nullptr;
+                itr3 = M_PowerUpObjects3.erase(itr3);
+
+                unsigned int gameTicks = SDL_GetTicks();
+
+                GameTime = gameTicks / 1000.0f;
+                GameTime = GameTime - lastClear;
+                PowerUpTime = GameTime;
+                shootSpeed = -400;
+                SDL_Log("Power Up gained");
+                PowerUpActive = true;
+
+
+            }
+        }
+        for (auto itr4 = M_PowerUpObjects4.end(); itr4 != M_PowerUpObjects4.begin();) {
+            --itr4;
+            //if the enemes collision is within the players collsion bounds then delete the enemy
+            if ((*itr4) != nullptr && playerSpaceS->GetCollider()->RectCollision(*(*itr4)->GetCollider())) {
+                delete* itr4;
+                *itr4 = nullptr;
+                itr4 = M_PowerUpObjects4.erase(itr4);
+
+                unsigned int gameTicks = SDL_GetTicks();
+
+                GameTime = gameTicks / 1000.0f;
+                GameTime = GameTime - lastClear;
+                PowerUpTime = GameTime;
+                shootSpeed = -500;
+                SDL_Log("Power Up gained");
+                PowerUpActive = true;
+
+
+            }
+        }
 	}
 	
 	try {
+		//the issue is to do with the .end and .begin statements..
+
+		for (auto itr2 = M_EnemyObjects.end(); itr2 != M_EnemyObjects.begin();) {
+			
+			itr2--;
+		//	if ((*itr2)->GetCollider())
+		//	{
+				for (auto itr1 = m_bullets.end(); itr1 != m_bullets.begin();) {
+					itr1--;
+					//if ((*itr1)->GetCollider()) {
+
+						//I NEED TO FIX THIS
+						if ((*itr2) != nullptr && (*itr1) != nullptr && (*itr1)->GetCollider()->RectCollision(*(*itr2)->GetCollider())) {
+
+							SDL_Log("BULLET COILDED");
+							//for some reason this causes issues 
+							//delete* itr;
+							//*itr = nullptr;
+							//itr = M_EnemyObjects.erase(itr);
+
+							delete* itr1;
+							*itr1 = nullptr;
+							itr1 = m_bullets.erase(itr1);
+							
+							
+							delete* itr2;
+							*itr2 = nullptr;
+							itr2 = M_EnemyObjects.erase(itr2);
+							audio->PlaySFX("../assets/EnemyDeath.wav");
+
+							//this fixes the differencible bug however i dont think it is correct
+                            numberofkills = numberofkills + 1;
+							break;
+
+
+						}
+				//	}
+					
+
+				}
+
+
+		//	}
+		}
+
+
+
+	}
+	catch(std::string e) {
+		std::string e1 = "error" + e;
+		//SDL_Log(e1);
+		//SDL_Log(("error " + e + "sdlerror " + SDL_Error).c_str());
+	}
+    try {
 		//the issue is to do with the .end and .begin statements..
 
 		for (auto itr2 = M_EnemyObjects.end(); itr2 != M_EnemyObjects.begin();) {
@@ -281,7 +450,6 @@ void Game::PE_CollisionCheck(){
 	}
 
 
-
 }
 void Game::ResetGame()
 {
@@ -298,12 +466,15 @@ void Game::ResetGame()
 	lastSpawnM = 0;
 	lastSpawnS = 0;
 	isPlayerAlive = true;
+    PowerUpActive = false;
 	//erases all enemies
 	M_EnemyObjects.clear();
 	//erases all bullets
 	m_bullets.clear();
 	//reset the game timer so that the spawns starts fresh
 	lastClear = GameTime+lastClear;
+    shootSpeed = -70;
+    PowerUpTime = 0;
 
 }
 void Game::ChangeDifficulty(int diff)
@@ -390,7 +561,7 @@ void Game::processinput() {
 			LastBullet = SDL_GetTicks();
 			M_Position2.X = X1;
 			M_Position2.Y = Y1;
-			Bullet1*playerC = new Bullet1(SdlRenderer, M_Position2, 12, 15, 200);
+			Bullet1*playerC = new Bullet1(SdlRenderer, M_Position2, 12, 15, shootSpeed);
 			m_bullets.push_back(playerC);
 			audio = new Audio();
 			audio->PlaySFX("../assets/Shoot.wav");
@@ -437,8 +608,18 @@ void Game::update(float deltaTime) {
 			Enemies = new EnemyWave1(M_EnemyTexture, Vector2(rand_x, rand_y), 60, 41, 200);
 			M_EnemyObjects.push_back(Enemies);
 			lastSpawnL = SDL_GetTicks();
+            
+           
+            
+            
+           // lastSpawnL = SDL_GetTicks();
+
+
+
 		}
-		if (spawnTimerM > 2 && GameTime > 60) {
+        //1 minute
+        //60
+		if (spawnTimerM > 2 && GameTime > 6) {
 			enemycount++;
 			M_EnemyTexture = new Texture();
 			M_EnemyTexture->LoadImgFromFile("../assets/EnemyShipM.bmp", SdlRenderer);
@@ -447,8 +628,39 @@ void Game::update(float deltaTime) {
 			Enemies = new EnemyWave1(M_EnemyTexture, Vector2(rand_x, rand_y), 41, 41, 120);
 			M_EnemyObjects.push_back(Enemies);
 			lastSpawnM = SDL_GetTicks();
+
+            float t1 = (PowerUpTime - GameTime)*-1;
+
+            if (PowerUpTime == 0.0F)
+            {
+
+
+                M_PowerUpTexture = new Texture();
+                M_PowerUpTexture->LoadImgFromFile("../assets/p2.png", SdlRenderer);
+                rand_x = rand() % 1400 + 10;
+                rand_y = rand() % 1 + 10;
+                PowerU = new PowerUp(M_PowerUpTexture, Vector2(rand_x, rand_y), 16, 16, 200);
+                M_PowerUpObjects.push_back(PowerU);
+            }
+
+            if (t1 >= 10 && PowerUpTime != 0.0F)
+            {
+                PowerUpActive = false;
+                shootSpeed = -70;
+                PowerUpTime = 0;
+                // M_PowerUpObjects.clear();
+
+            }
+           
+
+
+            
+
+
 		}
-		if (spawnTimerS > 1 && GameTime > 120) {
+        //2 miutes 
+        //120
+		if (spawnTimerS > 1 && GameTime > 12) {
 			enemycount++;
 			M_EnemyTexture = new Texture();
 			M_EnemyTexture->LoadImgFromFile("../assets/EnemyShipS.bmp", SdlRenderer);
@@ -457,7 +669,113 @@ void Game::update(float deltaTime) {
 			Enemies = new EnemyWave1(M_EnemyTexture, Vector2(rand_x, rand_y), 40, 35, 200);
 			M_EnemyObjects.push_back(Enemies);
 			lastSpawnS = SDL_GetTicks();
+
+            float t1 = (PowerUpTime - GameTime)*-1;
+
+            if (PowerUpTime == 0.0F)
+            {
+
+
+                M_PowerUpTexture2 = new Texture();
+                M_PowerUpTexture2->LoadImgFromFile("../assets/p3.png", SdlRenderer);
+                rand_x = rand() % 1400 + 10;
+                rand_y = rand() % 1 + 10;
+                PowerU2 = new PowerUp(M_PowerUpTexture2, Vector2(rand_x, rand_y), 16, 16, 200);
+                M_PowerUpObjects2.push_back(PowerU2);
+            }
+
+            if (t1 >= 10 && PowerUpTime != 0.0F)
+            {
+                PowerUpActive = false;
+                shootSpeed = -70;
+                PowerUpTime = 0;
+                // M_PowerUpObjects.clear();
+
+            }
+
+
 		}
+        //3 minutes
+        //180
+        if (spawnTimerS > 1 && GameTime > 18) {
+            enemycount++;
+            M_EnemyTexture = new Texture();
+            M_EnemyTexture->LoadImgFromFile("../assets/EnemyShipXl.png", SdlRenderer);
+            int rand_x = rand() % 1400 + 10;
+            int rand_y = rand() % 1 + 10;
+            Enemies = new EnemyWave1(M_EnemyTexture, Vector2(rand_x, rand_y), 32, 32, 200);
+            M_EnemyObjects.push_back(Enemies);
+            lastSpawnS = SDL_GetTicks();
+
+            float t1 = (PowerUpTime - GameTime)*-1;
+
+            if (PowerUpTime == 0.0F)
+            {
+
+
+                M_PowerUpTexture3 = new Texture();
+                M_PowerUpTexture3->LoadImgFromFile("../assets/p4.png", SdlRenderer);
+                rand_x = rand() % 1400 + 10;
+                rand_y = rand() % 1 + 10;
+                PowerU3 = new PowerUp(M_PowerUpTexture3, Vector2(rand_x, rand_y), 16, 16, 200);
+                M_PowerUpObjects3.push_back(PowerU3);
+            }
+
+            if (t1 >= 10 && PowerUpTime != 0.0F)
+            {
+                PowerUpActive = false;
+                shootSpeed = -70;
+                PowerUpTime = 0;
+                // M_PowerUpObjects.clear();
+
+            }
+
+
+        }
+        //4minues
+        //240
+        if (spawnTimerS > 1 && GameTime > 20) {
+            enemycount++;
+            M_EnemyTexture = new Texture();
+            M_EnemyTexture->LoadImgFromFile("../assets/EnemyShipxs.png", SdlRenderer);
+            int rand_x = rand() % 1400 + 10;
+            int rand_y = rand() % 1 + 10;
+            Enemies = new EnemyWave1(M_EnemyTexture, Vector2(rand_x, rand_y),16, 16, 200);
+            M_EnemyObjects.push_back(Enemies);
+            lastSpawnS = SDL_GetTicks();
+
+            float t1 = (PowerUpTime - GameTime)*-1;
+
+            if (PowerUpTime == 0.0F)
+            {
+
+
+                M_PowerUpTexture4 = new Texture();
+                M_PowerUpTexture4->LoadImgFromFile("../assets/p5.png", SdlRenderer);
+                rand_x = rand() % 1400 + 10;
+                rand_y = rand() % 1 + 10;
+                PowerU4 = new PowerUp(M_PowerUpTexture4, Vector2(rand_x, rand_y), 16, 16, 200);
+                M_PowerUpObjects4.push_back(PowerU4);
+            }
+
+            if (t1 >= 10 && PowerUpTime != 0.0F)
+            {
+                PowerUpActive = false;
+                shootSpeed = -70;
+                PowerUpTime = 0;
+                // M_PowerUpObjects.clear();
+
+            }
+
+
+        }
+        //5 minues end game..
+        //300
+        if (spawnTimerS > 1 && GameTime > 30) {
+          
+            isGameFinnished = true;
+
+        }
 	
 	}
 	//this goes through all of the enimies and game obejcts and updates them 
@@ -470,6 +788,14 @@ void Game::update(float deltaTime) {
 	{
 		m_bullets[i]->Update(deltaTime);
 	}
+    for (int i = 0; i < M_PowerUpObjects.size(); ++i)
+    {
+        M_PowerUpObjects[i]->Update(deltaTime);
+    }
+    for (int i = 0; i < M_PowerUpObjects2.size(); ++i)
+    {
+        M_PowerUpObjects2[i]->Update(deltaTime);
+    }
 }
 void Game::shutdown() {
 	Mix_Quit();
