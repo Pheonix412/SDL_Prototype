@@ -41,7 +41,7 @@ void EnemyWave1::Draw(SDL_Renderer* renderer){
 		m_Collider->GetHeight()
 	};
 
-	SDL_SetRenderDrawColor(renderer, 0, 255, 255, 0);
+//	SDL_SetRenderDrawColor(renderer, 0, 255, 255, 0);
 	SDL_RenderDrawRect(renderer, &rect);
 }
 

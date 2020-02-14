@@ -201,7 +201,7 @@ void Game::draw() {
 			}
 
 		}
-        if (isGameFinnished == TRUE)
+        if (isGameFinnished == true)
         {
             M_EnemyObjects.clear();
             
@@ -209,7 +209,7 @@ void Game::draw() {
             int kn = numberofkills;
             killnumber = std::to_string(kn);
             
-            if (!m_textTexture->RenderText(("Congradulations you have finnished the game,you have killed "+killnumber+" enemies").c_str(), m_font, SdlRenderer, colour)) {
+            if (!m_textTexture->RenderText(("Congratulations you have finished the game, you have killed "+killnumber+" enemies").c_str(), m_font, SdlRenderer, colour)) {
                 //SDL_Log("Text rendered - Success");
             }
 
@@ -614,13 +614,7 @@ void Game::update(float deltaTime) {
 			Enemies = new EnemyWave1(M_EnemyTexture, Vector2(rand_x, rand_y), 60, 41, 200);
 			M_EnemyObjects.push_back(Enemies);
 			lastSpawnL = SDL_GetTicks();
-            
-           
-            
-            
-           // lastSpawnL = SDL_GetTicks();
-
-
+          
 
 		}
         //1 minute
@@ -658,10 +652,6 @@ void Game::update(float deltaTime) {
 
             }
            
-
-
-            
-
 
 		}
         //2 miutes 
